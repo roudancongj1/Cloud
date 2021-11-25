@@ -1,3 +1,4 @@
+
 package com.gao;
 
 import com.gao.pojo.student;
@@ -20,9 +21,12 @@ class GaoApplicationTests {
              ) {
             System.out.println(s);
         }
-      /*  for (int i=0;i<ls.size();i++){
+
+ for (int i=0;i<ls.size();i++){
             System.out.println(ls.get(i));
-        }*/
+        }
+
     }
 
 }
+
