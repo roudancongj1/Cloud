@@ -2,6 +2,7 @@
 package com.gao;
 
 import com.gao.pojo.student;
+import com.gao.pojo.user;
 import com.gao.service.usermapper;
 import com.gao.util.dayenum;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,17 @@ class GaoApplicationTests {
     void t1(){
         dayenum de=dayenum.oneday;
         System.out.println(de);
+    }
+    @Test
+    void t2(){
+        user u=new user();
+        u.setId(1);
+        String uu=u.getPassword();
+        System.out.println(u.getPassword());
+        if (u.getPassword()==null){
+            System.out.println("mimaweikong");
+        }
+        System.out.println(uu);
     }
 }
 
