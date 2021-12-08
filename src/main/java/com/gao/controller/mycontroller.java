@@ -1,5 +1,7 @@
 package com.gao.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gao.service.myser.myser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -46,10 +48,15 @@ public class mycontroller {
         return null;
     }
     @RequestMapping("test3")
-    public String test3(ServletRequest req, ServletResponse res){
+    public Map test3(ServletRequest req, ServletResponse res) throws JsonProcessingException {
         Map map=new HashMap();
         map.put("aaaa","bbbbb");
-        req.getAttribute("msg");
-        return req.getAttribute("msg").toString();
+        Object o=req.getAttribute("msg");
+        ObjectMapper mapper = new ObjectMapper();
+
+        Map m = mapper.readValue(mapper.writeValueAsString(o), Map.class);
+
+        //对象 d = mapper.readValue(mapper.writeValueAsString(m), 对象.class);
+        return m;
     }
 }
