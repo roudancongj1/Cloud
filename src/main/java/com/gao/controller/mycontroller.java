@@ -12,8 +12,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RestController
 @RequestMapping("aa")
@@ -58,5 +59,24 @@ public class mycontroller {
 
         //对象 d = mapper.readValue(mapper.writeValueAsString(m), 对象.class);
         return m;
+    }
+    @RequestMapping("test4")
+    public String test4(){
+        Date date=new Date();
+        //return test();
+        SimpleDateFormat sdf=new SimpleDateFormat();
+        sdf.applyPattern("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(date);
+    }
+    @RequestMapping("test5")
+    public String test5(){
+        Set set = new HashSet<>();
+        set.add("aaaaaa");
+        set.add("bbbbbb");
+        set.add("aaaaaa");
+        //return set.toString();
+        Map m=new HashMap();
+        m.put(set,set);
+        return m.toString();
     }
 }
