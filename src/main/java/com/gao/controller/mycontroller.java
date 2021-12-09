@@ -1,8 +1,11 @@
 package com.gao.controller;
 
+import ch.qos.logback.core.util.StringCollectionUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gao.pojo.user;
 import com.gao.service.myser.myser;
+import com.mysql.cj.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,5 +81,21 @@ public class mycontroller {
         Map m=new HashMap();
         m.put(set,set);
         return m.toString();
+    }
+    @RequestMapping("test6")
+    public String test6(){
+        user u = new user();
+        u.setId(22);
+        u.setPassword("2222");
+        /*if (null==u.getRole()){
+            return "s为空";
+        }else {
+            return "s不为空";
+        }*/
+        if ("3".equals(u.getRole())){
+            return "s为空";
+        }else {
+            return "s不为空";
+        }
     }
 }
