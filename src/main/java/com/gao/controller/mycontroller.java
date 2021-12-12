@@ -78,6 +78,7 @@ public class mycontroller {
         set.add("bbbbbb");
         set.add("aaaaaa");
         //return set.toString();
+        set.forEach(System.out::println);
         Map m=new HashMap();
         m.put(set,set);
         return m.toString();
@@ -92,10 +93,11 @@ public class mycontroller {
         }else {
             return "s不为空";
         }*/
+        String s = "s为空的1111";
         if ("3".equals(u.getRole())){
             return "s为空";
         }else {
-            return "s不为空";
+            return s;
         }
     }
 }

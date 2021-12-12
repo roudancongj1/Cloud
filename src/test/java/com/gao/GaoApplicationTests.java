@@ -8,6 +8,7 @@ import com.gao.util.dayenum;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -45,5 +46,16 @@ class GaoApplicationTests {
         }
         System.out.println(uu);
     }
+    @Test
+    //@Transactional
+    void t3(){
+        int i=1;
+        i++;
+        System.out.println(i);
+        int p=1/0;
+        i++;
+        System.out.println(i);
+    }
+
 }
 
