@@ -13,8 +13,12 @@ public class mvccontroller {
     public String ele(){
         return "index";
     }
-    @RequestMapping("boot")
-    public String boot(){
+    @RequestMapping("boot5")
+    public String boot4(){
         return "index2";
+    }
+    @RequestMapping("boot4")
+    public String boot5(){
+        return "index3";
     }
 }
