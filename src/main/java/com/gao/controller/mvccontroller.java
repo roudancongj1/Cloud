@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class mvccontroller {
     @RequestMapping("ele")
     public String ele(){
-        return "index";
+        return "index4";
     }
     @RequestMapping("boot5")
     public String boot4(){
@@ -20,5 +20,9 @@ public class mvccontroller {
     @RequestMapping("boot4")
     public String boot5(){
         return "index3";
+    }
+    @RequestMapping("/")
+    public String index(){
+        return "index";
     }
 }
