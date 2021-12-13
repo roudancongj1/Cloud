@@ -12,12 +12,14 @@
     <script src="//cdn.jsdelivr.net/npm/vue@next"></script>
     <!-- 导入组件库 -->
     <script src="//cdn.jsdelivr.net/npm/element-plus"></script>
+    <!--axios-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 <div id="app">
     <span>aaaa</span>
     <div>aaaaaaaaaa</div>
-    <el-button>{{ message }}</el-button>
+    <el-button>{{ info.name }}</el-button>
     <el-button round @click="dialogVisible = ture">圆角按钮</el-button>
     <el-dialog :visible.sync="dialogVisible" title="Hello world">
         <p>Try Element</p>
@@ -29,9 +31,21 @@
     const App = {
         data() {
             return {
-                message: "Hello Element Plus",
+                info:{
+                name: null,
+                age: null
+                }
             };
         },
+        /*setup(){
+            mounted: {
+                axios.get('/aa/test7').then(response => (this.info = response.data))
+            }
+        }*/
+        mounted(){
+            axios.get('/aa/test7').then(response => (this.info = response.data))
+        }
+
     };
     const app = Vue.createApp(App);
     app.use(ElementPlus);

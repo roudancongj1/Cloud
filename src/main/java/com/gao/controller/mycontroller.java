@@ -1,6 +1,7 @@
 package com.gao.controller;
 
 import ch.qos.logback.core.util.StringCollectionUtil;
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gao.pojo.user;
@@ -8,6 +9,7 @@ import com.gao.service.myser.myser;
 import com.mysql.cj.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.jackson.JsonObjectDeserializer;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -99,5 +101,12 @@ public class mycontroller {
         }else {
             return s;
         }
+    }
+    @RequestMapping("test7")
+    public String test7(){
+        Map map = new HashMap<>();
+        map.put("name","张三");
+        map.put("age","12");
+        return JSON.toJSONString(map);
     }
 }
