@@ -109,4 +109,9 @@ public class mycontroller {
         map.put("age","12");
         return JSON.toJSONString(map);
     }
+    @RequestMapping("test8")
+    public String test8(){
+        String str="hello";
+        return str;
+    }
 }
