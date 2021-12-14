@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>index</title>
+  <link
+        rel="stylesheet"
+        href="//cdn.jsdelivr.net/npm/element-plus/dist/index.css"
+    />
+    <script src="//cdn.jsdelivr.net/npm/vue@next"></script>
+    <script src="https://unpkg.com/vue-router@4.0.12/dist/vue-router.global.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/element-plus"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      window.onload = function (){
+        axios.get('/aa/test7').then(function (response){
+          document.getElementById('add').innerText = response.data.name
+        })
+      }
+    </script>
+</head>
+<body>
+<div id="app">
+  <el-button id="add"></el-button>
+
+  <el-button @click="query">点击显示名字</el-button>
+  <el-row>
+  <el-input v-model="info.name" placeholder="Please input name" /></el-row>
+  <el-button @click="query">点击显示年龄</el-button>
+  <el-row>
+  <el-input v-model="info.age" placeholder="Please input age" /></el-row>
+  <el-button @click="queryagejia">点击显示年龄加1</el-button>
+  <el-row>
+  <el-input v-model="info.age" placeholder="Please input agejia1" /></el-row>
+  <router-link to="/">Go to Home</router-link>
+  <router-link to="/about">Go to About</router-link>
+  <router-link to="/info">Go to info</router-link>
+  <router-link to="/gotoinfo">Go to hello</router-link>
+  <router-view></router-view>
+</div>
+<script>
+  // 1. 定义路由组件.
+  // 也可以从其他文件导入
+  const Home = { template: '<div>Home</div>' }
+  const About = { template: '<div>About</div>' }
+  const Info = { template: '<div>Info</div>' }
+
+  // 2. 定义一些路由
+  // 每个路由都需要映射到一个组件。
+  // 我们后面再讨论嵌套路由。
+
+  const routes = [
+    { path: '/', component: Home },
+    { path: '/about', component: About },
+    { path: '/info', component: Info },
+  ]
+
+  // 3. 创建路由实例并传递 `routes` 配置
+  // 你可以在这里输入更多的配置，但我们在这里
+  // 暂时保持简单
+
+  const router = VueRouter.createRouter({
+    // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
+    history: VueRouter.createWebHashHistory(),
+    routes, // `routes: routes` 的缩写
+  })
+
+  const App = {
+    data(){
+      return {
+        info: {
+          name: null,
+          age: null
+        }
+      }
+    },
+    methods: {
+      query() {
+        axios.get('aa/test7').then(response => (this.info = response.data))
+      },
+      queryagejia() {
+        this.info.age = this.info.age + 1
+        return this.info.age
+      },
+      gotoinfo() {
+        this.$router.push('/aa/text8')
+      }
+    }
+  }
+  /*const app = Vue.createApp(App);
+  app.use(ElementPlus);
+  app.mount("#app");*/
+  Vue.createApp(App)
+          .use(ElementPlus)
+          .use(router)
+          .mount("#app")
+</script>
+</body>
+</html>
