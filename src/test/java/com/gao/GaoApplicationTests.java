@@ -3,19 +3,21 @@ package com.gao;
 
 import com.gao.pojo.student;
 import com.gao.pojo.user;
-import com.gao.service.usermapper;
+import com.gao.service.userbasemapper;
 import com.gao.util.dayenum;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.List;
 
 @SpringBootTest
 class GaoApplicationTests {
     @Autowired
-    private usermapper um;
+    private userbasemapper um;
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
     @Test
     void contextLoads() {
         List<student> ls=um.selectList(null);
@@ -55,6 +57,11 @@ class GaoApplicationTests {
         int p=1/0;
         i++;
         System.out.println(i);
+    }
+    @Test
+        //@Transactional
+    void t4(){
+        stringRedisTemplate.opsForValue().append("ms","hello");
     }
 
 }

@@ -6,6 +6,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gao.pojo.user;
 import com.gao.service.myser.myser;
+import com.gao.service.redisservice;
+import com.gao.service.redisserviceimpl;
 import com.mysql.cj.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,6 +29,8 @@ public class mycontroller {
     @Autowired
     @Qualifier("myser2")
     private myser m;
+    @Autowired
+    private redisservice rd;
     @RequestMapping("test")
     public String test(){
 
@@ -113,5 +117,10 @@ public class mycontroller {
     public String test8(){
         String str="hello";
         return str;
+    }
+    @RequestMapping("test9")
+    public List<user> test9(){
+
+        return rd.getuserforcache();
     }
 }

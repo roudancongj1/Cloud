@@ -1,6 +1,6 @@
 package com.gao.service.myserinpl;
 
-import com.gao.dao.user;
+import com.gao.dao.usermapper;
 import com.gao.service.myser.myser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import java.util.Map;
 @Service("myser2")
 public class myser2impl implements myser {
     @Autowired
-    private user u;
+    private usermapper u;
     @Override
     public String hello() {
         return "hello service2";
