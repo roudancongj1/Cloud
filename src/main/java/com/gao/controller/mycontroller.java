@@ -123,4 +123,9 @@ public class mycontroller {
 
         return rd.getuserforcache();
     }
+    @RequestMapping("test10")
+    public String test10(){
+
+        return rd.getuserforcache2();
+    }
 }

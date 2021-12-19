@@ -37,6 +37,17 @@
   <router-link to="/info">Go to info</router-link>
   <router-link to="/gotoinfo">Go to hello</router-link>
   <router-view></router-view>
+  <el-button @click="gotodata">点击添加角色</el-button>
+  <table>
+    <tr>
+      <td>姓名</td>
+      <td>年龄</td>
+    </tr>
+    <tr v-for="data in madata">
+      <td>{{data.name}}</td>
+      <td>{{data.age}}</td>
+    </tr>
+  </table>
 </div>
 <script>
   // 1. 定义路由组件.
@@ -71,19 +82,26 @@
         info: {
           name: null,
           age: null
-        }
+        },
+        username:'李四',
+        age:'123',
+        madata :[{name:'',age:''}]
       }
     },
     methods: {
       query() {
         axios.get('aa/test7').then(response => (this.info = response.data))
       },
-      queryagejia() {
+      queryagejia: function (){
         this.info.age = this.info.age + 1
         return this.info.age
       },
       gotoinfo() {
         this.$router.push('/aa/text8')
+      },
+      gotodata() {
+        this.madata.push({name:this.username,age:this.age});
+        this.madata.push({name:'wang',age:'22'})
       }
     }
   }
