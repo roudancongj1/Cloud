@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -111,7 +112,15 @@ public class mycontroller {
         Map map = new HashMap<>();
         map.put("name","张三");
         map.put("age","12");
+        //map.put("age","122");
+        Map<String,user> mu=new HashMap<>();
+        user u = new user();
+        u.setId(11);
+        u.setPassword("231312");
+        u.setRole(2);
+        mu.put("用户",u);
         return JSON.toJSONString(map);
+        //return JSON.toJSONString(mu);
     }
     @RequestMapping("test8")
     public String test8(){
@@ -125,7 +134,6 @@ public class mycontroller {
     }
     @RequestMapping("test10")
     public String test10(){
-
         return rd.getuserforcache2();
     }
 }
