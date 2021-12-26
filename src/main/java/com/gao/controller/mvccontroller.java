@@ -25,4 +25,8 @@ public class mvccontroller {
     public String index(){
         return "index";
     }
+    @RequestMapping("local")
+    public String local(){
+        return "indexforlocal";
+    }
 }

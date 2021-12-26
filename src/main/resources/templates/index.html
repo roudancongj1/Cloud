@@ -38,6 +38,8 @@
   <router-link to="/gotoinfo">Go to hello</router-link>
   <router-view></router-view>
   <el-button @click="gotodata">点击添加角色</el-button>
+  <el-button type="warning"
+             @click="exportTemplate">模板导出</el-button>
   <table>
     <tr>
       <td>姓名</td>
@@ -102,7 +104,10 @@
       gotodata() {
         this.madata.push({name:this.username,age:this.age});
         this.madata.push({name:'wang',age:'22'},{"name":"张4","age":"122"})
-      }
+      },
+      exportTemplate() {
+        window.location.href = this.axios.get('excel/export').then(res => this.info.name = res.data)
+      },
     }
   }
   /*const app = Vue.createApp(App);

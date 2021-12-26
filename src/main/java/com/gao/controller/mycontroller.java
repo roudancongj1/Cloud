@@ -1,6 +1,6 @@
 package com.gao.controller;
 
-import ch.qos.logback.core.util.StringCollectionUtil;
+
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("aa")
@@ -129,11 +131,44 @@ public class mycontroller {
     }
     @RequestMapping("test9")
     public List<user> test9(){
+        List l=new ArrayList<>();
+        l.add("aadd");
+        l.add("ddcc");
+        l.add("ccff");
+        System.out.println(l.get(0));
 
         return rd.getuserforcache();
     }
     @RequestMapping("test10")
     public String test10(){
         return rd.getuserforcache2();
+    }
+    @RequestMapping("test11")
+    public String[] test11(){
+        String qx="按防腐剂-asdas-fwer-晒哎,";
+      //  Pattern r = Pattern.compile("");
+      //  // 现在创建 matcher 对象
+      //  Matcher m = r.matcher(qx);
+      //  if (m.find( )) {
+      //      System.out.println("Found value: " + m.group(0) );
+      //      System.out.println("Found value: " + m.group(1) );
+      //      System.out.println("Found value: " + m.group(2) );
+      //      System.out.println("Found value: " + m.group(3) );
+      //  } else {
+      //      System.out.println("NO MATCH");
+      //  }
+
+        //String str = "房估字(2014)第YPQD0006号";
+        //
+        //String jieguo = str.substring(str.indexOf("第")+1,str.indexOf("号"));
+
+        List list = new ArrayList<>();
+        String[] ss = qx.split("-");//表示用逗号进行拆分字符串  结果是一个字符串数组
+        for (int i = 0; i < ss.length; i++) {
+            System.out.println(ss[i]);
+            list.add(ss[i]);
+        }
+
+        return ss;
     }
 }
