@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>local</title>
+    <script src="js/vue.global.js"></script>
+    <script src="js/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <button @click="daochu">点击导出</button>
+    <button>{{info.name}}</button>
+    <button @click="daochue">点击导出模板</button>
+
+</div>
+
+
+<script>
+    const App ={
+        data(){
+            return{
+                info: {
+                    name: '',
+                    age: ''
+                }
+            }
+        },
+        methods: {
+            daochu(){
+                axios.get('aa/test7').then(res => this.info = res.data)
+            },
+            daochue(){
+                 window.location.href = "http://localhost:8888/excel/export"
+            }
+        }
+
+    }
+    Vue.createApp(App).mount("#app")
+    const app = Vue.createApp(App)
+</script>
+</body>
+</html>
