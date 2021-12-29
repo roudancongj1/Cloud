@@ -1,6 +1,8 @@
 
 package com.gao;
 
+import com.baomidou.mybatisplus.generator.FastAutoGenerator;
+import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.gao.pojo.student;
 import com.gao.pojo.user;
 import com.gao.service.userbasemapper;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
+import java.util.Collections;
 import java.util.List;
 
 @SpringBootTest
@@ -62,6 +65,23 @@ class GaoApplicationTests {
         //@Transactional
     void t4(){
         stringRedisTemplate.opsForValue().append("ms","hello");
+    }
+    @Test
+    void t5(){
+        FastAutoGenerator.create("jdbc:mysql://localhost:3306/data","root","123")
+                .globalConfig(builder -> {
+                    builder.author("Gao") // 设置作者
+                            .outputDir("D://_____idea//_____autoscan"); // 指定输出目录
+                })
+                .packageConfig(builder -> {
+                    builder.parent("sacn"); // 设置父包名
+                })
+                .strategyConfig(builder -> {
+                    builder.addInclude("juxing") // 设置需要生成的表名
+                            .addTablePrefix("t_", "c_"); // 设置过滤表前缀
+                })
+                .execute();
+        //默认生成D://_____idea//_____autoscan扫描一套
     }
 
 }

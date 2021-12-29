@@ -2,8 +2,11 @@ package com.gao.controller;
 
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gao.dao.dataDao;
+import com.gao.pojo.data;
 import com.gao.pojo.user;
 import com.gao.service.myser.myser;
 import com.gao.service.redisservice;
@@ -34,6 +37,8 @@ public class mycontroller {
     private myser m;
     @Autowired
     private redisservice rd;
+    @Autowired
+    private dataDao dD;
     @RequestMapping("test")
     public String test(){
 
@@ -171,4 +176,27 @@ public class mycontroller {
 
         return ss;
     }
+    @RequestMapping("test12")
+    public String test12(){
+        data d=dD.selectOne(new QueryWrapper<data>().eq("id","1"));
+        System.out.println(d.getCity());
+      // data dup=new data();
+      // dup.setCity("水水水水");
+      // dup.setEat("sssss");
+      // dup.setWifi(32);
+      // dD.insert(dup);
+      // System.out.println("添加成功");
+        //dD.selectOne(new QueryWrapper<data>().eq("wifi",32)).getCity();
+        return "添加成功";
+    }
+    @RequestMapping("test13")
+    public String test13(){
+        List<data> ls=dD.selectall();
+        for (data d:
+             ls) {
+            System.out.println(d.getCity());
+        }
+        return "查询成功";
+    }
+
 }
