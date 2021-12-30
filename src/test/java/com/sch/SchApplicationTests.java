@@ -1,5 +1,6 @@
 package com.sch;
 
+import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
