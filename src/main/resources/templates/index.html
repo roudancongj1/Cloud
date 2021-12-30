@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../static/css/ele.css">
+    <link rel="stylesheet" href="css/ele.css">
     <script src="js/vue.global.js"></script>
     <script src="js/element-plus.js"></script>
     <script src="js/axios.min.js"></script>
@@ -13,14 +13,68 @@
 <body>
 <div id="app">
     <el-container>
-        <el-header>Header</el-header>
-        <el-main>Main</el-main>
+        <el-header>
+            标题区域
+        </el-header>
+        <el-container>
+            <el-aside width="200px">
+                侧边栏
+            </el-aside>
+            <el-main>
+                <router-link to="/">Go to Home</router-link><td>||</td>
+                <router-link to="/about">Go to About</router-link><td>||</td>
+                <router-link to="/info"> info</router-link><td>||</td>
+                <el-button @click="luyouid">点击传参数id66name44</el-button>
+                <router-view></router-view>
+            </el-main>
+        </el-container>
     </el-container>
 </div>
-<script>
-    Vue.createApp()
 
-        .use(ElemtntPlus)
+<script>
+    const App ={
+        data(){
+            return{
+                info: {
+                    name: '',
+                    age: ''
+                },
+            }
+        },
+        methods: {
+            luyouid(){
+                this.$router.push({
+                    name: 'gotoinfo',
+                    params: {
+                        id: '66666',
+                        name: '444444'
+                    }
+                })
+            },
+        }
+
+    }
+    // 1. 定义路由组件.
+    const Home = { template: '<div>Home</div>' }
+    const About = { template: '<div>About</div>' }
+    const Info = { template: '<div>Info</div>' }
+    const Gotoinfo = { template: '<div><el-button>{{ $route.params.name }}</el-button>'
+            + '<el-button>{{ $route.params.id }}</el-button></div>'}
+    // 2. 定义一些路由
+    const routes = [
+        { path: '/', component: Home },
+        { path: '/about', component: About },
+        { path: '/info', component: Info },
+        { path: '/gotoinfo', name: 'gotoinfo',component: Gotoinfo }
+    ]
+    // 3. 创建路由实例并传递 `routes` 配置
+    const router = VueRouter.createRouter({//使用 hash 模式。
+        history: VueRouter.createWebHashHistory(),
+        routes, // `routes: routes` 的缩写
+    })
+    Vue.createApp(App)
+        .use(router)
+        .use(ElementPlus)
         .mount("#app")
 </script>
 </body>

@@ -5,13 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @Auth: Gao
- * @Date: 2021/12/31 0:34
+ * @Date: 2021/12/31 0:48
  */
 @Controller
-@RequestMapping("aa")
-public class testcon {
-    @RequestMapping("test")
-    public String test(){
+public class webController {
+    @RequestMapping("/")
+    public String index(){
         return "index";
     }
 }
