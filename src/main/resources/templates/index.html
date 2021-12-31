@@ -8,26 +8,36 @@
     <script src="js/element-plus.js"></script>
     <script src="js/axios.min.js"></script>
     <script src="js/vue-router.global.js"></script>
-
+    <style>
+        .header {
+            padding: 40px;
+            text-align: right;
+            height: 100px;
+        }
+        .herderLink {
+            margin: 0 20px;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
     <el-container>
-        <el-header>
-            标题区域
+        <el-header class="header">
+            <el-link class="herderLink">首页</el-link>
+            <el-link class="herderLink">服务</el-link>
+            <el-link class="herderLink">反馈</el-link>
+            <el-link class="herderLink">关于</el-link>
+            <el-link class="herderLink">支持我们</el-link>
+            <el-link class="herderLink"></el-link>
         </el-header>
-        <el-container>
-            <el-aside width="200px">
-                侧边栏
-            </el-aside>
-            <el-main>
+        <el-main>
                 <router-link to="/">Go to Home</router-link><td>||</td>
                 <router-link to="/about">Go to About</router-link><td>||</td>
                 <router-link to="/info"> info</router-link><td>||</td>
                 <el-button @click="luyouid">点击传参数id66name44</el-button>
                 <router-view></router-view>
-            </el-main>
-        </el-container>
+        </el-main>
     </el-container>
 </div>
 
