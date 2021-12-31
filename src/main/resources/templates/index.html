@@ -24,18 +24,21 @@
 <div id="app">
     <el-container>
         <el-header class="header">
-            <el-link class="herderLink">首页</el-link>
-            <el-link class="herderLink">服务</el-link>
-            <el-link class="herderLink">反馈</el-link>
+            <el-link class="herderLink" @click="index">首页</el-link>
+            <el-link class="herderLink" @click="services">服务</el-link>
+            <el-link class="herderLink" @click="city">城市</el-link>
             <el-link class="herderLink">关于</el-link>
             <el-link class="herderLink">支持我们</el-link>
-            <el-link class="herderLink"></el-link>
+            <el-link class="herderLink">反馈</el-link>
+            <el-link class="herderLink">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+                </svg>
+            </el-link>
         </el-header>
         <el-main>
-                <router-link to="/">Go to Home</router-link><td>||</td>
-                <router-link to="/about">Go to About</router-link><td>||</td>
-                <router-link to="/info"> info</router-link><td>||</td>
-                <el-button @click="luyouid">点击传参数id66name44</el-button>
+            <el-container>
+            </el-container>
                 <router-view></router-view>
         </el-main>
     </el-container>
@@ -52,35 +55,54 @@
             }
         },
         methods: {
-            luyouid(){
+            index() {
                 this.$router.push({
-                    name: 'gotoinfo',
+                    name: 'index',
                     params: {
-                        id: '66666',
-                        name: '444444'
+                        id: '1',
+                        name: '首页'
                     }
                 })
             },
+            services() {
+                this.$router.push({
+                    name: 'services',
+                    params: {
+                        id: '2',
+                        name: '服务'
+                    }
+                })
+            },
+            city() {
+                this.$router.push({
+                    name: 'city',
+                    params: {
+                        id: '3',
+                        name: '城市'
+                    }
+                })
+            }
         }
 
     }
     // 1. 定义路由组件.
-    const Home = { template: '<div>Home</div>' }
-    const About = { template: '<div>About</div>' }
-    const Info = { template: '<div>Info</div>' }
-    const Gotoinfo = { template: '<div><el-button>{{ $route.params.name }}</el-button>'
-            + '<el-button>{{ $route.params.id }}</el-button></div>'}
-    // 2. 定义一些路由
-    const routes = [
-        { path: '/', component: Home },
-        { path: '/about', component: About },
-        { path: '/info', component: Info },
-        { path: '/gotoinfo', name: 'gotoinfo',component: Gotoinfo }
-    ]
-    // 3. 创建路由实例并传递 `routes` 配置
-    const router = VueRouter.createRouter({//使用 hash 模式。
-        history: VueRouter.createWebHashHistory(),
-        routes, // `routes: routes` 的缩写
+    const index = { template: '<div>{{ $route.params.id }}{{ $route.params.name }}您好您好</div>' }
+    const services = { template: '<div>{{ $route.params.id }}{{ $route.params.name }}</div>' }
+    const city = {template: '<div>{{ $route.params.id }}{{ $route.params.name }}</div>'}
+    const error = {template: '<div>无效路径</div>'}
+
+    // 2. 创建路由实例并传递 `routes` 配置
+    const router = VueRouter.createRouter({
+        history: VueRouter.createWebHashHistory(),//使用 hash 模式。
+        routes: [
+            { path: '/:catchAll(.*)', redirect: '/404'},
+            { path: '/404', name: '404', component: error },
+            { path: '/', redirect: '/index'},
+            { path: '/index', name: 'index', component: index },
+            { path: '/services', name: 'services', component: services},
+            { path: '/city', name: 'city', component: city},
+
+        ]
     })
     Vue.createApp(App)
         .use(router)
