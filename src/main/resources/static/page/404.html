@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>error</title>
+    <style>
+        .titleup{
+            color: white;
+            margin: 150px;
+            text-align: center;
+        }
+        .titledown{
+            color: white;
+            margin: 200px;
+            text-align: center;
+        }
+        .bg{
+            background: url(img/404.jpg);
+            background-size: cover
+        }
+    </style>
+</head>
+<body class="bg">
+<h2 class="titleup">无效的请求 ^^</h2>
+<h3 class="titledown">
+    <span>您的浏览器将在</span>
+    <span id="time"></span>
+    <span>秒后</span>
+    <a href="/">返回首页</a>
+</h3>
+<script>
+    var t = 5
+    function JiShi(){
+        t -= 1
+        document.getElementById("time").innerHTML = t
+        if (t == 0){
+            window.location.href=window.location.protocol + '//' +window.location.host
+        }
+        window.setTimeout('JiShi()',1000)
+    }
+    this.JiShi()
+</script>
+</body>
+</html>
