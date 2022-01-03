@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="css/ele.css">
+    <script src="js/vue.global.js"></script>
+    <script src="js/element-plus.js"></script>
+    <script src="js/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <el-button v-model="person.info" @click="test"></el-button>
+    <el-button v-model="person.name"></el-button>
+</div>
+<script>
+    const App ={
+        data(){
+            return{
+                person: {
+                    info: '',
+                    name: ''
+                }
+            }
+        },
+        methods: {
+            test() {
+                axios.get("/data/test").then(req => ( this.person = req) )
+            }
+        }
+    }
+    Vue.createApp(App)
+        .use(ElementPlus)
+        .mount("#app")
+</script>
+</body>
+</html>

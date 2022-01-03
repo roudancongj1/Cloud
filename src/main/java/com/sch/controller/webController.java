@@ -16,4 +16,6 @@ public class webController {
     public String error(){
         return "page/404.html";
     }
+    @RequestMapping("login")
+    public String login(){ return "page/login.html"; }
 }
