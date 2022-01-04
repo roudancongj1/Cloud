@@ -21,6 +21,12 @@
         .cont{
             padding: 100px;
         }
+        #app{
+            width: 100%;
+            top: 0;
+            left: 0;
+            position: absolute;
+        }
     </style>
 </head>
 <body>
@@ -53,9 +59,8 @@
             </el-affix>
         </el-header>
         <el-main>
-            <!--<img src="img/404.jpg">-->
-
-                <router-view></router-view>
+            <router-view></router-view>
+            <img src="img/404.jpg">
         </el-main>
     </el-container>
 </div>

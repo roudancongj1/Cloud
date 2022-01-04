@@ -7,12 +7,32 @@
     <script src="js/vue.global.js"></script>
     <script src="js/element-plus.js"></script>
     <script src="js/axios.min.js"></script>
+    <style>
+        .header{
+            padding: 20px;
+            background: black;
+            height: 60px;
+        }
+        #app{
+            width: 100%;
+            top: 0;
+            left: 0;
+            position: absolute;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
-    <el-button  @click="test">点击获取内容</el-button>
-    <el-input v-model="person.info"></el-input>
-    <el-input v-model="person.name"></el-input>
+    <el-container>
+        <el-header class="header">
+            <span style="color: white">海内存知己 天涯若比邻 不如先登个录吧</span>
+        </el-header>
+        <el-main>
+            <el-button  @click="test">点击获取内容</el-button>
+            <el-input v-model="person.info"></el-input>
+            <el-input v-model="person.name"></el-input>
+        </el-main>
+    </el-container>
 </div>
 <script>
     const App ={
