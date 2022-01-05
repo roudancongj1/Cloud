@@ -18,4 +18,10 @@ public class webController {
     }
     @RequestMapping("login")
     public String login(){ return "page/login.html"; }
+    @RequestMapping("user")
+    public String user(){ return "page/user.html"; }
+    @RequestMapping("account")
+    public String account(){ return "page/account.html"; }
+    @RequestMapping("manage")
+    public String manage(){ return "page/manage.html"; }
 }

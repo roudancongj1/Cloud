@@ -9,6 +9,12 @@
     <script src="js/axios.min.js"></script>
     <script src="js/vue-router.global.js"></script>
     <style>
+        #app{
+            width: 100%;
+            top: 0;
+            left: 0;
+            position: absolute;
+        }
         .header {
             padding: 40px;
             text-align: right;
@@ -20,12 +26,6 @@
         }
         .cont{
             padding: 100px;
-        }
-        #app{
-            width: 100%;
-            top: 0;
-            left: 0;
-            position: absolute;
         }
     </style>
 </head>
@@ -40,7 +40,7 @@
                 <el-link class="herderLink" @click="about">关于</el-link>
                 <el-link class="herderLink" @click="support">支持我们</el-link>
                 <el-link class="herderLink" @click="feedback">反馈</el-link>
-                <el-button class="herderLink" round>登录</el-button>
+                <el-button class="herderLink" @click="tologin" round>登录</el-button>
                 <el-dropdown trigger="click">
                     <el-button class="herderLink" circle>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
@@ -49,9 +49,9 @@
                     </el-button>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item>个人资料</el-dropdown-item>
-                            <el-dropdown-item>我的账户</el-dropdown-item>
-                            <el-dropdown-item>后台管理</el-dropdown-item>
+                            <el-dropdown-item @click="touser">个人资料</el-dropdown-item>
+                            <el-dropdown-item @click="toaccount">我的账户</el-dropdown-item>
+                            <el-dropdown-item @click="tomanage">后台管理</el-dropdown-item>
                             <el-dropdown-item divided>退出登录</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
@@ -60,7 +60,7 @@
         </el-header>
         <el-main>
             <router-view></router-view>
-            <img src="img/404.jpg">
+            <!--<img src="img/404.jpg">-->
         </el-main>
     </el-container>
 </div>
@@ -99,7 +99,12 @@
             },
             feedback() {
                 this.$router.push({ name: 'feedback' })
-            }
+            },
+            tologin() { window.location.href="/login" },
+            touser() {window.location.href="/user" },
+            toaccount() {window.location.href="/account" },
+            tomanage() { window.location.href="/manage"},
+
         }
 
     }
@@ -189,7 +194,7 @@
             '                            <el-input placeholder="电话"></el-input>\n' +
             '                        </el-form-item>\n' +
             '                        <el-form-item >\n' +
-            '                            <el-input placeholder="留言"></el-input>\n' +
+            '                            <el-input placeholder="留言" type="textarea"></el-input>\n' +
             '                        </el-form-item><el-button type="primary" round>提交</el-button>\n' +
             '                    </el-form>\n' +
             '                </div>\n' +
