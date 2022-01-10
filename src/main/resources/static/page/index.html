@@ -15,6 +15,9 @@
             left: 0;
             position: absolute;
         }
+        body{
+            background: #f9f9fa;
+        }
         .header {
             padding: 40px;
             text-align: right;
@@ -70,9 +73,10 @@
         data(){
             return{
                 info: {
-                    name: '',
+                    name: '111',
                     age: ''
                 },
+                cards: []
             }
         },
         methods: {
@@ -80,7 +84,24 @@
                 this.$router.push({ name: 'index' })
             },
             services() {
-                this.$router.push({ name: 'services' })
+           //  this.$router.push({
+           //      name: 'services',
+           //      query: {
+           //          cards: JSON.stringify(this.cards)
+           //      }
+           //  })
+
+                this.$router.push({
+                    name: 'services',
+                    params: {
+                        cards: JSON.stringify(this.cards),
+                        aaa: [11,22,33],
+                        bbb: JSON.stringify([{id:1,name:'aa'},
+                            {id:2,name:'bb'},
+                            {id:3,name:'cc'},
+                            {id:4,name:"dd"}])
+                    }
+                })
             },
             city() {
                 this.$router.push({
@@ -104,7 +125,11 @@
             touser() {window.location.href="/user" },
             toaccount() {window.location.href="/account" },
             tomanage() { window.location.href="/manage"},
+            cardInfo() { axios.get("/data/cardInfo").then(res => this.cards= res.data)},
 
+        },
+        created() {
+            this.cardInfo()
         }
 
     }
@@ -122,25 +147,47 @@
     const services = { template: '<el-container>\n' +
             '                <el-header style="text-align: center">\n' +
             '                    <h1>我们的服务</h1>\n' +
-            '                    <p>我们大手大脚回答扣篮大赛更好的哈工大卡箍的</p>\n' +
+            '                    <p>{{$route.params.cards}}</p>\n' +
+            '                    <p>{{$route.params.bbb}}</p>\n' +
             '                </el-header>\n' +
             '                <el-main>\n' +
             '                        <el-container>\n' +
-            '                            <el-card  v-for="num in 4" style="margin: 20px;width: 25%">\n' +
-            '                                <template #header>\n' +
-            '                                    <div>\n' +
-            '                                        <span>Card name{{num}}</span>\n' +
-            '                                    </div>\n' +
-            '                                </template>\n' +
-            '                                <div>内容阿三大苏打萨达</div>\n' +
-            '                            </el-card>\n' +
+          //  '                            <el-card  v-for="card in $route.params.cards" :key="card" style="margin: 20px;width: 25%">\n' +
+          //  '                                <template #header>\n' +
+          //  '                                    <div>\n' +
+          //  '                                        <span>{{card.label}}</span>\n' +
+          //  '                                    </div>\n' +
+          //  '                                </template>\n' +
+          //  '                                <div>{{card.service}}</div>\n' +
+          //  '                            </el-card>\n' +
+            '                            <table  v-for="(aaa,index) in $route.params.aaa" :key="index" style="margin: 20px;width: 25%">\n' +
+            '                                <tr>\n' +
+            '                                    <td>{{aaa}}{{index}}</td>\n' +
+          //  '                                    <td>{{card.name}}</td>\n' +
+            '                                </tr>\n' +
+            '                            </table>\n' +
+            '                            <table  v-for="(b,index) in $route.params.bbb" :key="index" style="margin: 20px;width: 25%">\n' +
+            '                                <tr>\n' +
+            '                                    <td>{{b.id}}{{index}}</td>\n' +
+            //  '                                    <td>{{card.name}}</td>\n' +
+            '                                </tr>\n' +
+            '                            </table>\n' +
             '                        </el-container>\n' +
             '                </el-main>\n' +
             '            </el-container>' + '' }
 
     const city = { template: '<el-carousel height="300px">\n' +
-            '                <el-carousel-item v-for="item in 4" :key="item">\n' +
-            '                    <img src="img/404.jpg">城市{{item}}\n' +
+            '                <el-carousel-item :key="item">\n' +
+            '                    <img src="img/bj.jpg" style="object-fit: fill;width: 100%;height: 100%">\n' +
+            '                </el-carousel-item>\n' +
+            '                <el-carousel-item :key="item">\n' +
+            '                    <img src="img/gz.jpg" style="object-fit: fill;width: 100%;height: 100%">\n' +
+            '                </el-carousel-item>\n' +
+            '                <el-carousel-item :key="item">\n' +
+            '                    <img src="img/sh.jpg" style="object-fit: fill;width: 100%;height: 100%">\n' +
+            '                </el-carousel-item>\n' +
+            '                <el-carousel-item :key="item">\n' +
+            '                    <img src="img/sz.jpg" style="object-fit: fill;width: 100%;height: 100%">\n' +
             '                </el-carousel-item>\n' +
             '            </el-carousel>\n'+'<p>城市操作1</p>\n' +
             '            <p>城市操作1</p>\n' +
@@ -167,7 +214,7 @@
             '                </el-main>\n' +
             '            </el-container>' + ''}
 
-    const support = { template: '<div>支持我们</div>'}
+    const support = { template: '<div>支持我们</div>'+''}
 
     const feedback = { template: '<el-container>\n' +
             '                <div style="width: 30%;padding: 10px">\n' +
