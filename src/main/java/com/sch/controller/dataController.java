@@ -2,10 +2,7 @@ package com.sch.controller;
 
 import com.sch.utils.captchaUtil;
 import com.sch.utils.resultUtil;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +19,7 @@ import java.util.Map;
  * @Auth: Gao
  * @Date: 2021/12/31 14:02
  */
+
 @RestController
 @RequestMapping("/data")
 public class dataController {
@@ -73,6 +71,7 @@ public class dataController {
        // return resultUtil.ok().put(captchaUtil.randomColor(12,444).toString());
     }
 
+    @CrossOrigin
     @GetMapping("captcha")
     public void captcha(HttpServletResponse response){
         response.setHeader("Cache-Control", "no-store, no-cache");
