@@ -34,6 +34,9 @@
         .btn{
             width: 200px;
         }
+        .captcha{
+            width: 100px;
+        }
     </style>
 </head>
 <body>
@@ -55,7 +58,14 @@
                     <el-input class="input" placeholder="密码:" v-model="user.name"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-input class="input" placeholder="验证码:" v-model="user.name"></el-input>
+                    <el-row gutter="20" justify="center">
+                        <el-col span="12">
+                            <el-input placeholder="验证码" v-model="captcha" class="captcha"></el-input>
+                        </el-col>
+                        <el-col span="12">
+                            <img :src="captchaUrl" @click="getCaptcha" alt="验证码">
+                        </el-col>
+                    </el-row>
                 </el-form-item>
                 <el-form-item>
                     <span style="margin: 0 10px">记住我</span><el-switch v-model="user.rem"></el-switch>
@@ -113,15 +123,20 @@
                     rem: false
                 },
                 drawer: false,
-
+                captcha: '',
+                captchaUrl: 'http://localhost:8888/data/captcha'
             }
         },
         methods: {
             test() {
                 axios.get("/data/test").then(res => (this.user = res.data) )
             },
+            getCaptcha() {
+                 let r=Math.random()
+                 this.captchaUrl = 'http://localhost:8888/data/captcha?r='+r
+            }
 
-        }
+        },
     }
     Vue.createApp(App)
         .use(ElementPlus)
