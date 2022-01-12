@@ -72,27 +72,7 @@ public class dataController {
        // Math.random()
        // return resultUtil.ok().put(captchaUtil.randomColor(12,444).toString());
     }
-    @GetMapping("yz")
-    public void yz(HttpServletRequest request, HttpServletResponse response){
-        response.setHeader("Cache-Control", "no-store, no-cache");
 
-        captchaUtil captcha=captchaUtil.Instance();
-        BufferedImage image=captcha.getImage();
-        String code=captcha.getStr();
-        request.getSession().setAttribute("code",code);
-
-
-        try {
-            ImageIO.write(image,"jpg",response.getOutputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    @RequestMapping("login")
-    public String login(HttpServletRequest request){
-        System.out.println("登陆成功"+request.getSession().getAttribute("code"));
-        return "登陆成功";
-    }
     @GetMapping("captcha")
     public void captcha(HttpServletResponse response){
         response.setHeader("Cache-Control", "no-store, no-cache");
