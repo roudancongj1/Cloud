@@ -1,7 +1,5 @@
 package com.sch.utils;
 
-import net.sf.jsqlparser.expression.StringValue;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -10,19 +8,19 @@ import java.util.Random;
  * @Auth: Gao
  * @Date: 2022/1/12 12:49
  */
-public class captchaUtil {
+public class CaptchaUtil {
 
     private BufferedImage image;
     private String codes;
     private static final char[] code="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789".toCharArray();
     private static final String SESSION_CODE_NAME="code";
 
-    private captchaUtil() {
+    private CaptchaUtil() {
         init();
     }
 
-    public static captchaUtil Instance(){
-        return new captchaUtil();
+    public static CaptchaUtil Instance(){
+        return new CaptchaUtil();
     }
 
     public BufferedImage getImage(){

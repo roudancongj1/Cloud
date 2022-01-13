@@ -5,3 +5,9 @@ server:
 spring:
   thymeleaf:
     cache: false
+
+
+  redis:
+    host: localhost
+    port: 6379
+

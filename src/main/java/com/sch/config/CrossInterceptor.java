@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Auth: Gao
  * @Date: 2022/1/12 22:47
  */
-public class crossInterceptor implements HandlerInterceptor {
+public class CrossInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (request.getHeader(HttpHeaders.ORIGIN) != null) {

@@ -1,15 +1,16 @@
 package com.sch.controller;
 
-import com.sch.utils.captchaUtil;
-import com.sch.utils.resultUtil;
+import com.sch.pojo.User;
+import com.sch.utils.CaptchaUtil;
+import com.sch.utils.ResultUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,9 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/data")
-public class dataController {
+public class DataController {
+    @Autowired
+    private RedisTemplate redisTemplate;
     @GetMapping("test")
     public Map test(){
         List l=new ArrayList();
@@ -32,6 +35,13 @@ public class dataController {
         Map map = new HashMap();
         map.put("info","啊大苏打");
         map.put("name","张三");
+        redisTemplate.opsForValue().set("aa","32");
+        redisTemplate.opsForValue().set("1","2");
+        User u = new User();
+        u.setId(1);
+        u.setName("张三");
+        redisTemplate.opsForValue().set("zhang",u);
+
         return map;
     }
     @GetMapping("cardInfo")
@@ -57,7 +67,7 @@ public class dataController {
         return list;
     }
     @RequestMapping("result")
-    public resultUtil result(){
+    public ResultUtil result(){
        // return resultUtil.ok().put("asdasdaa");
        // return resultUtil.ok().put("2232","dsadsa");
 
@@ -66,7 +76,7 @@ public class dataController {
         map.put("asdas","sad");
         map.put("22","sad");
         map.put("asd33as","sad");
-        return resultUtil.ok().put(map);
+        return ResultUtil.ok().put(map);
        // Math.random()
        // return resultUtil.ok().put(captchaUtil.randomColor(12,444).toString());
     }
@@ -76,7 +86,7 @@ public class dataController {
     public void captcha(HttpServletResponse response){
         response.setHeader("Cache-Control", "no-store, no-cache");
 
-        captchaUtil captcha = captchaUtil.Instance();
+        CaptchaUtil captcha = CaptchaUtil.Instance();
         BufferedImage image = captcha.getImage();
         String str = captcha.getStr();
 

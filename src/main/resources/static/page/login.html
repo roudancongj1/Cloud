@@ -63,7 +63,7 @@
                             <el-input placeholder="验证码" v-model="captcha" class="captcha"></el-input>
                         </el-col>
                         <el-col span="10">
-                            <img :src="captchaUrl" @click="getCaptcha" alt="显示不出点击->">
+                            <img :src="captchaUrl" @click="getCaptcha" alt="无法显示请点击->">
                         </el-col>
                         <el-col span="2">
                             <el-button class="herderLink" @click="remind" size="small" circle>
@@ -143,7 +143,7 @@
             remind() {
                 this.$notify.warning({
                     title: '验证码无法显示？',
-                    message: '较高版本浏览器会产生跨域问题无法访问http,清关闭跨域设置或使用默认号码<br>' +
+                    message: '较高版本浏览器会产生跨域问题,清关闭跨域设置或使用默认号码<br>' +
                         '  管理员 admin 123 qwer(验证码)<br> 游客 user 123 qwer(验证码)',
                     dangerouslyUseHTMLString: true,
                 })
