@@ -69,6 +69,7 @@
 </div>
 
 <script>
+
     const App ={
         data(){
             return{
@@ -76,7 +77,10 @@
                     name: '111',
                     age: ''
                 },
-                cards: []
+                cards: {
+                    l: [],
+                    s: []
+                },
             }
         },
         methods: {
@@ -84,22 +88,11 @@
                 this.$router.push({ name: 'index' })
             },
             services() {
-           //  this.$router.push({
-           //      name: 'services',
-           //      query: {
-           //          cards: JSON.stringify(this.cards)
-           //      }
-           //  })
-
                 this.$router.push({
                     name: 'services',
-                    params: {
-                        cards: JSON.stringify(this.cards),
-                        aaa: [11,22,33],
-                        bbb: JSON.stringify([{id:1,name:'aa'},
-                            {id:2,name:'bb'},
-                            {id:3,name:'cc'},
-                            {id:4,name:"dd"}])
+                    query: {
+                        label: this.cards.l,
+                        service: this.cards.s,
                     }
                 })
             },
@@ -125,13 +118,23 @@
             touser() {window.location.href="/user" },
             toaccount() {window.location.href="/account" },
             tomanage() { window.location.href="/manage"},
-            cardInfo() { axios.get("/data/cardInfo").then(res => this.cards= res.data)},
+            cardInfo() { axios.get("data/cardInfo").then(res => {
+                res.data.data.forEach(i => {
+                    this.cards.l.push(i.label)
+                    this.cards.s.push(i.service)
+                })
+            })},
+
 
         },
         created() {
             this.cardInfo()
+        },
+        watch: {
+          // $route(){
+          //     this.$route.params.label=this.cards.l
+          // },
         }
-
     }
 
     const index = { template: '<el-container class="cont">\n' +
@@ -147,44 +150,31 @@
     const services = { template: '<el-container>\n' +
             '                <el-header style="text-align: center">\n' +
             '                    <h1>我们的服务</h1>\n' +
-            '                    <p>{{$route.params.cards}}</p>\n' +
-            '                    <p>{{$route.params.bbb}}</p>\n' +
+            '                    <el-divider></el-divider>\n' +
             '                </el-header>\n' +
             '                <el-main>\n' +
             '                        <el-container>\n' +
-          //  '                            <el-card  v-for="card in $route.params.cards" :key="card" style="margin: 20px;width: 25%">\n' +
-          //  '                                <template #header>\n' +
-          //  '                                    <div>\n' +
-          //  '                                        <span>{{card.label}}</span>\n' +
-          //  '                                    </div>\n' +
-          //  '                                </template>\n' +
-          //  '                                <div>{{card.service}}</div>\n' +
-          //  '                            </el-card>\n' +
-            '                            <table  v-for="(aaa,index) in $route.params.aaa" :key="index" style="margin: 20px;width: 25%">\n' +
-            '                                <tr>\n' +
-            '                                    <td>{{aaa}}{{index}}</td>\n' +
-          //  '                                    <td>{{card.name}}</td>\n' +
-            '                                </tr>\n' +
-            '                            </table>\n' +
-            '                            <table  v-for="(b,index) in $route.params.bbb" :key="index" style="margin: 20px;width: 25%">\n' +
-            '                                <tr>\n' +
-            '                                    <td>{{b.id}}{{index}}</td>\n' +
-            //  '                                    <td>{{card.name}}</td>\n' +
-            '                                </tr>\n' +
-            '                            </table>\n' +
+            '                            <el-card v-for="(num,index) in 4" style="margin: 20px;width: 25%">\n' +
+            '                                <template #header>\n' +
+            '                                    <div>\n' +
+            '                                        <span>{{$route.query.label[index]}}</span>\n' +
+            '                                    </div>\n' +
+            '                                </template>\n' +
+            '                                <div>{{$route.query.service[index]}}</div>\n' +
+            '                            </el-card>\n' +
             '                        </el-container>\n' +
             '                </el-main>\n' +
             '            </el-container>' + '' }
 
     const city = { template: '<el-carousel height="300px">\n' +
             '                <el-carousel-item :key="item">\n' +
-            '                    <img src="img/bj.jpg" style="object-fit: fill;width: 100%;height: 100%">\n' +
+            '                    <img src="img/sh.jpg" style="object-fit: fill;width: 100%;height: 100%">\n' +
             '                </el-carousel-item>\n' +
             '                <el-carousel-item :key="item">\n' +
             '                    <img src="img/gz.jpg" style="object-fit: fill;width: 100%;height: 100%">\n' +
             '                </el-carousel-item>\n' +
             '                <el-carousel-item :key="item">\n' +
-            '                    <img src="img/sh.jpg" style="object-fit: fill;width: 100%;height: 100%">\n' +
+            '                    <img src="img/bj.jpg" style="object-fit: fill;width: 100%;height: 100%">\n' +
             '                </el-carousel-item>\n' +
             '                <el-carousel-item :key="item">\n' +
             '                    <img src="img/sz.jpg" style="object-fit: fill;width: 100%;height: 100%">\n' +

@@ -44,9 +44,11 @@
     <el-container>
         <el-header class="header">
             <span style="color: white">海内存知己 天涯若比邻 不如先登个录吧</span>
+            <el-link style="color: white;float: right" @click="toindex">随便看看..</el-link>
+
         </el-header>
         <el-main class="main">
-            <el-form>
+            <el-form hide-required-asterisk="true">
                 <h1>疫情防控 人人有责</h1>
                 <el-form-item>
                     <el-input class="input"
@@ -96,17 +98,24 @@
                         <el-form-item label="确认密码:">
                             <el-input class="input"></el-input>
                         </el-form-item>
-                        <el-form-item label="手机号码:">
-                            <el-input class="input"></el-input>
-                        </el-form-item>
                         <el-form-item label="性别:">
                             <el-radio-group v-model="user.info">
                                 <el-radio label="男"></el-radio>
                                 <el-radio label="女"></el-radio>
                             </el-radio-group>
                         </el-form-item>
+                        <el-form-item label="手机号码:">
+                            <el-input class="input"></el-input>
+                        </el-form-item>
                         <el-form-item label="验证码:">
-                        <el-input class="input"></el-input>
+                            <el-row gutter="20">
+                                <el-col span="12">
+                                    <el-input style="width: 150px" placeholder="请输入短信验证码"></el-input>
+                                </el-col>
+                                <el-col span="12">
+                                    <el-button >点击发送</el-button>
+                                </el-col>
+                            </el-row>
                         </el-form-item>
                         <el-form-item>
                             <el-button class="btn" type="success">点击注册</el-button>
@@ -119,6 +128,7 @@
     </el-container>
 </div>
 <script>
+
     const App ={
         data(){
             return{
@@ -129,7 +139,7 @@
                 },
                 drawer: false,
                 captcha: '',
-                captchaUrl: 'http://localhost:8888/data/captcha'
+                captchaUrl: 'http://localhost:8888/data/captcha',
             }
         },
         methods: {
@@ -147,7 +157,10 @@
                         '  管理员 admin 123 qwer(验证码)<br> 游客 user 123 qwer(验证码)',
                     dangerouslyUseHTMLString: true,
                 })
-            }
+            },
+            toindex() {
+                window.location.href="http://localhost:8888/"
+            },
 
         },
     }

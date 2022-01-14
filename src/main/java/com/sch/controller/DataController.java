@@ -1,7 +1,10 @@
 package com.sch.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.sch.pojo.Card;
 import com.sch.pojo.User;
 import com.sch.utils.CaptchaUtil;
+import com.sch.utils.RedisUtil;
 import com.sch.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -26,6 +29,10 @@ import java.util.Map;
 public class DataController {
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private RedisUtil redisUtil;
+
     @GetMapping("test")
     public Map test(){
         List l=new ArrayList();
@@ -42,43 +49,25 @@ public class DataController {
         u.setName("张三");
         redisTemplate.opsForValue().set("zhang",u);
 
+
+        redisUtil.set("wocao","dasda");
         return map;
     }
+
     @GetMapping("cardInfo")
-    public List<Map> cardInfo(){
-        Map map1 = new HashMap();
-        map1.put("label","优秀的团队");
-        map1.put("service","训练有素的服务");
-        Map map2 = new HashMap();
-        map2.put("label","和善的");
-        map2.put("service","大苏打撒旦");
-        Map map3 = new HashMap();
-        map3.put("label","阿斯顿萨达");
-        map3.put("service","3232");
-        Map map4 = new HashMap();
-        map4.put("label","嗷嗷嗷");
-        map4.put("service","顶顶顶顶顶");
-        List list = new ArrayList();
-        list.add(map1);
-        list.add(map2);list.add(map3);
-        list.add(map4);
-
-
-        return list;
-    }
-    @RequestMapping("result")
-    public ResultUtil result(){
-       // return resultUtil.ok().put("asdasdaa");
-       // return resultUtil.ok().put("2232","dsadsa");
-
-      //  return resultUtil.ok().put("asdas","dsadsa");
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("asdas","sad");
-        map.put("22","sad");
-        map.put("asd33as","sad");
-        return ResultUtil.ok().put(map);
-       // Math.random()
-       // return resultUtil.ok().put(captchaUtil.randomColor(12,444).toString());
+    public ResultUtil cardInfo(){
+        Card card1 = new Card("1ff2","23dss");
+        Card card2 = new Card("21321","3232");
+        Card card3 = new Card("2132221","32ds32");
+        Card card4 = new Card("21341aa21","32432");
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
+        cards.add(card4);
+        System.out.println(cards);
+        System.out.println(JSON.toJSON(cards));
+        return ResultUtil.ok().put(cards);
     }
 
     @CrossOrigin
