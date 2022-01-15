@@ -1,6 +1,7 @@
 package com.sch.utils;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -8,23 +9,16 @@ import java.util.Random;
 
 /**
  * @Auth: Gao
- * @Date: 2022/1/12 12:49
+ * @Date: 2022/1/15 15:41
  */
 
+@Component
 public class CaptchaUtil {
 
     private BufferedImage image;
     private String codes;
     private static final char[] code="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789".toCharArray();
     private static final String SESSION_CODE_NAME="code";
-
-    private CaptchaUtil() {
-        init();
-    }
-
-    public static CaptchaUtil Instance(){
-        return new CaptchaUtil();
-    }
 
     public BufferedImage getImage(){
         return this.image;
@@ -34,7 +28,8 @@ public class CaptchaUtil {
         return this.codes;
     }
 
-    private void init(){
+    public void Instance(){
+
         int width=100;
         int height=40;
         Random random = new Random();
@@ -70,6 +65,7 @@ public class CaptchaUtil {
         g.dispose();
         //赋值图片
         this.image=image;
+
     }
 
     //给定范围获取随机色
@@ -84,4 +80,14 @@ public class CaptchaUtil {
         int b=x+random.nextInt(y-x);
         return new Color(r,g,b);
     }
+
+
+   //  private CaptchaU() {
+   //      init();
+   //  }
+
+   //  public static CaptchaU Instance(){
+   //      return new CaptchaU();
+   //  }
+   //  CaptchaU captcha = CaptchaU.Instance();
 }

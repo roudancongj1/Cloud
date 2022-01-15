@@ -2,12 +2,10 @@ package com.sch.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.sch.pojo.Card;
-import com.sch.pojo.User;
 import com.sch.utils.CaptchaUtil;
 import com.sch.utils.RedisUtil;
 import com.sch.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
@@ -27,11 +25,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("/data")
 public class DataController {
-    @Autowired
-    private RedisTemplate redisTemplate;
 
     @Autowired
     private RedisUtil redisUtil;
+
+    @Autowired
+    private CaptchaUtil captchaUtil;
 
     @GetMapping("test")
     public Map test(){
@@ -42,12 +41,7 @@ public class DataController {
         Map map = new HashMap();
         map.put("info","啊大苏打");
         map.put("name","张三");
-        redisTemplate.opsForValue().set("aa","32");
-        redisTemplate.opsForValue().set("1","2");
-        User u = new User();
-        u.setId(1);
-        u.setName("张三");
-        redisTemplate.opsForValue().set("zhang",u);
+
 
 
         redisUtil.set("wocao","dasda");
@@ -70,15 +64,15 @@ public class DataController {
         return ResultUtil.ok().put(cards);
     }
 
-    @CrossOrigin
+    //@CrossOrigin
     @GetMapping("captcha")
     public void captcha(HttpServletResponse response){
         response.setHeader("Cache-Control", "no-store, no-cache");
 
 
-        CaptchaUtil captcha = CaptchaUtil.Instance();
-        BufferedImage image = captcha.getImage();
-        String str = captcha.getStr();
+        captchaUtil.Instance();
+        BufferedImage image = captchaUtil.getImage();
+        String str = captchaUtil.getStr();
         System.out.println("-----——————---获取验证码"+str+"---------------");
         try{
             ImageIO.write(image,"jpg",response.getOutputStream());
