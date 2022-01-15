@@ -139,7 +139,7 @@
                 },
                 drawer: false,
                 captcha: '',
-                captchaUrl: 'http://localhost:8888/data/captcha',
+                captchaUrl: window.location.protocol+'//'+window.location.host+'/data/captcha',
             }
         },
         methods: {
@@ -148,7 +148,7 @@
             },
             getCaptcha() {
                  let r=Math.random()
-                 this.captchaUrl = 'http://localhost:8888/data/captcha?r='+r
+                 this.captchaUrl = window.location.protocol+'//'+window.location.host+'/data/captcha?r='+r
             },
             remind() {
                 this.$notify.warning({
@@ -159,7 +159,7 @@
                 })
             },
             toindex() {
-                window.location.href="http://localhost:8888/"
+                window.location.href= window.location.protocol+'//'+window.location.host+"/"
             },
 
         },

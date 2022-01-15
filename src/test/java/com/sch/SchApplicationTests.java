@@ -1,3 +1,4 @@
+/*
 package com.sch;
 
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
@@ -25,3 +26,4 @@ class SchApplicationTests {
     }
 
 }
+*/

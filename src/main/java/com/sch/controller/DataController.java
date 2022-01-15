@@ -75,10 +75,11 @@ public class DataController {
     public void captcha(HttpServletResponse response){
         response.setHeader("Cache-Control", "no-store, no-cache");
 
+
         CaptchaUtil captcha = CaptchaUtil.Instance();
         BufferedImage image = captcha.getImage();
         String str = captcha.getStr();
-
+        System.out.println("-----——————---获取验证码"+str+"---------------");
         try{
             ImageIO.write(image,"jpg",response.getOutputStream());
         } catch (IOException e) {

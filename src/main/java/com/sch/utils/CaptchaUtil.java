@@ -1,5 +1,7 @@
 package com.sch.utils;
 
+import org.springframework.stereotype.Component;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -8,6 +10,7 @@ import java.util.Random;
  * @Auth: Gao
  * @Date: 2022/1/12 12:49
  */
+
 public class CaptchaUtil {
 
     private BufferedImage image;
