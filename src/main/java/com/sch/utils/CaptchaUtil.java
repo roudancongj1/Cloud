@@ -3,6 +3,7 @@ package com.sch.utils;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -18,18 +19,26 @@ public class CaptchaUtil {
     private BufferedImage image;
     private String codes;
     private static final char[] code="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789".toCharArray();
-    private static final String SESSION_CODE_NAME="code";
+
+
+    private CaptchaUtil(){
+       // init();
+    }
 
     public BufferedImage getImage(){
         return this.image;
     }
 
-    public String getStr(){
+    public String getCode(){
         return this.codes;
     }
 
-    public void Instance(){
-
+  // public static CaptchaUtil Instance(){
+  //     return new CaptchaUtil();
+  // }
+   // private void init(){
+  //  @PostConstruct 注册bean后立即执行
+    public void init(){
         int width=100;
         int height=40;
         Random random = new Random();
@@ -61,13 +70,12 @@ public class CaptchaUtil {
         }
         //赋值验证码
         this.codes=codes;
-        //图像生效
-        g.dispose();
         //赋值图片
         this.image=image;
+        //释放资源
+        g.dispose();
 
     }
-
     //给定范围获取随机色
     private static Color randomColor(int x,int y){
         Random random = new Random();
@@ -82,12 +90,4 @@ public class CaptchaUtil {
     }
 
 
-   //  private CaptchaU() {
-   //      init();
-   //  }
-
-   //  public static CaptchaU Instance(){
-   //      return new CaptchaU();
-   //  }
-   //  CaptchaU captcha = CaptchaU.Instance();
 }

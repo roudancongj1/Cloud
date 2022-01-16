@@ -1,7 +1,9 @@
 package com.sch.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.sch.pojo.Captcha;
 import com.sch.pojo.Card;
+import com.sch.service.CaptchaUtilService;
 import com.sch.utils.CaptchaUtil;
 import com.sch.utils.RedisUtil;
 import com.sch.utils.ResultUtil;
@@ -28,9 +30,9 @@ public class DataController {
 
     @Autowired
     private RedisUtil redisUtil;
-
     @Autowired
-    private CaptchaUtil captchaUtil;
+    private CaptchaUtilService captchaUtilService;
+
 
     @GetMapping("test")
     public Map test(){
@@ -68,16 +70,25 @@ public class DataController {
     @GetMapping("captcha")
     public void captcha(HttpServletResponse response){
         response.setHeader("Cache-Control", "no-store, no-cache");
+        response.setContentType("application/json;charset=UTF-8");
 
+        Captcha captcha = captchaUtilService.getCaptcha();
 
-        captchaUtil.Instance();
-        BufferedImage image = captchaUtil.getImage();
-        String str = captchaUtil.getStr();
-        System.out.println("-----——————---获取验证码"+str+"---------------");
-        try{
-            ImageIO.write(image,"jpg",response.getOutputStream());
-        } catch (IOException e) {
+        try {
+            System.out.println("-----——————---获取验证码"+captcha.getCode()+"---------------");
+            ImageIO.write(captcha.getImage(),"jpg",response.getOutputStream());
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        // captchaUtil.Instance();
+     // BufferedImage image = captchaUtil.getImage();
+     // String str = captchaUtil.getStr();
+     //  System.out.println("-----——————---获取验证码"+str+"---------------");
+     //  try{
+     //      ImageIO.write(image,"jpg",response.getOutputStream());
+     //  } catch (IOException e) {
+     //      e.printStackTrace();
+     //  }
+
     }
 }
