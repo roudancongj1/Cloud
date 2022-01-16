@@ -2,8 +2,11 @@
 package com.sch;
 
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
+import com.baomidou.mybatisplus.generator.config.OutputFile;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Collections;
 
 @SpringBootTest
 class SchApplicationTests {
@@ -16,10 +19,10 @@ class SchApplicationTests {
                             .outputDir("D://_____idea//_____autoscan"); // 指定输出目录
                 })
                 .packageConfig(builder -> {
-                    builder.parent("sacn"); // 设置父包名
+                    builder.parent("sacn"); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("user") // 设置需要生成的表名
+                    builder.addInclude("place") // 设置需要生成的表名
                             .addTablePrefix("t_", "c_"); // 设置过滤表前缀
                 })
                 .execute();

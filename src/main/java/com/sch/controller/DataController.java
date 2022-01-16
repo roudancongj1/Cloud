@@ -1,8 +1,11 @@
 package com.sch.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.sch.dao.UserMapper;
 import com.sch.pojo.Captcha;
 import com.sch.pojo.Card;
+import com.sch.pojo.User;
 import com.sch.service.CaptchaUtilService;
 import com.sch.utils.CaptchaUtil;
 import com.sch.utils.RedisUtil;
@@ -32,10 +35,12 @@ public class DataController {
     private RedisUtil redisUtil;
     @Autowired
     private CaptchaUtilService captchaUtilService;
+    @Autowired
+    UserMapper userMapper;
 
 
     @GetMapping("test")
-    public Map test(){
+    public ResultUtil test(){
         List l=new ArrayList();
         l.add("222222");
         l.add("333333");
@@ -43,11 +48,9 @@ public class DataController {
         Map map = new HashMap();
         map.put("info","啊大苏打");
         map.put("name","张三");
-
-
-
+        User u=userMapper.selectOne(new QueryWrapper<User>().eq("user_id","1"));
         redisUtil.set("wocao","dasda");
-        return map;
+        return ResultUtil.ok().put(map).put(u);
     }
 
     @GetMapping("cardInfo")
