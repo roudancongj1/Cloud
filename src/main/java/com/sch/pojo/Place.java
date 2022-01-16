@@ -1,5 +1,9 @@
 package com.sch.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -9,11 +13,13 @@ import java.time.LocalDate;
  * @author Gao
  * @since 2022-01-16
  */
+@TableName("place")
 public class Place implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private BigDecimal placeId;
+    @TableId(value = "place_id", type = IdType.AUTO)
+    private Integer placeId;
 
     private Integer parentId;
 
@@ -38,11 +44,11 @@ public class Place implements Serializable {
     private LocalDate updateDate;
 
 
-    public BigDecimal getPlaceId() {
+    public Integer getPlaceId() {
         return placeId;
     }
 
-    public void setPlaceId(BigDecimal placeId) {
+    public void setPlaceId(Integer placeId) {
         this.placeId = placeId;
     }
 

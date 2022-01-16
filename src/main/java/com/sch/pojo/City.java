@@ -2,6 +2,8 @@ package com.sch.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 
 /**
@@ -10,6 +12,7 @@ import java.io.Serializable;
  * @author Gao
  * @since 2022-01-16
  */
+@TableName("city")
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;

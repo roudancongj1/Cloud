@@ -2,6 +2,7 @@ package com.sch.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
  * @author Gao
  * @since 2022-01-16
  */
-@Component
+@TableName("user")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
