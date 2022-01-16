@@ -2,11 +2,11 @@
 package com.sch;
 
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
-import com.baomidou.mybatisplus.generator.config.OutputFile;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Collections;
+
 
 @SpringBootTest
 class SchApplicationTests {
