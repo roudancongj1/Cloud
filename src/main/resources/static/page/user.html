@@ -23,7 +23,7 @@
             text-align: right;
         }
         .info{
-            padding: 0px 100px;
+            padding: 20px 100px;
             text-align: center;
         }
         .div{
@@ -32,24 +32,58 @@
             border-radius: 25px;
             height: 600px;
         }
-
+        .row{
+            padding: 20px;
+        }
+        .img{
+            float: left;
+            width: 35%;
+            height: 100vh;
+        }
     </style>
 </head>
 <body>
 <div id="app">
     <el-container>
-        <el-header class="title"><span>您好xxxx</span></el-header>
+        <div class="img">
+            <img src="img/zc.jpg" style="width: 100%;height: 100%">
+        </div>
         <el-container>
-            <el-aside class="info" width="600px">
-                <div class="div">
-                    <img src="#" alt="头像">
-
-                </div>
-            </el-aside>
-            <el-main class="info">
-                <div class="div"><span>bbbb</span></div>
-
-            </el-main>
+        <el-header class="title">
+            <el-button>上传头像</el-button>
+            <el-button>修改信息</el-button>
+            <el-button>修改密码</el-button>
+            <el-button>查看订单</el-button>
+        </el-header>
+        <el-main class="info">
+            <div class="div">
+                <img src="img/t1.png" alt="头像">
+                <el-row class="row">
+                    <el-col :span="8">昵称:</el-col>
+                    <el-col :span="14">等爱的玫瑰</el-col>
+                </el-row>
+                <el-row class="row">
+                    <el-col :span="8">性别:</el-col>
+                    <el-col :span="14">男</el-col>
+                </el-row>
+                <el-row class="row">
+                    <el-col :span="8">账号:</el-col>
+                    <el-col :span="14">admin</el-col>
+                </el-row>
+                <el-row class="row">
+                    <el-col :span="8">手机号:</el-col>
+                    <el-col :span="14">1888888888</el-col>
+                </el-row>
+                <el-row class="row">
+                    <el-col :span="8">角色:</el-col>
+                    <el-col :span="14">管理员</el-col>
+                </el-row>
+                <el-row class="row">
+                    <el-col :span="8">订单:</el-col>
+                    <el-col :span="14">2020年2月2号去xxx隔离</el-col>
+                </el-row>
+            </div>
+        </el-main>
         </el-container>
     </el-container>
 </div>

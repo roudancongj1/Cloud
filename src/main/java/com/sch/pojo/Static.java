@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Card {
+public class Static {
     private String cardLabel;
     private String cardInfo;
 }

@@ -77,7 +77,7 @@
                     name: '111',
                     age: ''
                 },
-                cards: {
+                static: {
                     l: [],
                     i: []
                 },
@@ -91,8 +91,8 @@
                 this.$router.push({
                     name: 'services',
                     query: {
-                        label: this.cards.l,
-                        info: this.cards.i,
+                        label: this.static.l,
+                        info: this.static.i,
                     }
                 })
             },
@@ -106,7 +106,12 @@
                 })
             },
             about() {
-                this.$router.push({ name: 'about' })
+                this.$router.push({
+                    name: 'about' ,
+                    query: {
+                        label: this.static.l,
+                        info: this.static.i,
+                    }})
             },
             support() {
                 this.$router.push({ name: 'support' })
@@ -120,8 +125,8 @@
             tomanage() { window.location.href="/manage"},
             cardInfo() { axios.get("data/cardInfo").then(res => {
                 res.data.data.forEach(c => {
-                    this.cards.l.push(c.cardLabel)
-                    this.cards.i.push(c.cardInfo)
+                    this.static.l.push(c.cardLabel)
+                    this.static.i.push(c.cardInfo)
                 })
             })},
 
@@ -160,7 +165,7 @@
             '                                        <span style="color: red;text-decoration: underline">{{$route.query.label[index]}}</span>\n' +
             '                                    </div>\n' +
             '                                </template>\n' +
-            '                                <div>{{$route.query.info[index]}}</div>\n' +
+            '                                <div><span style="color: #303133">{{$route.query.info[index]}}</span></div>\n' +
             '                            </el-card>\n' +
             '                        </el-container>\n' +
             '                </el-main>\n' +
@@ -190,15 +195,15 @@
             '                </el-header>\n' +
             '                <el-main>\n' +
             '                    <el-container>\n' +
-            '                        <div style="width: 50%">\n' +
-            '                            <p>我们的团队///a</p><el-divider></el-divider>\n' +
-            '                            <p>阿三大苏打///a</p><el-divider></el-divider>\n' +
-            '                            <p>2018年大撒大撒大撒</p><el-divider></el-divider>\n' +
+            '                        <div style="width: 50%;text-align: right;padding: 20px" >\n' +
+            '                        <div v-for="(num,index) in 5">\n' +
+            '                            <p>{{$route.query.label[index+4]}}</p><el-divider></el-divider>\n' +
             '                        </div>\n' +
-            '                        <div style="width: 50%">\n' +
-            '                            <p>阿松大数据库///a</p><hr>\n' +
-            '                            <p>多么用心</p><hr>\n' +
-            '                            <p>致力于///a</p><hr>\n' +
+            '                        </div>\n' +
+            '                        <div style="width: 50%;padding: 20px">\n' +
+            '                        <div  v-for="(num,index) in 5">\n' +
+            '                            <p>{{$route.query.info[index+4]}}</p><el-divider></el-divider>\n' +
+            '                        </div>\n' +
             '                        </div>\n' +
             '                    </el-container>\n' +
             '                </el-main>\n' +

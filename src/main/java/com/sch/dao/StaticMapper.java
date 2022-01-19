@@ -1,6 +1,6 @@
 package com.sch.dao;
 
-import com.sch.pojo.Card;
+import com.sch.pojo.Static;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface CardMapper {
-    @Select("select * from card")
-    List<Card> qureyAll();
+public interface StaticMapper {
+    @Select("select * from static")
+    List<Static> qureyAll();
 }

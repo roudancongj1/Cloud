@@ -1,14 +1,12 @@
 package com.sch.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.sch.dao.CardMapper;
+import com.sch.dao.StaticMapper;
 import com.sch.dao.UserMapper;
 import com.sch.pojo.Captcha;
-import com.sch.pojo.Card;
+import com.sch.pojo.Static;
 import com.sch.pojo.User;
 import com.sch.service.CaptchaUtilService;
-import com.sch.utils.CaptchaUtil;
 import com.sch.utils.RedisUtil;
 import com.sch.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +35,7 @@ public class DataController {
     @Autowired
     UserMapper userMapper;
     @Autowired
-    CardMapper cardMapper;
+    StaticMapper cardMapper;
 
 
     @GetMapping("test")
@@ -58,8 +54,8 @@ public class DataController {
 
     @GetMapping("cardInfo")
     public ResultUtil cardInfo(){
-        List<Card> cards=cardMapper.qureyAll();
-        return ResultUtil.ok().put(cards);
+        List<Static> statics=cardMapper.qureyAll();
+        return ResultUtil.ok().put(statics);
     }
 
     //@CrossOrigin
