@@ -79,7 +79,7 @@
                 },
                 cards: {
                     l: [],
-                    s: []
+                    i: []
                 },
             }
         },
@@ -92,7 +92,7 @@
                     name: 'services',
                     query: {
                         label: this.cards.l,
-                        service: this.cards.s,
+                        info: this.cards.i,
                     }
                 })
             },
@@ -119,9 +119,9 @@
             toaccount() {window.location.href="/account" },
             tomanage() { window.location.href="/manage"},
             cardInfo() { axios.get("data/cardInfo").then(res => {
-                res.data.data.forEach(i => {
-                    this.cards.l.push(i.label)
-                    this.cards.s.push(i.service)
+                res.data.data.forEach(c => {
+                    this.cards.l.push(c.cardLabel)
+                    this.cards.i.push(c.cardInfo)
                 })
             })},
 
@@ -157,10 +157,10 @@
             '                            <el-card v-for="(num,index) in 4" style="margin: 20px;width: 25%">\n' +
             '                                <template #header>\n' +
             '                                    <div>\n' +
-            '                                        <span>{{$route.query.label[index]}}</span>\n' +
+            '                                        <span style="color: red;text-decoration: underline">{{$route.query.label[index]}}</span>\n' +
             '                                    </div>\n' +
             '                                </template>\n' +
-            '                                <div>{{$route.query.service[index]}}</div>\n' +
+            '                                <div>{{$route.query.info[index]}}</div>\n' +
             '                            </el-card>\n' +
             '                        </el-container>\n' +
             '                </el-main>\n' +

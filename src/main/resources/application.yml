@@ -19,9 +19,10 @@ spring:
     password: 123
 
 mybatis-plus:
-   type-aliases-package: com.sch.pojo
+  type-aliases-package: com.sch.pojo
    #开启sql显示
    #configuration:
    #  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
    #驼峰命名
-    ## map-underscore-to-camel-case: true
+  configuration:
+    map-underscore-to-camel-case: true

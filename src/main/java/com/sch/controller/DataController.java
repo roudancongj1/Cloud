@@ -2,6 +2,7 @@ package com.sch.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.sch.dao.CardMapper;
 import com.sch.dao.UserMapper;
 import com.sch.pojo.Captcha;
 import com.sch.pojo.Card;
@@ -37,6 +38,8 @@ public class DataController {
     private CaptchaUtilService captchaUtilService;
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    CardMapper cardMapper;
 
 
     @GetMapping("test")
@@ -55,17 +58,7 @@ public class DataController {
 
     @GetMapping("cardInfo")
     public ResultUtil cardInfo(){
-        Card card1 = new Card("1ff2","23dss");
-        Card card2 = new Card("21321","3232");
-        Card card3 = new Card("2132221","32ds32");
-        Card card4 = new Card("21341aa21","32432");
-        ArrayList<Card> cards = new ArrayList<>();
-        cards.add(card1);
-        cards.add(card2);
-        cards.add(card3);
-        cards.add(card4);
-        System.out.println(cards);
-        System.out.println(JSON.toJSON(cards));
+        List<Card> cards=cardMapper.qureyAll();
         return ResultUtil.ok().put(cards);
     }
 

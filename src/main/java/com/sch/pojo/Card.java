@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Card {
-    private String label;
-    private String service;
+    private String cardLabel;
+    private String cardInfo;
 }
