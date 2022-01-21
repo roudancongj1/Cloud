@@ -9,10 +9,12 @@ import com.sch.pojo.User;
 import com.sch.service.CaptchaUtilService;
 import com.sch.utils.RedisUtil;
 import com.sch.utils.ResultUtil;
+import com.sch.utils.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,8 +40,9 @@ public class DataController {
     StaticMapper cardMapper;
 
 
+
     @GetMapping("test")
-    public ResultUtil test(){
+    public ResultUtil test(HttpServletRequest request,HttpServletResponse response){
         List l=new ArrayList();
         l.add("222222");
         l.add("333333");
@@ -49,6 +52,7 @@ public class DataController {
         map.put("name","张三");
         User u=userMapper.selectOne(new QueryWrapper<User>().eq("user_id","1"));
         redisUtil.set("wocao","dasda");
+        System.out.println(TokenUtil.getToken());
         return ResultUtil.ok().put(map).put(u);
     }
 
@@ -72,15 +76,12 @@ public class DataController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // captchaUtil.Instance();
-     // BufferedImage image = captchaUtil.getImage();
-     // String str = captchaUtil.getStr();
-     //  System.out.println("-----——————---获取验证码"+str+"---------------");
-     //  try{
-     //      ImageIO.write(image,"jpg",response.getOutputStream());
-     //  } catch (IOException e) {
-     //      e.printStackTrace();
-     //  }
+    }
 
+    @PostMapping("login")
+    public ResultUtil login(@RequestBody Map map){
+        User u=userMapper.selectOne(new QueryWrapper<User>().eq("user_number",map.get("username")));
+
+        return ResultUtil.ok().put(u);
     }
 }

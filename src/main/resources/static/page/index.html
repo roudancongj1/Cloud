@@ -73,6 +73,7 @@
     const App ={
         data(){
             return{
+                token: '',
                 info: {
                     name: '111',
                     age: ''
@@ -123,11 +124,12 @@
             touser() {window.location.href="/user" },
             toaccount() {window.location.href="/account" },
             tomanage() { window.location.href="/manage"},
-            cardInfo() { axios.get("data/cardInfo").then(res => {
+            cardInfo() { axios.get("data/cardInfo",{headers: {'token': localStorage.getItem('token')}}).then(res => {
                 res.data.data.forEach(c => {
                     this.static.l.push(c.cardLabel)
                     this.static.i.push(c.cardInfo)
                 })
+
             })},
 
 
@@ -139,7 +141,10 @@
           // $route(){
           //     this.$route.params.label=this.cards.l
           // },
-        }
+        },
+        mounted() {
+            this.token = localStorage.getItem('token')
+        },
     }
 
     const index = { template: '<el-container class="cont">\n' +

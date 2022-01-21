@@ -17,7 +17,7 @@ public class CaptchaUtilServiceImpl implements CaptchaUtilService {
     private CaptchaUtil captchaUtil;
     //获取验证码
     public Captcha getCaptcha(){
-        captchaUtil.init();
+        captchaUtil.Instance();
 
         Captcha captcha = new Captcha();
 

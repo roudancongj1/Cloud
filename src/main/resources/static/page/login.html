@@ -145,6 +145,7 @@
         methods: {
             test() {
                 axios.get("/data/test").then(res => (this.user = res.data) )
+                localStorage.setItem('token', '2222234444')
             },
             getCaptcha() {
                  let r=Math.random()

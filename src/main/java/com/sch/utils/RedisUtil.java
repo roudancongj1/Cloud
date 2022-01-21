@@ -54,5 +54,12 @@ public class RedisUtil {
         }
     }
 
+    public Boolean hasKey(String str){
+        try {
+            return redisTemplate.hasKey(str);
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
 }
