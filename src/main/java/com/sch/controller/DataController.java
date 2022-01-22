@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -69,7 +70,7 @@ public class DataController {
         response.setContentType("application/json;charset=UTF-8");
 
         Captcha captcha = captchaUtilService.getCaptcha();
-
+     //   InputStream stream = this.getClass().getResourceAsStream("CaptchaUtil.class");
         try {
             System.out.println("-----——————---获取验证码"+captcha.getCode()+"---------------");
             ImageIO.write(captcha.getImage(),"jpg",response.getOutputStream());

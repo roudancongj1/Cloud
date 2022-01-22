@@ -60,7 +60,7 @@ public class CaptchaUtil {
         g.dispose();
     }
 
-    //springboot构造方法使用注意
+    //!!
 
     // private CaptchaUtil(){
     //    // init();
