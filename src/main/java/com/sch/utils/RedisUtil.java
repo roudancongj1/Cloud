@@ -17,10 +17,10 @@ public class RedisUtil {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    public Boolean set(String str,Object o){
+    public Boolean set(String key,Object value){
         try {
             //默认十分钟过期
-            redisTemplate.opsForValue().set(str,o,10*60, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(key,value,10*60, TimeUnit.SECONDS);
         } catch (Exception e) {
             return false;
         }

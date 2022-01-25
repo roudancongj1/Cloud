@@ -48,16 +48,16 @@
 
         </el-header>
         <el-main class="main">
-            <el-form hide-required-asterisk="true">
+            <el-form hide-required-asterisk="true" >
                 <h1>疫情防控 人人有责</h1>
                 <el-form-item>
                     <el-input class="input"
                               placeholder="账号:"
                               required="true"
-                              v-model="user.info"></el-input>
+                              v-model="user.userNumber"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-input class="input" placeholder="密码:" v-model="user.name"></el-input>
+                    <el-input class="input" placeholder="密码:" v-model="user.userPass"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-row gutter="20" justify="center">
@@ -75,7 +75,7 @@
                     </el-row>
                 </el-form-item>
                 <el-form-item>
-                    <span style="margin: 0 10px">记住我</span><el-switch v-model="user.rem"></el-switch>
+                    <span style="margin: 0 10px">记住我</span><el-switch v-model="rem"></el-switch>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="test" class="btn">登录</el-button>
@@ -133,23 +133,33 @@
         data(){
             return{
                 user: {
-                    info: '',
-                    name: '',
-                    rem: false
+                    userNumber: '',
+                    userPass: '',
+
                 },
+                rem: false,
                 drawer: false,
                 captcha: '',
-                captchaUrl: window.location.protocol+'//'+window.location.host+'/data/captcha',
+                captchaUrl: window.location.protocol+'//'+window.location.host+'/captcha',
             }
         },
         methods: {
             test() {
-                axios.get("/data/test").then(res => (this.user = res.data) )
-                localStorage.setItem('token', '2222234444')
+                axios.post("/login",this.user).then(res => {
+                    this.user = res.data
+                    if (res.data!=null){
+                        this.$notify.success({
+                            title: '登陆成功',
+                            massage: 'aaaa'
+                        })
+                    }
+                    localStorage.setItem('token', res.data.token)
+                    }
+                )
             },
             getCaptcha() {
                  let r=Math.random()
-                 this.captchaUrl = window.location.protocol+'//'+window.location.host+'/data/captcha?r='+r
+                 this.captchaUrl = window.location.protocol+'//'+window.location.host+'/captcha?r='+r
             },
             remind() {
                 this.$notify.warning({

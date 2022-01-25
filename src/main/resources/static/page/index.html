@@ -63,6 +63,7 @@
         </el-header>
         <el-main>
             <router-view></router-view>
+            <p>{{token}}</p>
             <!--<img src="img/404.jpg">-->
         </el-main>
     </el-container>
@@ -120,7 +121,7 @@
             feedback() {
                 this.$router.push({ name: 'feedback' })
             },
-            tologin() { window.location.href="/login" },
+            tologin() { window.location.href="/toLogin" },
             touser() {window.location.href="/user" },
             toaccount() {window.location.href="/account" },
             tomanage() { window.location.href="/manage"},

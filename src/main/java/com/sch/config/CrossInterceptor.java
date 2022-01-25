@@ -17,8 +17,8 @@ public class CrossInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (request.getHeader(HttpHeaders.ORIGIN) != null) {
-            String origin = request.getHeader("Origin");
-            response.addHeader("Access-Control-Allow-Origin", origin);//*
+            //String origin = request.getHeader("Origin");
+            response.addHeader("Access-Control-Allow-Origin", "*");//*
             response.addHeader("Access-Control-Allow-Credentials", "true");//
             response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT,PATCH, HEAD");//
             response.addHeader("Access-Control-Allow-Headers", "Content-Type");

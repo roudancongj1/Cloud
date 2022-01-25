@@ -3,10 +3,11 @@ package com.sch.pojo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import org.springframework.stereotype.Component;
+
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
 
 /**
  *
@@ -144,18 +145,19 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-        "userId=" + userId +
-        ", userNumber=" + userNumber +
-        ", userPass=" + userPass +
-        ", userName=" + userName +
-        ", userSex=" + userSex +
-        ", userPhone=" + userPhone +
-        ", userTrip=" + userTrip +
-        ", userRole=" + userRole +
-        ", version=" + version +
-        ", logicDelete=" + logicDelete +
-        ", addDate=" + addDate +
-        ", updateDate=" + updateDate +
-        "}";
+                "userId=" + userId +
+                ", userNumber=" + userNumber +
+                ", userPass=" + userPass +
+                ", userName=" + userName +
+                ", userSex=" + userSex +
+                ", userPhone=" + userPhone +
+                ", userTrip=" + userTrip +
+                ", userRole=" + userRole +
+                ", version=" + version +
+                ", logicDelete=" + logicDelete +
+                ", addDate=" + addDate +
+                ", updateDate=" + updateDate +
+                "}";
     }
+
 }

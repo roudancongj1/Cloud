@@ -15,7 +15,7 @@ public class ResultUtil extends HashMap<String,Object> {
         put("msg","success");
     }
 
-    ResultUtil(Integer code, Object msg){
+    ResultUtil(String code, Object msg){
         put("code",code);
         put("msg",msg);
     }
@@ -25,23 +25,23 @@ public class ResultUtil extends HashMap<String,Object> {
     }
 
     public static ResultUtil ok(String msg){
-        return new ResultUtil(0,msg);
+        return new ResultUtil("0",msg);
     }
 
     public static ResultUtil ok(Integer code, String msg){
-        return new ResultUtil(code,msg);
+        return new ResultUtil(code.toString(),msg);
     }
 
     public static ResultUtil error(){
-        return new ResultUtil(500,"操作失败");
+        return new ResultUtil("500","操作失败");
     }
 
     public static ResultUtil error(String msg){
-        return new ResultUtil(500,msg);
+        return new ResultUtil("500",msg);
     }
 
     public static ResultUtil error(Integer code, String msg){
-        return new ResultUtil(code,msg);
+        return new ResultUtil(code.toString(),msg);
     }
 
     @Override

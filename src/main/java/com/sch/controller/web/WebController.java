@@ -1,4 +1,4 @@
-package com.sch.controller;
+package com.sch.controller.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ public class WebController {
     public String error(){
         return "page/404.html";
     }
-    @RequestMapping("login")
+    @RequestMapping("toLogin")
     public String login(){ return "page/login.html"; }
     @RequestMapping("user")
     public String user(){ return "page/user.html"; }
