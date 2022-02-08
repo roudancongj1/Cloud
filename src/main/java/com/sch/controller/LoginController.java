@@ -11,12 +11,11 @@ import com.sch.utils.ResultUtil;
 import com.sch.utils.ThreadLocalUtil;
 import com.sch.utils.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Auth: Gao
@@ -38,13 +37,44 @@ public class LoginController {
         String token= TokenUtil.getToken();
 
         TokenEntity entity = new TokenEntity();
+        entity.setUserId(u.getUserId());
+        entity.setUserName(u.getUserName());
+        entity.setUserNumber(u.getUserNumber());
+        entity.setUserRole(u.getUserRole());
+        entity.setUserSex(u.getUserSex());
+        entity.setUserTrip(u.getUserTrip());
 
-        JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(u));
-        entity.setData(jsonObject);
-        entity.setToken("token:"+token);
+        redisUtil.set(token,entity);
+        return ResultUtil.ok().put(u).put("token",token).put(entity);
+    }
 
-        redisUtil.set(token+":",entity);
-        return ResultUtil.ok().put(u).put("token",token).put(u);
+    @GetMapping("visitor")
+    public ResultUtil visitor(){
+
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        String token=requestAttributes.getRequest().getHeader("token");
+
+        return ResultUtil.ok().put(!redisUtil.hasKey(token));
+
+    }
+
+    @RequestMapping("aa")
+    public String aa(){
+        Integer aa[]={1,3,-7,2,3,1,2,-2,1,2};
+
+        ArrayList list = new ArrayList();
+
+        for (int i = 0; i <aa.length ; i++) {
+            int max=0;
+            for (int j = i; j < aa.length; j++) {
+                    max+=aa[j];
+                list.add(max);
+            }
+        }
+        System.out.println(Collections.max(list));
+
+
+       return null;
     }
 
 

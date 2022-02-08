@@ -32,14 +32,12 @@ public class ThreadLocalAspect {
         if(null == requestAttributes)
             throw new RuntimeException("未捕获到响应请求");
 
-        String token=requestAttributes.getRequest().getParameter("token");
-
+        String token = requestAttributes.getRequest().getHeader("token");
 
 
         //!
-        if(!redisUtil.hasKey(token)){
+        if(redisUtil.hasKey(token)){
             System.out.println("---------------------------判断token----------------------------------");
-           // threadLocal.set((J));
             ThreadLocalUtil.getThreadlocal().set(JSON.parseObject(JSON.toJSONString(redisUtil.get("token:"+token))));
         }else {
             throw new RuntimeException("用户登录已过期,请重新登录");

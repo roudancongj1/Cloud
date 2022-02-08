@@ -25,6 +25,18 @@ public class TokenEntity implements Serializable {
 
     private LocalDate updateTime;
 
+    private String userNumber;
+
+    private String userName;
+
+    private Integer userSex;
+
+    private String userPhone;
+
+    private String userTrip;
+
+    private Integer userRole;
+
     private Map<String,Object> data =new HashMap();
 
     public TokenEntity set(String key,Object value){
