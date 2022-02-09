@@ -55,7 +55,7 @@
                             <el-dropdown-item @click="touser">个人资料</el-dropdown-item>
                             <el-dropdown-item @click="toaccount">我的账户</el-dropdown-item>
                             <el-dropdown-item @click="tomanage">后台管理</el-dropdown-item>
-                            <el-dropdown-item divided>退出登录</el-dropdown-item>
+                            <el-dropdown-item @click="logout" divided>退出登录</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
@@ -126,7 +126,7 @@
             touser() {window.location.href="/user" },
             toaccount() {window.location.href="/account" },
             tomanage() { window.location.href="/manage"},
-            cardInfo() { axios.get("data/cardInfo",{headers: {'token': localStorage.getItem('token')}}).then(res => {
+            cardInfo() { axios.get("data/cardInfo").then(res => {
                 res.data.data.forEach(c => {
                     this.static.l.push(c.cardLabel)
                     this.static.i.push(c.cardInfo)
@@ -135,6 +135,22 @@
             })},
             toVisitor() {
                 axios.get("visitor",{headers: {'token': localStorage.getItem('token')}}).then(res => {this.visitor = res.data.data})
+            },
+            logout() {
+                axios.get("logout",{headers: {'token': localStorage.getItem('token')}}).then(res => {
+                    if(res.data.code == 0) {
+                        this.$notify.success({
+                            title: '注销成功',
+                            massage: res.data.msg
+                        })
+                    }else{
+                        this.$notify.error({
+                            title: '注销失败',
+                            massage: res.data.msg
+                        })
+                    }
+                })
+                window.setTimeout(function (){window.location.reload()},2*1000)
             },
 
 

@@ -1,20 +1,18 @@
-package com.sch.controller;
+package com.sch.controller.noaspect;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sch.dao.UserMapper;
 import com.sch.pojo.TokenEntity;
 import com.sch.pojo.User;
 import com.sch.utils.RedisUtil;
 import com.sch.utils.ResultUtil;
-import com.sch.utils.ThreadLocalUtil;
 import com.sch.utils.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
@@ -32,7 +30,16 @@ public class LoginController {
 
     @PostMapping("login")
     public ResultUtil login(@RequestBody User user) {
-        User u = userMapper.selectOne(new QueryWrapper<User>().eq("user_number",user.getUserNumber()));
+//        User u = userMapper.selectOne(new QueryWrapper<User>().eq("user_number",user.getUserNumber()));
+       User u=userMapper.queryNum(user.getUserNumber());
+
+        if(null == u){
+            return ResultUtil.error("用户不存在");
+        }
+
+        if(!user.getUserPass().equals(u.getUserPass())){
+            return ResultUtil.error("密码错误");
+        }
 
         String token= TokenUtil.getToken();
 
@@ -46,6 +53,16 @@ public class LoginController {
 
         redisUtil.set(token,entity);
         return ResultUtil.ok().put(u).put("token",token).put(entity);
+    }
+
+    @GetMapping("logout")
+    public ResultUtil logout(HttpServletRequest request){
+        String token=request.getHeader("token");
+        Boolean state=redisUtil.delete(request.getHeader("token"));
+        if(state)
+            return ResultUtil.ok("注销成功");
+        else
+            return ResultUtil.error("注销失败");
     }
 
     @GetMapping("visitor")

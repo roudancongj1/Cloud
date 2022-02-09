@@ -1,4 +1,4 @@
-package com.sch.controller;
+package com.sch.controller.noaspect;
 
 import com.sch.pojo.Captcha;
 import com.sch.service.CaptchaUtilService;

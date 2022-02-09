@@ -146,14 +146,21 @@
         methods: {
             test() {
                 axios.post("/login",this.user).then(res => {
-                    this.user = res.data
-                    if (res.data!=null){
+                    if (res.data.code == 0){
+                        localStorage.setItem('token', res.data.token)
                         this.$notify.success({
                             title: '登陆成功',
-                            massage: 'aaaa'
+                            message: '您好:'+res.data.data.userName
+                        })
+                        window.setTimeout(function (){
+                            window.location.href = window.location.protocol+'//'+window.location.host+"/"},2*1000)
+
+                    }else {
+                        this.$notify.error({
+                            title: '登陆失败',
+                            message: res.data.msg
                         })
                     }
-                    localStorage.setItem('token', res.data.token)
                     }
                 )
             },

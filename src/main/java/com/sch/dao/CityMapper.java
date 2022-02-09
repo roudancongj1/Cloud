@@ -19,5 +19,5 @@ import java.util.List;
 @Mapper
 public interface CityMapper extends BaseMapper<City> {
     @Select("select * from city")
-    List<City> queryAll();
+    List<City> queryCount();
 }

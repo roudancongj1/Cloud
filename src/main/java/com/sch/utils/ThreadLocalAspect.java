@@ -24,7 +24,7 @@ public class ThreadLocalAspect {
     @Autowired
     private RedisUtil redisUtil;
 
-    @Around("execution(* com.sch.controller.data..*.*(..))")
+    @Around("execution(* com.sch.controller.work..*.*(..))")
     public Object doAround(ProceedingJoinPoint point) throws Throwable{
         System.out.println("---------------切面被执行-----------------");
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
