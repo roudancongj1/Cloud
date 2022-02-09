@@ -2,6 +2,7 @@ package com.sch.controller.noaspect;
 
 import com.sch.pojo.Captcha;
 import com.sch.service.CaptchaUtilService;
+import com.sch.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,8 @@ public class CaptchaController {
 
     @Autowired
     private CaptchaUtilService captchaUtilService;
+    @Autowired
+    private RedisUtil redisUtil;
 
     //@CrossOrigin
     @GetMapping("captcha")
@@ -27,6 +30,14 @@ public class CaptchaController {
         response.setContentType("application/json;charset=UTF-8");
 
         Captcha captcha = captchaUtilService.getCaptcha();
+
+        if(redisUtil.hasKey("captcha")){
+            redisUtil.delete("captcha");
+            redisUtil.set("captcha",captcha.getCode(),1);
+        }else {
+            redisUtil.set("captcha",captcha.getCode(),1);
+        }
+
         //   InputStream stream = this.getClass().getResourceAsStream("CaptchaUtil.class");
         try {
             System.out.println("-----——————---获取验证码" + captcha.getCode() + "---------------");

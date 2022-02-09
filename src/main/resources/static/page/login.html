@@ -37,6 +37,10 @@
         .captcha{
             width: 100px;
         }
+        .inputdiv{
+            width: 300px;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
@@ -48,37 +52,39 @@
 
         </el-header>
         <el-main class="main">
-            <el-form hide-required-asterisk="true" >
+            <el-form  ref="userForm"
+                      :model="userForm"
+                      :rules="userRules"
+                      @keyup.enter.native="dataFormSubmit('userForm')"
+                      status-icon>
                 <h1>疫情防控 人人有责</h1>
+                <div class="inputdiv">
+                     <el-form-item prop="userNumber">
+                         <el-input class="input"
+                                   placeholder="账号:"
+                                   v-model="userForm.userNumber"></el-input>
+                     </el-form-item>
+                     <el-form-item prop="userPass">
+                         <el-input class="input" placeholder="密码:" v-model="userForm.userPass"></el-input>
+                     </el-form-item>
+                     <el-form-item prop="captcha">
+                         <el-row gutter="20" justify="center">
+                             <el-col span="12">
+                                 <el-input placeholder="验证码" v-model="userForm.captcha" class="captcha"></el-input>
+                             </el-col>
+                             <el-col span="10">
+                                 <img :src="captchaUrl" @click="getCaptcha" alt="无法显示请点击->">
+                             </el-col>
+                             <el-col span="2">
+                                 <el-button class="herderLink" @click="remind" size="small" circle>
+                                     <span style="color: red">?</span>
+                                 </el-button>
+                             </el-col>
+                         </el-row>
+                     </el-form-item>
+                </div>
                 <el-form-item>
-                    <el-input class="input"
-                              placeholder="账号:"
-                              required="true"
-                              v-model="user.userNumber"></el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-input class="input" placeholder="密码:" v-model="user.userPass"></el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-row gutter="20" justify="center">
-                        <el-col span="12">
-                            <el-input placeholder="验证码" v-model="captcha" class="captcha"></el-input>
-                        </el-col>
-                        <el-col span="10">
-                            <img :src="captchaUrl" @click="getCaptcha" alt="无法显示请点击->">
-                        </el-col>
-                        <el-col span="2">
-                            <el-button class="herderLink" @click="remind" size="small" circle>
-                                <span style="color: red">?</span>
-                            </el-button>
-                        </el-col>
-                    </el-row>
-                </el-form-item>
-                <el-form-item>
-                    <span style="margin: 0 10px">记住我</span><el-switch v-model="rem"></el-switch>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="test" class="btn">登录</el-button>
+                    <el-button type="primary" @click="dataFormSubmit('userForm')" class="btn">登录</el-button>
                     <el-button type="info" @click="drawer = true" class="btn" >注册</el-button>
                 </el-form-item>
             </el-form>
@@ -132,37 +138,52 @@
     const App ={
         data(){
             return{
-                user: {
+                userForm: {
                     userNumber: '',
                     userPass: '',
+                    captcha: '',
 
                 },
-                rem: false,
+                userRules: {
+                    userNumber: [
+                        { required: true, message: '帐号不能为空', trigger: 'blur' },
+                    ],
+                    userPass: [
+                        { required: true, message: '密码不能为空', trigger: 'blur' },
+                    ],
+                    captcha: [
+                        { required: true, message: '验证码不能为空', trigger: 'blur' },
+                    ],
+                },
                 drawer: false,
-                captcha: '',
                 captchaUrl: window.location.protocol+'//'+window.location.host+'/captcha',
             }
         },
         methods: {
-            test() {
-                axios.post("/login",this.user).then(res => {
-                    if (res.data.code == 0){
-                        localStorage.setItem('token', res.data.token)
-                        this.$notify.success({
-                            title: '登陆成功',
-                            message: '您好:'+res.data.data.userName
-                        })
-                        window.setTimeout(function (){
-                            window.location.href = window.location.protocol+'//'+window.location.host+"/"},2*1000)
+            dataFormSubmit(userForm) {
+                this.$refs[userForm].validate(valid => {
+                        if (valid) {
+                            axios.post("/login", this.userForm).then(res => {
+                                    if (res.data.code == 0) {
+                                        localStorage.setItem('token', res.data.token)
+                                        this.$notify.success({
+                                            title: '登陆成功',
+                                            message: '您好:' + res.data.data.userName
+                                        })
+                                        window.setTimeout(function () {
+                                            window.location.href = window.location.protocol + '//' + window.location.host + "/"
+                                        }, 2 * 1000)
 
-                    }else {
-                        this.$notify.error({
-                            title: '登陆失败',
-                            message: res.data.msg
-                        })
-                    }
-                    }
-                )
+                                    } else {
+                                        this.$notify.error({
+                                            title: '登陆失败',
+                                            message: res.data.msg
+                                        })
+                                    }
+                                }
+                            )
+                        }
+                })
             },
             getCaptcha() {
                  let r=Math.random()
@@ -172,7 +193,7 @@
                 this.$notify.warning({
                     title: '验证码无法显示？',
                     message: '较高版本浏览器会产生跨域问题,清关闭跨域设置或使用默认号码<br>' +
-                        '  管理员 admin 123 qwer(验证码)<br> 游客 user 123 qwer(验证码)',
+                        '  管理员 ////<br> 游客 ///',
                     dangerouslyUseHTMLString: true,
                 })
             },

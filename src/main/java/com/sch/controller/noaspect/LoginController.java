@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sch.dao.UserMapper;
 import com.sch.pojo.TokenEntity;
 import com.sch.pojo.User;
+import com.sch.pojo.UserForm;
 import com.sch.utils.RedisUtil;
 import com.sch.utils.ResultUtil;
 import com.sch.utils.TokenUtil;
@@ -29,16 +30,20 @@ public class LoginController {
     private UserMapper userMapper;
 
     @PostMapping("login")
-    public ResultUtil login(@RequestBody User user) {
+    public ResultUtil login(@RequestBody UserForm userForm) {
 //        User u = userMapper.selectOne(new QueryWrapper<User>().eq("user_number",user.getUserNumber()));
-       User u=userMapper.queryNum(user.getUserNumber());
+       User u=userMapper.queryNum(userForm.getUserNumber());
 
         if(null == u){
             return ResultUtil.error("用户不存在");
         }
 
-        if(!user.getUserPass().equals(u.getUserPass())){
+        if(!userForm.getUserPass().equals(u.getUserPass())){
             return ResultUtil.error("密码错误");
+        }
+
+        if(!userForm.getCaptcha().equals(redisUtil.get("captcha"))){
+            return ResultUtil.error("验证码错误或已过期");
         }
 
         String token= TokenUtil.getToken();
