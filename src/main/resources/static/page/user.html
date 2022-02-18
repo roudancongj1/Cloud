@@ -52,60 +52,125 @@
         <el-header class="title">
             <el-button>上传头像</el-button>
             <el-button>修改信息</el-button>
-            <el-button>修改密码</el-button>
-            <el-button>查看订单</el-button>
+            <el-button @click="passdialog=true">修改密码</el-button>
+            <el-button @click="toaccount">我的账户</el-button>
         </el-header>
         <el-main class="info">
             <div class="div">
                 <img src="img/t1.png" alt="头像">
                 <el-row class="row">
                     <el-col :span="8">昵称:</el-col>
-                    <el-col :span="14">等爱的玫瑰</el-col>
+                    <el-col :span="14">{{user.userName}}</el-col>
                 </el-row>
                 <el-row class="row">
                     <el-col :span="8">性别:</el-col>
-                    <el-col :span="14">男</el-col>
+                    <el-col :span="14">{{user.userSex}}</el-col>
                 </el-row>
                 <el-row class="row">
                     <el-col :span="8">账号:</el-col>
-                    <el-col :span="14">admin</el-col>
+                    <el-col :span="14">{{user.userNumber}}</el-col>
                 </el-row>
                 <el-row class="row">
                     <el-col :span="8">手机号:</el-col>
-                    <el-col :span="14">1888888888</el-col>
+                    <el-col :span="14">{{user.userPhone}}</el-col>
                 </el-row>
                 <el-row class="row">
                     <el-col :span="8">角色:</el-col>
-                    <el-col :span="14">管理员</el-col>
+                    <el-col :span="14">{{user.userRole}}</el-col>
                 </el-row>
                 <el-row class="row">
                     <el-col :span="8">订单:</el-col>
-                    <el-col :span="14">2020年2月2号去xxx隔离</el-col>
+                    <el-col :span="14">{{user.order}}</el-col>
                 </el-row>
             </div>
         </el-main>
         </el-container>
     </el-container>
+
+    <el-dialog
+            v-model="passdialog"
+            title="修改密码"
+            width="30%">
+        <el-form>
+            <el-form-item label="请输入旧密码" label-width="120px">
+                <el-input v-model="userPass"></el-input>
+            </el-form-item>
+            <el-form-item label="请输入新密码" label-width="120px">
+                <el-input v-model="newUserPass"></el-input>
+            </el-form-item>
+            <el-form-item label="再次输入新密码" label-width="120px">
+                <el-input></el-input>
+            </el-form-item>
+        </el-form>
+        <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="passdialog = false">取消</el-button>
+        <el-button type="primary" @click="passinfo">提交</el-button>
+      </span>
+        </template>
+    </el-dialog>
 </div>
 <script>
     const App ={
         data(){
             return{
                 user: {
-                    info: '',
-                    name: '',
-                    rem: false
+                    userName: '',
+                    userSex: '',
+                    userNumber: '',
+                    userPhone: '',
+                    userRole: '',
+                    order: ''
                 },
-                drawer: false,
-
+                passdialog: false,
+                userPass: '',
+                newUserPass: '',
 
             }
         },
         methods: {
-            test() {
-                axios.get("/data/test").then(res => (this.user = res.data) )
+            getInfo() {
+                axios.get("userInfo",{headers: {'token': localStorage.getItem('token')}}).then(
+                    res => {
+                        if(res.data.code == 0){
+                            this.user.userName = res.data.userName
+                            this.user.userSex = res.data.userSex === 1?'男':'女'
+                            this.user.userNumber = res.data.userNumber
+                            this.user.userPhone = res.data.userPhone
+                            this.user.userRole = res.data.userRole ==='1'?'管理员':'游客'
+                            if(null != res.data.userTrip){
+                                this.user.order = res.data.userTripTime + res.data.userTrip +'的旅行'
+                            }else {
+                                this.user.order = '无'
+                            }
+                        }else {
+                            this.$message.error(res.data.msg)
+                        }
+                    }
+                )
             },
-
+            toaccount() {window.location.href="/account" },
+            passinfo() {
+                axios.post("pass",{
+                    headers: {'token': localStorage.getItem('token')},
+                    params:{
+                        userNumber:this.user.userNumber,
+                        userPass:this.userPass,
+                        newUserPass:this.newUserPass,
+                    }
+                    }).then(
+                     res=>{
+                         if(res.data.code==0){
+                             this.userPass=res.data.userPass
+                         }else {
+                             this.$message.error(res.data.msg)
+                         }
+                     })
+                this.passdialog=false
+            }
+        },
+        created() {
+            this.getInfo()
         }
     }
     Vue.createApp(App)

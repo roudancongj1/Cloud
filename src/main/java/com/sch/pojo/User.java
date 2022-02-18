@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 
 /**
@@ -34,6 +35,8 @@ public class User implements Serializable {
     private String userPhone;
 
     private String userTrip;
+
+    private Date userTripTime;
 
     private Integer userRole;
 
@@ -101,6 +104,15 @@ public class User implements Serializable {
     public void setUserTrip(String userTrip) {
         this.userTrip = userTrip;
     }
+
+    public Date getUserTripTime() {
+        return userTripTime;
+    }
+
+    public void setUserTripTime(Date userTripTime) {
+        this.userTripTime = userTripTime;
+    }
+
 
     public Integer getUserRole() {
         return userRole;

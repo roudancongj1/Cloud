@@ -94,29 +94,33 @@
                     direction="rtl">
                 <el-container>
                     <el-form label-position="right"
-                             label-width="100px">
-                        <el-form-item label="账号:">
-                            <el-input class="input"></el-input>
+                             label-width="100px"
+                             :model="regForm"
+                             :role="regRoles"
+                              ref="regForm"
+                              status-icon>
+                        <el-form-item label="账号:" prop="userNumber">
+                            <el-input class="input" v-model="regForm.userNumber"></el-input>
                         </el-form-item>
-                        <el-form-item label="密码:">
-                            <el-input class="input"></el-input>
+                        <el-form-item label="密码:" prop="userPass">
+                            <el-input class="input" v-model="regForm.userPass"></el-input>
                         </el-form-item>
-                        <el-form-item label="确认密码:">
-                            <el-input class="input"></el-input>
+                        <el-form-item label="确认密码:" prop="userPass">
+                            <el-input class="input" v-model="regForm.userPass"></el-input>
                         </el-form-item>
-                        <el-form-item label="性别:">
-                            <el-radio-group v-model="user.info">
+                        <el-form-item label="性别:"  prop="sex">
+                            <el-radio-group v-model="regForm.sex">
                                 <el-radio label="男"></el-radio>
                                 <el-radio label="女"></el-radio>
                             </el-radio-group>
                         </el-form-item>
-                        <el-form-item label="手机号码:">
-                            <el-input class="input"></el-input>
+                        <el-form-item label="手机号码:" prop="userPhone">
+                            <el-input class="input" v-model="regForm.userPhone"></el-input>
                         </el-form-item>
-                        <el-form-item label="验证码:">
+                        <el-form-item label="验证码:" prop="captcha">
                             <el-row gutter="20">
                                 <el-col span="12">
-                                    <el-input style="width: 150px" placeholder="请输入短信验证码"></el-input>
+                                    <el-input style="width: 150px" placeholder="请输入短信验证码" v-model="regForm.captcha"></el-input>
                                 </el-col>
                                 <el-col span="12">
                                     <el-button >点击发送</el-button>
@@ -157,6 +161,30 @@
                 },
                 drawer: false,
                 captchaUrl: window.location.protocol+'//'+window.location.host+'/captcha',
+                regForm: {
+                    userNumber: '',
+                    userPass: '',
+                    sex: '',
+                    userPhone: '',
+                    captcha: '',
+                },
+                regRoles: {
+                    userNumber: [
+                        { required: true, message: '帐号不能为空', trigger: 'blur' },
+                    ],
+                    userPass: [
+                        { required: true, message: '密码不能为空', trigger: 'blur' },
+                    ],
+                    sex: [
+                        { required: true, message: '性别不能为空', trigger: 'blur' },
+                    ],
+                    userPhone: [
+                        { required: true, message: '手机号码不能为空', trigger: 'blur' },
+                    ],
+                    captcha: [
+                        { required: true, message: '验证码不能为空', trigger: 'blur' },
+                    ],
+                }
             }
         },
         methods: {

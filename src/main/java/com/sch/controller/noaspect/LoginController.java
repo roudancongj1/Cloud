@@ -14,6 +14,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -41,7 +42,9 @@ public class LoginController {
         if(!userForm.getUserPass().equals(u.getUserPass())){
             return ResultUtil.error("密码错误");
         }
-
+        if(null == redisUtil.get("captcha")){
+            return ResultUtil.error("验证码已使用请勿重复登陆");
+        }
         if(!userForm.getCaptcha().equals(redisUtil.get("captcha"))){
             return ResultUtil.error("验证码错误或已过期");
         }
@@ -55,8 +58,13 @@ public class LoginController {
         entity.setUserRole(u.getUserRole());
         entity.setUserSex(u.getUserSex());
         entity.setUserTrip(u.getUserTrip());
+        if(null != u.getUserTripTime()){
+            entity.setUserTripTime(new SimpleDateFormat("yyyy-MM-dd").format(u.getUserTripTime()));
+        }
+        entity.setUserPhone(u.getUserPhone());
 
         redisUtil.set(token,entity);
+        redisUtil.delete("captcha");
         return ResultUtil.ok().put(u).put("token",token).put(entity);
     }
 
@@ -82,22 +90,46 @@ public class LoginController {
 
     @RequestMapping("aa")
     public String aa(){
-        Integer aa[]={1,3,-7,2,3,1,2,-2,1,2};
+  //     Integer aa[]={1,3,-7,2,3,1,2,-2,1,2};
 
-        ArrayList list = new ArrayList();
+  //     ArrayList list = new ArrayList();
 
-        for (int i = 0; i <aa.length ; i++) {
-            int max=0;
-            for (int j = i; j < aa.length; j++) {
-                    max+=aa[j];
-                list.add(max);
-            }
-        }
-        System.out.println(Collections.max(list));
+  //     for (int i = 0; i <aa.length ; i++) {
+  //         int max=0;
+  //         for (int j = i; j < aa.length; j++) {
+  //                 max+=aa[j];
+  //             list.add(max);
+  //         }
+  //     }
+  //     System.out.println(Collections.max(list));
+        Integer aa[]={1,2,3,4,5};
+   //    for (int i = 0; i < aa.length; i++) {
+   //        int x;
+   //        if(aa[i]>aa[i+1]){
+   //            x=aa[i];
+   //            aa[i]=aa[i+1];
+   //            aa[i+1]=x;
+   //        }
+   //    }
+   //    int a=5;
+   //    for (int i = 0; i < aa.length; i++) {
+   //        if(aa[i]==a)
+   //            System.out.println("包含"+ a);
+   //    }
+
+        HashMap map = new HashMap();
+        map.put("aa",null);
+        if (null == map.get("aa"))
+            System.out.println("判断成功");
+        else
+            System.out.println("判断失败，空指针异常");
 
 
-       return null;
+        return null;
     }
+
+
+
 
 
 }

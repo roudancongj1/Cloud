@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +35,8 @@ public class TokenEntity implements Serializable {
     private String userPhone;
 
     private String userTrip;
+
+    private String userTripTime;
 
     private Integer userRole;
 
