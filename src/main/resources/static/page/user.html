@@ -91,21 +91,24 @@
             v-model="passdialog"
             title="修改密码"
             width="30%">
-        <el-form>
-            <el-form-item label="请输入旧密码" label-width="120px">
-                <el-input v-model="userPass"></el-input>
+        <el-form  ref="pass"
+                  :model="pass"
+                  :rules="passrule"
+                 status-icon>
+            <el-form-item label="请输入旧密码" label-width="120px" prop="oldUserPass">
+                <el-input v-model="pass.oldUserPass"></el-input>
             </el-form-item>
-            <el-form-item label="请输入新密码" label-width="120px">
-                <el-input v-model="newUserPass"></el-input>
+            <el-form-item label="请输入新密码" label-width="120px" prop="userPass">
+                <el-input v-model="pass.userPass"></el-input>
             </el-form-item>
-            <el-form-item label="再次输入新密码" label-width="120px">
-                <el-input></el-input>
+            <el-form-item label="再次输入新密码" label-width="120px" prop="newUserPass">
+                <el-input v-model="pass.newUserPass"></el-input>
             </el-form-item>
         </el-form>
         <template #footer>
       <span class="dialog-footer">
         <el-button @click="passdialog = false">取消</el-button>
-        <el-button type="primary" @click="passinfo">提交</el-button>
+        <el-button type="primary" @click="passinfo('pass')">提交</el-button>
       </span>
         </template>
     </el-dialog>
@@ -113,6 +116,15 @@
 <script>
     const App ={
         data(){
+            var repasswordValidator = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请再次输入密码'));
+                } else if (value !== this.pass.userPass) {
+                    callback(new Error('两次输入密码不一致!'));
+                } else {
+                    callback();
+                }
+            };
             return{
                 user: {
                     userName: '',
@@ -123,8 +135,23 @@
                     order: ''
                 },
                 passdialog: false,
-                userPass: '',
-                newUserPass: '',
+                pass: {
+                    oldUserPass:'',
+                    userPass: '',
+                    newUserPass: '',
+                },
+                passrule: {
+                    oldUserPass: [
+                        { required: true, message: '请输入旧密码', trigger: 'blur' },
+                    ],
+                    userPass: [
+                        { required: true, message: '请输入新密码', trigger: 'blur' },
+                    ],
+                    newUserPass: [
+                        { required: true, message: '请再次输入新密码', trigger: 'blur' },
+                        { validator: repasswordValidator,trigger: 'blur' },
+                    ],
+                }
 
             }
         },
@@ -150,23 +177,34 @@
                 )
             },
             toaccount() {window.location.href="/account" },
-            passinfo() {
-                axios.post("pass",{
-                    headers: {'token': localStorage.getItem('token')},
-                    params:{
-                        userNumber:this.user.userNumber,
-                        userPass:this.userPass,
-                        newUserPass:this.newUserPass,
+            passinfo(pass) {
+                this.$refs[pass].validate(valid => {
+                    if (valid) {
+                        axios.post("pass", {
+                                userNumber: this.user.userNumber,
+                                oldUserPass: this.pass.oldUserPass,
+                                newUserPass: this.pass.newUserPass,
+                                // axios({
+                                //     method: 'post',
+                                //     url: "pass",
+                                //     data: {
+                                //         userNumber: this.user.userNumber,
+                                //         userPass:this.userPass,
+                                //         newUserPass:this.newUserPass,
+                                //     },
+                                //     headers: {'token': localStorage.getItem('token') }
+                            }, {headers: {'token': localStorage.getItem('token')}}
+                        ).then(
+                            res => {
+                                if (res.data.code == 0) {
+                                    this.$message.success(res.data.msg)
+                                } else {
+                                    this.$message.error(res.data.msg)
+                                }
+                            })
+                        this.passdialog = false
                     }
-                    }).then(
-                     res=>{
-                         if(res.data.code==0){
-                             this.userPass=res.data.userPass
-                         }else {
-                             this.$message.error(res.data.msg)
-                         }
-                     })
-                this.passdialog=false
+                })
             }
         },
         created() {

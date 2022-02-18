@@ -48,7 +48,7 @@ public class ProtectedDataController {
 
         try {
             User user = userMapper.selectOne(new QueryWrapper<User>().eq("user_number",map.get("userNumber")));
-            if(map.get("userPass").equals(user.getUserPass())){
+            if(map.get("oldUserPass").equals(user.getUserPass())){
                 user.setUserPass(map.get("newUserPass").toString());
                 userMapper.update(user,new UpdateWrapper<User>().eq("user_number",map.get("userNumber")));
                 return ResultUtil.ok("修改成功");
