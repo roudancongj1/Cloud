@@ -45,7 +45,9 @@ public class LoginController {
         if(null == redisUtil.get("captcha")){
             return ResultUtil.error("验证码已使用请勿重复登陆");
         }
-        if(!userForm.getCaptcha().equals(redisUtil.get("captcha"))){
+
+        if(!userForm.getCaptcha().equals(redisUtil.get("captcha"))
+                && !userForm.getCaptcha().equals(redisUtil.get("captcha").toString().toLowerCase(Locale.ROOT))){
             return ResultUtil.error("验证码错误或已过期");
         }
 
@@ -123,6 +125,29 @@ public class LoginController {
             System.out.println("判断成功");
         else
             System.out.println("判断失败，空指针异常");
+
+        int arr[]={1,2,12,12,12,1};
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            list.add(arr[i]);
+        }
+
+        list.forEach(i ->{
+            System.out.println(i.byteValue());
+        });
+
+        String dd[]={"as","sad"};
+
+        User u1=new User();
+        u1.setUserId(11);
+        User u2=new User();
+        u2.setUserId(22);
+        User u[]={u1,u2};
+        System.out.println(u[0]);
+
+
+
+
 
 
         return null;

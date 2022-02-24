@@ -70,7 +70,7 @@ public class CaptchaUtil {
             g.drawString(codei, i * 13 + 20, 30);
         }
         //赋值验证码
-        this.codes = codes.toLowerCase(Locale.ROOT);
+        this.codes = codes;
 
         //释放资源
         g.dispose();
