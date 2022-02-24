@@ -1,7 +1,6 @@
 package com.sch.controller.noaspect;
 
-import com.sch.pojo.Captcha;
-import com.sch.service.CaptchaUtilService;
+import com.sch.utils.CaptchaUtil;
 import com.sch.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 public class CaptchaController {
 
     @Autowired
-    private CaptchaUtilService captchaUtilService;
-    @Autowired
     private RedisUtil redisUtil;
+
 
     //@CrossOrigin
     @GetMapping("captcha")
@@ -29,7 +27,8 @@ public class CaptchaController {
         response.setHeader("Cache-Control", "no-store, no-cache");
         response.setContentType("application/json;charset=UTF-8");
 
-        Captcha captcha = captchaUtilService.getCaptcha();
+        CaptchaUtil captcha = CaptchaUtil.getInstance();
+
 
         if(redisUtil.hasKey("captcha")){
             redisUtil.delete("captcha");

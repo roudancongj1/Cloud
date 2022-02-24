@@ -1,9 +1,7 @@
 package com.sch.utils;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -15,13 +13,31 @@ import java.util.Random;
 
 @Component
 public class CaptchaUtil {
+    //单例模式验证码实现
+    //volatile 变量立即可见不再写入缓存
+    private static volatile CaptchaUtil captchaUtil;
 
     private BufferedImage image;
     private String codes;
     private static final char[] code = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789".toCharArray();
 
 
-    public void Instance() {
+    private CaptchaUtil(){
+        Instance();
+    }
+
+    public static CaptchaUtil getInstance(){
+        if(null == captchaUtil){
+            synchronized (CaptchaUtil.class){
+                if(null == captchaUtil){
+                    return new CaptchaUtil();
+                }
+            }
+        }
+        return captchaUtil;
+    }
+
+    private void Instance() {
 
         int width = 100;
         int height = 40;
@@ -54,23 +70,14 @@ public class CaptchaUtil {
         }
         //赋值验证码
         this.codes = codes;
-        //赋值图片
-        this.image = image;
+
         //释放资源
         g.dispose();
+        //赋值图片
+        this.image = image;
     }
 
-    //!!
-
-    // private CaptchaUtil(){
-    //    // init();
-    // }
-    // public static CaptchaUtil Instance(){
-    //     return new CaptchaUtil();
-    // }
-    // private void init(){
     //  @PostConstruct 注册bean后立即执行
-    //  public void init(){ }
 
 
     public BufferedImage getImage(){
