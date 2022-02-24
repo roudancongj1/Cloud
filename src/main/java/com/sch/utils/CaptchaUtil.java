@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Locale;
 import java.util.Random;
 
 /**
@@ -69,7 +70,7 @@ public class CaptchaUtil {
             g.drawString(codei, i * 13 + 20, 30);
         }
         //赋值验证码
-        this.codes = codes;
+        this.codes = codes.toLowerCase(Locale.ROOT);
 
         //释放资源
         g.dispose();
