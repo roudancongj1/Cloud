@@ -1,5 +1,7 @@
 package com.sch.controller.noaspect;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sch.dao.UserMapper;
 import com.sch.pojo.TokenEntity;
@@ -88,6 +90,19 @@ public class LoginController {
 
         return ResultUtil.ok().put(!redisUtil.hasKey(token));
 
+    }
+
+
+    @GetMapping("userRole")
+    public ResultUtil userRole(){
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        String token=requestAttributes.getRequest().getHeader("token");
+        if(redisUtil.hasKey(token)){
+            JSONObject user = JSON.parseObject(redisUtil.get(token).toString());
+            return ResultUtil.ok().put("userRole",user.get("userRole"));
+        }else {
+            return ResultUtil.error("未登录");
+        }
     }
 
     @RequestMapping("aa")

@@ -24,7 +24,6 @@
 <body>
 <div id="app">
     <p>账户界面</p>
-    <img src="http://localhost:8888/data/yz" >
 </div>
 <script>
     const App ={
@@ -40,10 +39,22 @@
             }
         },
         methods: {
-            test() {
-                axios.get("/data/test").then(res => (this.user = res.data) )
+            toVisitor() {
+                axios({
+                    method: 'get',
+                    url: 'visitor',
+                    headers: {'token': localStorage.getItem('token') }
+                }).then(res => {
+                    if(res.data.data){
+                        this.$message.error("登陆状态已过期或未登录")
+                        window.setTimeout(function () {
+                            window.location.href = window.location.protocol + '//' + window.location.host + "/"}, 2 * 1000)
+                    }
+                })
             },
-
+        },
+        created() {
+            this.toVisitor()
         }
     }
     Vue.createApp(App)

@@ -37,7 +37,7 @@
         }
         .img{
             float: left;
-            width: 35%;
+            width: 60vh;
             height: 100vh;
         }
     </style>
@@ -134,6 +134,7 @@
                     userRole: '',
                     order: ''
                 },
+                visitor: true,
                 passdialog: false,
                 pass: {
                     oldUserPass:'',
@@ -184,15 +185,6 @@
                                 userNumber: this.user.userNumber,
                                 oldUserPass: this.pass.oldUserPass,
                                 newUserPass: this.pass.newUserPass,
-                                // axios({
-                                //     method: 'post',
-                                //     url: "pass",
-                                //     data: {
-                                //         userNumber: this.user.userNumber,
-                                //         userPass:this.userPass,
-                                //         newUserPass:this.newUserPass,
-                                //     },
-                                //     headers: {'token': localStorage.getItem('token') }
                             }, {headers: {'token': localStorage.getItem('token')}}
                         ).then(
                             res => {
@@ -205,9 +197,23 @@
                         this.passdialog = false
                     }
                 })
-            }
+            },
+            toVisitor() {
+                axios({
+                    method: 'get',
+                    url: 'visitor',
+                    headers: {'token': localStorage.getItem('token') }
+                }).then(res => {
+                    if(res.data.data){
+                        this.$message.error("登陆状态已过期或未登录")
+                    window.setTimeout(function () {
+                        window.location.href = window.location.protocol + '//' + window.location.host + "/"}, 2 * 1000)
+                    }
+                })
+            },
         },
         created() {
+            this.toVisitor()
             this.getInfo()
         }
     }

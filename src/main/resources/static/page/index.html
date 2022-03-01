@@ -54,7 +54,7 @@
                         <el-dropdown-menu>
                             <el-dropdown-item @click="touser">个人资料</el-dropdown-item>
                             <el-dropdown-item @click="toaccount">我的账户</el-dropdown-item>
-                            <el-dropdown-item @click="tomanage">后台管理</el-dropdown-item>
+                            <el-dropdown-item v-if="userRole != '0'" @click="tomanage">后台管理</el-dropdown-item>
                             <el-dropdown-item @click="logout" divided>退出登录</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
@@ -63,7 +63,6 @@
         </el-header>
         <el-main>
             <router-view></router-view>
-            <p>{{token}}</p>
             <!--<img src="img/404.jpg">-->
         </el-main>
     </el-container>
@@ -76,6 +75,7 @@
             return{
                 token: '',
                 visitor: true,
+                userRole: '',
                 info: {
                     name: '111',
                     age: ''
@@ -134,7 +134,22 @@
 
             })},
             toVisitor() {
-                axios.get("visitor",{headers: {'token': localStorage.getItem('token')}}).then(res => {this.visitor = res.data.data})
+                axios({
+                    method: 'get',
+                    url: 'visitor',
+                    headers: {'token': localStorage.getItem('token')}
+                }).then(res => {
+                    this.visitor = res.data.data
+                    if (!res.data.data){
+                        axios({
+                            method: 'get',
+                            url: 'userRole',
+                            headers: {'token': localStorage.getItem('token')}
+                        }).then(res => {
+                            this.userRole = res.data.userRole
+                        })
+                    }
+                })
             },
             logout() {
                 axios.get("logout",{headers: {'token': localStorage.getItem('token')}}).then(res => {
@@ -152,7 +167,6 @@
                 })
                 window.setTimeout(function (){window.location.reload()},2*1000)
             },
-
 
         },
         created() {

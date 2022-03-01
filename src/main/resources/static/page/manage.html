@@ -86,7 +86,23 @@
         methods: {
             test(){
                 axios.get("/test",info).then(res => ( this.info = res.data))
-            }
+            },
+            toVisitor() {
+                axios({
+                    method: 'get',
+                    url: 'visitor',
+                    headers: {'token': localStorage.getItem('token') }
+                }).then(res => {
+                    if(res.data.data){
+                        this.$message.error("登陆状态已过期或未登录")
+                        window.setTimeout(function () {
+                            window.location.href = window.location.protocol + '//' + window.location.host + "/"}, 2 * 1000)
+                    }
+                })
+            },
+        },
+        created() {
+            this.toVisitor()
         }
     }
 
