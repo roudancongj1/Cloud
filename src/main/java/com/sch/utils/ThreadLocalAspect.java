@@ -34,19 +34,17 @@ public class ThreadLocalAspect {
             throw new RuntimeException("未捕获到响应请求");
 
         String token = requestAttributes.getRequest().getHeader("token");
-
         //获取入参
         Object[] args = point.getArgs();
 
-        //获取方法返回值
-        Object proceed = point.proceed();
-
         if(redisUtil.hasKey(token)){
+
             System.out.println("---------------------------判断token----------------------------------");
             ThreadLocalUtil.getThreadlocal().set(JSON.parseObject(JSON.toJSONString(redisUtil.get("token:"+token))));
+            //获取方法返回值
+            return point.proceed();
         }else {
             return ResultUtil.error("用户未登录");
         }
-        return proceed;
     }
 }
