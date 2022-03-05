@@ -26,7 +26,8 @@ public class ThreadLocalAspect {
 
     @Around("execution(* com.sch.controller.work..*.*(..))")
     public Object doAround(ProceedingJoinPoint point) throws Throwable{
-        System.out.println("---------------切面被执行-----------------");
+
+        System.out.println("---------------------------切面被执行----------------------------------");
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 
         if(null == requestAttributes)
@@ -34,15 +35,18 @@ public class ThreadLocalAspect {
 
         String token = requestAttributes.getRequest().getHeader("token");
 
+        //获取入参
+        Object[] args = point.getArgs();
 
-        //!
+        //获取方法返回值
+        Object proceed = point.proceed();
+
         if(redisUtil.hasKey(token)){
             System.out.println("---------------------------判断token----------------------------------");
             ThreadLocalUtil.getThreadlocal().set(JSON.parseObject(JSON.toJSONString(redisUtil.get("token:"+token))));
         }else {
-            throw new RuntimeException("用户登录已过期,请重新登录");
+            return ResultUtil.error("用户未登录");
         }
-
-        return point.proceed();
+        return proceed;
     }
 }

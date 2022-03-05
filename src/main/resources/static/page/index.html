@@ -80,9 +80,13 @@
                     name: '111',
                     age: ''
                 },
-                static: {
-                    l: [],
-                    i: []
+                staticSer: {
+                    label: [],
+                    value: []
+                },
+                staticAbo: {
+                    label: [],
+                    value: []
                 },
             }
         },
@@ -94,8 +98,8 @@
                 this.$router.push({
                     name: 'services',
                     query: {
-                        label: this.static.l,
-                        info: this.static.i,
+                        label: this.staticSer.label,
+                        value: this.staticSer.value,
                     }
                 })
             },
@@ -112,8 +116,8 @@
                 this.$router.push({
                     name: 'about' ,
                     query: {
-                        label: this.static.l,
-                        info: this.static.i,
+                        label: this.staticAbo.label,
+                        value: this.staticAbo.value,
                     }})
             },
             support() {
@@ -126,13 +130,36 @@
             touser() {window.location.href="/user" },
             toaccount() {window.location.href="/account" },
             tomanage() { window.location.href="/manage"},
-            cardInfo() { axios.get("data/cardInfo").then(res => {
-                res.data.data.forEach(c => {
-                    this.static.l.push(c.cardLabel)
-                    this.static.i.push(c.cardInfo)
+            serviceInfo() {
+                axios({
+                    method: 'get',
+                    url: 'data/static/SERVICE',
+                }).then(res => {
+                    if (res.data.code === '0') {
+                        res.data.data.forEach(arr => {
+                            this.staticSer.label.push(arr.staticLabel)
+                            this.staticSer.value.push(arr.staticValue)
+                        })
+                    } else {
+                        this.$massage.error(res.data.msg)
+                    }
                 })
-
-            })},
+            },
+            aboutInfo() {
+                axios({
+                    method: 'get',
+                    url: 'data/static/ABOUT',
+                }).then(res => {
+                    if (res.data.code === '0') {
+                        res.data.data.forEach(arr => {
+                            this.staticAbo.label.push(arr.staticLabel)
+                            this.staticAbo.value.push(arr.staticValue)
+                        })
+                    } else {
+                        this.$message.error(res.data.msg)
+                    }
+                })
+            },
             toVisitor() {
                 axios({
                     method: 'get',
@@ -152,25 +179,30 @@
                 })
             },
             logout() {
-                axios.get("logout",{headers: {'token': localStorage.getItem('token')}}).then(res => {
-                    if(res.data.code == 0) {
+                axios({
+                    method: 'get',
+                    url: 'logout',
+                    headers: {'token': localStorage.getItem('token')}
+                }).then(res => {
+                    if (res.data.code === '0'){
                         this.$notify.success({
                             title: '注销成功',
-                            massage: res.data.msg
+                            message: '请重新登陆'
                         })
-                    }else{
-                        this.$notify.error({
+                    }else {
+                        this.$notify.success({
                             title: '注销失败',
-                            massage: res.data.msg
+                            message: res.data.msg
                         })
                     }
+                    window.setTimeout(function (){window.location.reload()},2*1000)
                 })
-                window.setTimeout(function (){window.location.reload()},2*1000)
-            },
+            }
 
         },
         created() {
-            this.cardInfo()
+            this.serviceInfo()
+            this.aboutInfo()
             this.toVisitor()
 
         },
@@ -207,7 +239,7 @@
             '                                        <span style="color: red;text-decoration: underline">{{$route.query.label[index]}}</span>\n' +
             '                                    </div>\n' +
             '                                </template>\n' +
-            '                                <div><span style="color: #303133">{{$route.query.info[index]}}</span></div>\n' +
+            '                                <div><span style="color: #303133">{{$route.query.value[index]}}</span></div>\n' +
             '                            </el-card>\n' +
             '                        </el-container>\n' +
             '                </el-main>\n' +
@@ -239,12 +271,12 @@
             '                    <el-container>\n' +
             '                        <div style="width: 50%;text-align: right;padding: 20px" >\n' +
             '                        <div v-for="(num,index) in 5">\n' +
-            '                            <p>{{$route.query.label[index+4]}}</p><el-divider></el-divider>\n' +
+            '                            <p>{{$route.query.label[index]}}</p><el-divider></el-divider>\n' +
             '                        </div>\n' +
             '                        </div>\n' +
             '                        <div style="width: 50%;padding: 20px">\n' +
             '                        <div  v-for="(num,index) in 5">\n' +
-            '                            <p>{{$route.query.info[index+4]}}</p><el-divider></el-divider>\n' +
+            '                            <p>{{$route.query.value[index]}}</p><el-divider></el-divider>\n' +
             '                        </div>\n' +
             '                        </div>\n' +
             '                    </el-container>\n' +

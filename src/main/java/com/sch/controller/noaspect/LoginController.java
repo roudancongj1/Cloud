@@ -7,6 +7,7 @@ import com.sch.dao.UserMapper;
 import com.sch.pojo.TokenEntity;
 import com.sch.pojo.User;
 import com.sch.pojo.UserForm;
+import com.sch.service.MailService;
 import com.sch.utils.RedisUtil;
 import com.sch.utils.ResultUtil;
 import com.sch.utils.TokenUtil;
@@ -31,6 +32,7 @@ public class LoginController {
     private RedisUtil redisUtil;
     @Autowired
     private UserMapper userMapper;
+
 
     @PostMapping("login")
     public ResultUtil login(@RequestBody UserForm userForm) {
@@ -75,7 +77,8 @@ public class LoginController {
     @GetMapping("logout")
     public ResultUtil logout(HttpServletRequest request){
         String token=request.getHeader("token");
-        Boolean state=redisUtil.delete(request.getHeader("token"));
+
+        Boolean state=redisUtil.delete(token);
         if(state)
             return ResultUtil.ok("注销成功");
         else
@@ -105,68 +108,6 @@ public class LoginController {
         }
     }
 
-    @RequestMapping("aa")
-    public String aa(){
-  //     Integer aa[]={1,3,-7,2,3,1,2,-2,1,2};
-
-  //     ArrayList list = new ArrayList();
-
-  //     for (int i = 0; i <aa.length ; i++) {
-  //         int max=0;
-  //         for (int j = i; j < aa.length; j++) {
-  //                 max+=aa[j];
-  //             list.add(max);
-  //         }
-  //     }
-  //     System.out.println(Collections.max(list));
-        Integer aa[]={1,2,3,4,5};
-   //    for (int i = 0; i < aa.length; i++) {
-   //        int x;
-   //        if(aa[i]>aa[i+1]){
-   //            x=aa[i];
-   //            aa[i]=aa[i+1];
-   //            aa[i+1]=x;
-   //        }
-   //    }
-   //    int a=5;
-   //    for (int i = 0; i < aa.length; i++) {
-   //        if(aa[i]==a)
-   //            System.out.println("包含"+ a);
-   //    }
-
-        HashMap map = new HashMap();
-        map.put("aa",null);
-        if (null == map.get("aa"))
-            System.out.println("判断成功");
-        else
-            System.out.println("判断失败，空指针异常");
-
-        int arr[]={1,2,12,12,12,1};
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < arr.length; i++) {
-            list.add(arr[i]);
-        }
-
-        list.forEach(i ->{
-            System.out.println(i.byteValue());
-        });
-
-        String dd[]={"as","sad"};
-
-        User u1=new User();
-        u1.setUserId(11);
-        User u2=new User();
-        u2.setUserId(22);
-        User u[]={u1,u2};
-        System.out.println(u[0]);
-
-
-
-
-
-
-        return null;
-    }
 
 
 

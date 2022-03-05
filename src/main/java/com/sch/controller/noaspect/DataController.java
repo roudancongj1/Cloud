@@ -19,12 +19,16 @@ public class DataController {
 
 
     @Autowired
-    private StaticMapper cardMapper;
+    private StaticMapper staticMapper;
 
-    @GetMapping("cardInfo")
-    public ResultUtil cardInfo() {
-        List<Static> statics = cardMapper.qureyAll();
-        return ResultUtil.ok().put(statics);
+    @GetMapping("static/{code}")
+    public ResultUtil cardInfo(@PathVariable("code") String code) {
+        try {
+            List<Static> staticInfo = staticMapper.queryCode(code);
+            return ResultUtil.ok().put(staticInfo);
+        } catch (Exception e) {
+            return ResultUtil.error("查询静态数据异常");
+        }
     }
 
 

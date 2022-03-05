@@ -16,5 +16,7 @@ import java.util.List;
 @Repository
 public interface StaticMapper {
     @Select("select * from static")
-    List<Static> qureyAll();
+    List<Static> queryAll();
+
+    List<Static> queryCode(String code);
 }

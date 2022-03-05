@@ -25,8 +25,7 @@ import java.util.Map;
 public class ProtectedDataController {
     @Autowired
     private RedisUtil redisUtil;
-    @Autowired
-    private UserMapper userMapper;
+
     @GetMapping("userInfo")
     public ResultUtil userInfo(HttpServletRequest request){
         String token=request.getHeader("token");
@@ -43,20 +42,5 @@ public class ProtectedDataController {
     }
 
 
-    @RequestMapping("pass")
-    public ResultUtil updatepass(@RequestBody Map<String,Object> map){
 
-        try {
-            User user = userMapper.selectOne(new QueryWrapper<User>().eq("user_number",map.get("userNumber")));
-            if(map.get("oldUserPass").equals(user.getUserPass())){
-                user.setUserPass(map.get("newUserPass").toString());
-                userMapper.update(user,new UpdateWrapper<User>().eq("user_number",map.get("userNumber")));
-                return ResultUtil.ok("修改成功");
-            }else {
-                return ResultUtil.error("旧密码输入错误");
-            }
-        } catch (Exception e) {
-            return ResultUtil.error("修改异常");
-        }
-    }
 }

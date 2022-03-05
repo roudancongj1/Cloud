@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sch.dao.StaticMapper">
+    <select id="queryCode" parameterType="String" resultType="com.sch.pojo.Static">
+        select * from static where static_code = #{code}
+    </select>
+</mapper>

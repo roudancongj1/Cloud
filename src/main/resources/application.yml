@@ -18,6 +18,12 @@ spring:
     port: 6379
     password: 123
 
+  mail:
+    host: smtp.126.com
+    username: Yun_mic@126.com
+    #屏蔽
+    password:
+
 mybatis-plus:
   type-aliases-package: com.sch.pojo
    #开启sql显示
