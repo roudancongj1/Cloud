@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/ele.css">
+    <!--图标-->
+    <link rel="shortcut icon" href="#">
     <script src="js/vue.global.js"></script>
     <script src="js/element-plus.js"></script>
     <script src="js/axios.min.js"></script>
@@ -29,6 +31,14 @@
         }
         .cont{
             padding: 100px;
+        }
+        .addInfo{
+            margin: 50px 20px;
+        }
+        .label .el-form-item__label{
+            font-family: "Microsoft YaHei UI";
+            font-size: 20px;
+            color: #606266;
         }
     </style>
 </head>
@@ -65,6 +75,7 @@
             <router-view></router-view>
             <!--<img src="img/404.jpg">-->
         </el-main>
+
     </el-container>
 </div>
 
@@ -124,7 +135,7 @@
                 this.$router.push({ name: 'support' })
             },
             feedback() {
-                this.$router.push({ name: 'feedback' })
+                this.$router.push({name: 'feedback'})
             },
             tologin() { window.location.href="/toLogin" },
             touser() {window.location.href="/user" },
@@ -190,7 +201,7 @@
                             message: '请重新登陆'
                         })
                     }else {
-                        this.$notify.success({
+                        this.$notify.error({
                             title: '注销失败',
                             message: res.data.msg
                         })
@@ -283,40 +294,117 @@
             '                </el-main>\n' +
             '            </el-container>' + ''}
 
-    const support = { template: '<div>支持我们</div>'+''}
+    const support = {
+        template: '<div>支持我们</div>'+'<el-button>{{aa}}</el-button>',
+        data() {
+            return {
+                aa: 'aaaaaa',
+            };
+        },
+        methods: {
 
-    const feedback = { template: '<el-container>\n' +
-            '                <div style="width: 30%;padding: 10px">\n' +
-            '                    <el-card>\n' +
-            '                        <template #header>\n' +
-            '                            <div class="card-header">\n' +
-            '                                <span>联系方式</span>\n' +
-            '                            </div>\n' +
-            '                        </template>\n' +
-            '                        <p>地址-哈尔滨啊实打实</p>\n' +
-            '                        <p>电话-1232142141</p>\n' +
-            '                        <p>邮箱-Yundsal@123.com</p>\n' +
-            '                    </el-card>\n' +
-            '                </div>\n' +
-            '                <div style="width: 70%;padding: 10px">\n' +
-            '                    <el-form :inline="true" :model="formInline" class="demo-form-inline">\n' +
-            '                        <el-form-item label="v-model=youxiang">\n' +
-            '                            <el-input placeholder="邮箱"></el-input>\n' +
-            '                        </el-form-item>\n' +
-            '                        <el-form-item label="地址 by">\n' +
-            '                            <el-input placeholder="地址"></el-input>\n' +
-            '                        </el-form-item>\n' +
-            '                        <el-form-item label="电话 by">\n' +
-            '                            <el-input placeholder="电话"></el-input>\n' +
-            '                        </el-form-item>\n' +
-            '                        <el-form-item >\n' +
-            '                            <el-input placeholder="留言" type="textarea"></el-input>\n' +
-            '                        </el-form-item><el-button type="primary" round>提交</el-button>\n' +
-            '                    </el-form>\n' +
-            '                </div>\n' +
-            '            </el-container>' +''}
+        }
+    }
 
-    const error = {template: '<div style="padding: 100px;text-align: center" ><h1>无效的页面路径^^</h1>' +
+
+    const feedback = {
+        template: '<el-container>\n' +
+            '          <div style="width: 40%;padding: 10px">\n' +
+            '              <el-card>\n' +
+            '                  <template #header>\n' +
+            '                      <div class="card-header">\n' +
+            '                          <h2>我们的联系方式</h2>\n' +
+            '                      </div>\n' +
+            '                  </template>\n' +
+            '                  <h3 class="addInfo">地址:北京市朝阳区百xxxxx</h3>\n' +
+            '                  <h3 class="addInfo">电话:181xxxx8872</h3>\n' +
+            '                  <h3 class="addInfo">邮箱:Yun_mic@126.com</h3>\n' +
+            '                  <h3 class="addInfo">联系人:高xx</h3>\n' +
+            '                  <h3 class="addInfo" style="color: #66b1ff">您也可以在右侧在线向我们发送邮件提交您宝贵的建议></h3>\n' +
+            '              </el-card>\n' +
+            '          </div>\n' +
+            '          <div style="width: 60%;padding: 10px">\n' +
+            '              <el-form   ref="feedbackFrom"' +
+            '                        :model="feedbackFrom" ' +
+            '                        :rules="feedbackRule" ' +
+            '                        label-position="left" ' +
+            '                        label-width="150px" ' +
+            '                        status-icon>\n' +
+            '                  <el-form-item label="邮箱:" class="label" prop="mail">\n' +
+            '                      <el-input placeholder="邮箱" v-model="feedbackFrom.mail"></el-input>\n' +
+            '                  </el-form-item>\n' +
+            '                  <el-form-item label="地址:" class="label" prop="address">\n' +
+            '                      <el-input placeholder="地址" v-model="feedbackFrom.address"></el-input>\n' +
+            '                  </el-form-item>\n' +
+            '                  <el-form-item label="电话/手机:" class="label" prop="phone">\n' +
+            '                      <el-input placeholder="电话" v-model.number="feedbackFrom.phone"></el-input>\n' +
+            '                  </el-form-item>\n' +
+            '                  <el-form-item label="您的意见:" class="label" prop="text">\n' +
+            '                      <el-input type="textarea" ' +
+            '                                placeholder="留言" ' +
+            '                                rows="13"' +
+            '                                v-model="feedbackFrom.text"></el-input>\n' +
+            '                  </el-form-item>' +
+            '                  <el-divider></el-divider>' +
+            '                  <el-button type="primary" style="width: 100%" @click="toFeedback(\'feedbackFrom\')">提交</el-button>\n' +
+            '              </el-form>\n' +
+            '          </div>\n' +
+            '      </el-container>' +'',
+        data() {
+            return{
+                feedbackFrom: {
+                    mail: '',
+                    address: '',
+                    phone: '',
+                    text: ''
+                },
+                feedbackRule: {
+                    mail: [
+                        { required: true, message: '邮箱不能为空', trigger: 'blur' },
+                    ],
+                    address: [
+                        { required: true, message: '密码不能为空', trigger: 'blur' },
+                    ],
+                    phone: [
+                        { required: true, message: '电话/手机不能为空', trigger: 'blur' },
+                        { type: 'number', message: '电话/手机必须为数字' },
+                    ],
+                    text: [
+                        { required: true, message: '意见不能为空', trigger: 'blur' },
+                    ]
+                },
+
+            }
+        },
+        methods: {
+            toFeedback(feedbackFrom){
+                this.$refs.feedbackFrom.validate(valid => {
+                    if (valid) {
+                        axios({
+                            method: 'post',
+                            url: 'sendMail',
+                            data: {
+                                mail: this.feedbackFrom.mail,
+                                address: this.feedbackFrom.address,
+                                phone: this.feedbackFrom.phone,
+                                text: this.feedbackFrom.text,
+                            },
+                            headers: {'token': localStorage.getItem('token')}
+                        }).then(res => {
+                            if(res.data.code === '0'){
+                                this.$message.success(res.data.msg)
+                            }else {
+                                this.$message.error(res.data.msg)
+                            }
+                        })
+                    }
+                })
+            }
+        }
+    }
+
+
+    const error = { template: '<div style="padding: 100px;text-align: center" ><h1>无效的页面路径^^</h1>' +
             '<img src="img/404p.png"></div>'}
 
     const router = VueRouter.createRouter({

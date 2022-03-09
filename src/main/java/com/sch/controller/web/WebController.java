@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Auth: Gao
  * @Date: 2021/12/31 0:48
  */
+
 @Controller
 public class WebController {
     @RequestMapping("/")

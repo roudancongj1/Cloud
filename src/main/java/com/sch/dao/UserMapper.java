@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import java.util.Map;
+
 /**
  *
  * @author Gao
@@ -18,5 +20,9 @@ public interface UserMapper extends BaseMapper<User> {
 
     @Select("select * from user where user_number = #{userNum}")
     User queryNum(String userNum);
+
+    int updateFdNum(Map map);
+
+    int resetFdNum(int num);
 
 }

@@ -16,22 +16,20 @@ import java.io.File;
 @Service
 public class MailServiceImpl implements MailService {
 
-    private static final String SUBJECT = "-手机号 向您提交了建议";
+    private static final String SUBJECT = " 向您提交了建议";
     @Autowired
     JavaMailSenderImpl mailSender;
 
     @Override
-    public boolean sendMail(String phone, String text,String sendTo) {
+    public boolean sendMail(String mail, String text,String sendTo) {
         try {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
 
-            mailMessage.setSubject(phone + SUBJECT);
+            mailMessage.setSubject(mail + SUBJECT);
             mailMessage.setText(text);
-
 
             mailMessage.setFrom("Yun_mic@126.com");
             mailMessage.setTo(sendTo);
-
 
             mailSender.send(mailMessage);
 

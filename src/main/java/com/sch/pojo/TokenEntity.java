@@ -32,6 +32,8 @@ public class TokenEntity implements Serializable {
 
     private Integer userSex;
 
+    private Integer feedbackNum;
+
     private String userPhone;
 
     private String userTrip;

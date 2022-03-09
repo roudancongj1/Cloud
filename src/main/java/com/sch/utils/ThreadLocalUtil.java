@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ThreadLocalUtil {
 
-    private final static ThreadLocal<JSONObject> threadlocal= new ThreadLocal();
+    private final static ThreadLocal<JSONObject> threadlocal= new ThreadLocal<>();
 
     public static ThreadLocal<JSONObject> getThreadlocal(){
         return threadlocal;
@@ -21,6 +21,9 @@ public class ThreadLocalUtil {
 
 
     public static JSONObject getThreadLocalUser(){
+        if(threadlocal.get() == null){
+            return new JSONObject();
+        }
         JSONObject jsonObject=JSON.parseObject(JSON.toJSONString(threadlocal.get()));
         return jsonObject;
     }

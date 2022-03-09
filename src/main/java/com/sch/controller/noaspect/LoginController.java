@@ -11,6 +11,8 @@ import com.sch.service.MailService;
 import com.sch.utils.RedisUtil;
 import com.sch.utils.ResultUtil;
 import com.sch.utils.TokenUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -27,6 +29,8 @@ import java.util.*;
 
 @RestController
 public class LoginController {
+
+    private static final Logger log= LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     private RedisUtil redisUtil;
@@ -64,6 +68,8 @@ public class LoginController {
         entity.setUserRole(u.getUserRole());
         entity.setUserSex(u.getUserSex());
         entity.setUserTrip(u.getUserTrip());
+        entity.setFeedbackNum(u.getFeedbackNum());
+
         if(null != u.getUserTripTime()){
             entity.setUserTripTime(new SimpleDateFormat("yyyy-MM-dd").format(u.getUserTripTime()));
         }
@@ -71,6 +77,7 @@ public class LoginController {
 
         redisUtil.set(token,entity);
         redisUtil.delete("captcha");
+        log.info("用户:"+entity.getUserNumber()+"已登录");
         return ResultUtil.ok().put(u).put("token",token).put(entity);
     }
 

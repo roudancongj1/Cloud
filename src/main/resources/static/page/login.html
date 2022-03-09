@@ -65,7 +65,11 @@
                                    v-model="userForm.userNumber"></el-input>
                      </el-form-item>
                      <el-form-item prop="userPass">
-                         <el-input class="input" placeholder="密码:" v-model="userForm.userPass"></el-input>
+                         <el-input type="password"
+                                   show-password="true"
+                                   class="input"
+                                   placeholder="密码:"
+                                   v-model="userForm.userPass"></el-input>
                      </el-form-item>
                      <el-form-item prop="captcha">
                          <el-row gutter="20" justify="center">

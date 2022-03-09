@@ -1,7 +1,10 @@
-package com.sch.utils;
+package com.sch.aspect;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.sch.utils.RedisUtil;
+import com.sch.utils.ResultUtil;
+import com.sch.utils.ThreadLocalUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -40,7 +43,8 @@ public class ThreadLocalAspect {
         if(redisUtil.hasKey(token)){
 
             System.out.println("---------------------------判断token----------------------------------");
-            ThreadLocalUtil.getThreadlocal().set(JSON.parseObject(JSON.toJSONString(redisUtil.get("token:"+token))));
+            ThreadLocalUtil.getThreadlocal().set(JSON.parseObject(JSON.toJSONString(redisUtil.get(token))));
+
             //获取方法返回值
             return point.proceed();
         }else {

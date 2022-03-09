@@ -9,5 +9,5 @@ import java.io.File;
 
 
 public interface MailService {
-    boolean sendMail(String phone, String text,String sendTo);
+    boolean sendMail(String mail, String text,String sendTo);
 }

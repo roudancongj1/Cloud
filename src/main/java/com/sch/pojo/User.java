@@ -44,6 +44,8 @@ public class User implements Serializable {
 
     private Integer logicDelete;
 
+    private Integer feedbackNum;
+
     private LocalDateTime addDate;
 
     private LocalDateTime updateDate;
@@ -136,6 +138,14 @@ public class User implements Serializable {
 
     public void setLogicDelete(Integer logicDelete) {
         this.logicDelete = logicDelete;
+    }
+
+    public Integer getFeedbackNum() {
+        return feedbackNum;
+    }
+
+    public void setFeedbackNum(Integer feedbackNum) {
+        this.feedbackNum = feedbackNum;
     }
 
     public LocalDateTime getAddDate() {
