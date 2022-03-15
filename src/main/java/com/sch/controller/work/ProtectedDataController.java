@@ -4,16 +4,27 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.sch.dao.CityMapper;
 import com.sch.dao.UserMapper;
+import com.sch.pojo.City;
 import com.sch.pojo.User;
+import com.sch.service.ExcelService;
+import com.sch.serviceimpl.ExcelServiceImpl;
 import com.sch.utils.RedisUtil;
 import com.sch.utils.ResultUtil;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,6 +36,11 @@ import java.util.Map;
 public class ProtectedDataController {
     @Autowired
     private RedisUtil redisUtil;
+    @Autowired
+    private CityMapper cityMapper;
+
+
+
 
     @GetMapping("userInfo")
     public ResultUtil userInfo(HttpServletRequest request){
@@ -40,6 +56,19 @@ public class ProtectedDataController {
             return ResultUtil.error("查询失败");
         }
     }
+
+    @GetMapping("cityInfo")
+    public ResultUtil cityInfo(){
+        try {
+            List<City> cities = cityMapper.selectList(new QueryWrapper<>());
+            return ResultUtil.ok().put(cities);
+        } catch (Exception e) {
+            return ResultUtil.error("查询城市信息失败");
+        }
+    }
+
+
+
 
 
 

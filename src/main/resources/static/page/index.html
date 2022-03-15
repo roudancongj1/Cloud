@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>隔离系统</title>
     <link rel="stylesheet" href="css/ele.css">
     <!--图标-->
     <link rel="shortcut icon" href="img/favicon.ico" >
@@ -36,6 +36,10 @@
         }
         .cont{
             padding: 100px;
+        }
+        .contSev{
+            padding: 100px;
+
         }
         .addInfo{
             margin: 50px 20px;
@@ -81,11 +85,13 @@
             <!--<img src="img/404.jpg">-->
             <Copyright></Copyright>
         </el-main>
-
     </el-container>
 </div>
 
 <script>
+
+
+
     const Copyright= {
         template: '<div class="copyright">' +
                       '<p>Isolation Hotel selection</p>' +
@@ -216,12 +222,27 @@
             '                            </el-card>\n' +
             '                        </el-container>\n' +
             '                        <el-divider></el-divider>\n' +
-            '                            <el-container class="cont">\n' +
-            '                            <div style="width: 60%"><h3>我们由封闭车辆对您出站第一时间进行闭环转运\n' +
-            '                             </h3></div>\n' +
-            '                            <img src="img/s1.png ">\n' +
+            '                            <el-container class="contSev">\n' +
+            '                            <div style="width: 60%"><h2>您可以通过城市标签挑选您喜欢的隔离地点\n' +
+            '                             </h2><span>酒店信息环境价格清晰可见无二次隐形消费</span>\n' +
+            '                             <h1 style="color: #66b1ff">您也可以通过城市界面查看当前城市风险等级</h1></div>\n' +
+            '                            <img src="img/s3.png ">\n' +
             '                            </el-container>\n' +
             '                        <el-divider></el-divider>\n' +
+            '                            <el-container class="contSev">\n' +
+            '                            <img src="img/s2.png ">\n' +
+            '                            <div style="width: 60%;">' +
+            '                            <h2 style="text-align: right">在您下单后,我们会第一时间进行系统的对接</h2>\n' +
+            '                            <h4 style="text-align: right">我们会安排专人为您提供整套服务,您只需提供您的航班号</h4>' +
+            '                            <h1 style="color: #ff4d51;text-align: right">请留意您的短信,不要错过行程哦</h1></div>\n' +
+            '                            </el-container>\n' +
+            '                        <el-divider></el-divider>\n' +
+            '                            <el-container class="contSev">\n' +
+            '                            <div style="width: 60%"><h2>我们由封闭车辆对您出站第一时间进行闭环转运\n' +
+            '                             </h2><span>下车后工作人员会与您取得联系</span>\n' +
+            '                             <h1 style="color: #a4da89">我们将会直接开往隔离酒店确保您及周围人的安全</h1></div>\n' +
+            '                            <img src="img/s1.png ">\n' +
+            '                            </el-container>\n' +
             '                </el-main>\n' +
             '            </el-container>' + '',
         data(){
@@ -262,23 +283,110 @@
             '          <el-carousel-item >\n' +
             '              <img src="img/sz.jpg" style="object-fit: cover;width: 100%;height: 100%">\n' +
             '          </el-carousel-item>\n' +
-            '      </el-carousel>\n'+
-            '      <el-button @click="downloadForm">下载今日疫情表格</el-button>\n' +
-            '      <p>查询</p>\n' +
-            '      <p>购买</p>\n' +
-            '      <p>支付</p>' + '',
+            '      </el-carousel><br>\n'+
+            '      <div style="text-align: right">\n'+
+            '      <el-button @click="downloadForm" type="success">下载今日疫情表格</el-button>\n' +
+            '      <el-input style="width: 200px;margin: 0 20px"' +
+            '                placeholder="城市名称"></el-input>\n' +
+            '      <el-button type="primary">查询</el-button>\n' +
+            '      </div><br>\n' +
+            '      <component is="el-menu"' +
+            '                 background-color="#606266"' +
+            '                 text-color="#ffffff"' +
+            '                 active-text-color="#ffd04b"' +
+            '                 v-for="cval in cityList"' +
+            '                 >\n' +
+            '          <el-sub-menu index="[cval.cityId]">\n' +
+            '              <template #title>--&nbsp;{{cval.cityName}}&nbsp;--' +
+            '              <span style="color: #ff4d51">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;隔离天数:{{cval.cityDays}}</span>\n' +
+            '              <span style="color: #ff4d51">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;风险等级:{{cval.cityLv}}</span>' +            '              <div style="width: 100%;text-align: right">\n' +
+            '              <span style="text-align: right">&nbsp;&nbsp;{{cval.cityInfo}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>' +
+            '              </div>' +
+            '              </template>\n' +
+            '              <el-menu-item v-for="(num,index) in 5" index="[cval.cityId]-[num]" >\n' +
+            '              <div style="width: 100%">地方酒店{{num}}<el-button @click="expectTo(num)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
+
+            '          </el-sub-menu>\n' +
+            '      </component>' + '',
         data(){
             return{
-
+                cityList: [],
+                placeList: []
             }
         },
         methods:{
             downloadForm(){
-                return
+                window.location.href = window.location.protocol+'//'+window.location.host+'/data/exportToday'
+            },
+            queryCityList() {
+                axios({
+                    method: 'get',
+                    url: 'data/simpleCityInfo',
+                    headers: {'token': localStorage.getItem('token') }
+                }).then(res => {
+                    if(res.data.code){
+                        this.cityList=res.data.data
+                    }else {
+                        this.$message.error(res.data.msg)
+                    }
+                })
+            },
+            expectTo(num){
+                axios({
+                    method: 'post',
+                    url: 'updateExpect',
+                    headers: {'token': localStorage.getItem('token') },
+                    params:{
+                        expectId: num
+                    }
+                }).then(res => {
+                    if(res.data.code === '0'){
+                        window.location.href = '/account'
+                    }else {
+                        this.$message.error(res.data.msg)
+                    }
+                })
             }
         },
         created(){
-
+            this.queryCityList()
+        },
+        components: {
+            'menu-child': {
+                template:
+                    '<el-menu-item v-for="(pval,index) in placeList" index="[index+1]-[index+1]">'+
+                    '{{index}}'+
+                    '</el-menu-item>',
+                props: {
+                    pId: Number
+                },
+                data(){
+                    return{
+                        placeList: [],
+                    }
+                },
+                methods: {
+                    queryPlaceList() {
+                        axios({
+                            method: 'get',
+                            url: 'data/simplePlaceInfo',
+                            headers: {'token': localStorage.getItem('token') },
+                            params:{
+                                pId: this.pId
+                            }
+                        }).then(res => {
+                            if(res.data.code){
+                                this.placeList=res.data.data
+                            }else {
+                                this.$message.error(res.data.msg)
+                            }
+                        })
+                    }
+                },
+                created(){
+                    this.queryPlaceList()
+                }
+            },
         }
     }
 
@@ -373,14 +481,17 @@
             '                  <el-form-item label="电话/手机:" class="label" prop="phone">\n' +
             '                      <el-input placeholder="电话" v-model.number="feedbackFrom.phone"></el-input>\n' +
             '                  </el-form-item>\n' +
-            '                  <el-form-item label="您的意见:" class="label" prop="text">\n' +
+            '                  <el-form-item label="您的意见:" class="label" prop="opinion">\n' +
             '                      <el-input type="textarea" ' +
             '                                placeholder="留言" ' +
             '                                rows="13"' +
-            '                                v-model="feedbackFrom.text"></el-input>\n' +
+            '                                v-model="feedbackFrom.opinion"></el-input>\n' +
             '                  </el-form-item>' +
             '                  <el-divider></el-divider>' +
-            '                  <el-button type="primary" style="width: 100%" @click="toFeedback(\'feedbackFrom\')">提交</el-button>\n' +
+            '                  <el-button type="primary" style="width: 100%" @click="toFeedback(\'feedbackFrom\')"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="12" fill="currentColor" class="bi bi-envelope-check" viewBox="0 0 16 16">\n' +
+            '  <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2Zm3.708 6.208L1 11.105V5.383l4.708 2.825ZM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2Z"/>\n' +
+            '  <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z"/>\n' +
+            '</svg>提交</el-button>\n' +
             '              </el-form>\n' +
             '          </div>\n' +
             '      </el-container>' +'',
@@ -390,7 +501,7 @@
                     mail: '',
                     address: '',
                     phone: '',
-                    text: ''
+                    opinion: ''
                 },
                 feedbackRule: {
                     mail: [
@@ -403,7 +514,7 @@
                         { required: true, message: '电话/手机不能为空', trigger: 'blur' },
                         { type: 'number', message: '电话/手机必须为数字' },
                     ],
-                    text: [
+                    opinion: [
                         { required: true, message: '意见不能为空', trigger: 'blur' },
                     ]
                 },
@@ -421,7 +532,7 @@
                                 mail: this.feedbackFrom.mail,
                                 address: this.feedbackFrom.address,
                                 phone: this.feedbackFrom.phone,
-                                text: this.feedbackFrom.text,
+                                opinion: this.feedbackFrom.opinion,
                             },
                             headers: {'token': localStorage.getItem('token')}
                         }).then(res => {

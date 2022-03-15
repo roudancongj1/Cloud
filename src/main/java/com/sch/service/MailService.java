@@ -1,6 +1,7 @@
 package com.sch.service;
 
 import java.io.File;
+import java.util.Map;
 
 /**
  * @Auth: Gao
@@ -9,5 +10,5 @@ import java.io.File;
 
 
 public interface MailService {
-    boolean sendMail(String mail, String text,String sendTo);
+    boolean sendOpinionMail(String sub, Map info);
 }

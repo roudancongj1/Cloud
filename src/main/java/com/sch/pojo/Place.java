@@ -25,7 +25,7 @@ public class Place implements Serializable {
 
     private String placeName;
 
-    private Integer palceMark;
+    private Integer placeMark;
 
     private String placeAddress;
 
@@ -68,12 +68,12 @@ public class Place implements Serializable {
         this.placeName = placeName;
     }
 
-    public Integer getPalceMark() {
-        return palceMark;
+    public Integer getPlaceMark() {
+        return placeMark;
     }
 
-    public void setPalceMark(Integer palceMark) {
-        this.palceMark = palceMark;
+    public void setPlaceMark(Integer palceMark) {
+        this.placeMark = palceMark;
     }
 
     public String getPlaceAddress() {
@@ -146,7 +146,7 @@ public class Place implements Serializable {
         "placeId=" + placeId +
         ", parentId=" + parentId +
         ", placeName=" + placeName +
-        ", palceMark=" + palceMark +
+        ", palceMark=" + placeMark +
         ", placeAddress=" + placeAddress +
         ", placeEat=" + placeEat +
         ", placeWifi=" + placeWifi +

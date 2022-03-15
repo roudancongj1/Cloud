@@ -1,12 +1,16 @@
 package com.sch.serviceimpl;
 
 import com.sch.service.MailService;
+
+import com.sch.utils.MailMessageUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
+import java.util.Map;
 
 /**
  * @Auth: Gao
@@ -16,27 +20,20 @@ import java.io.File;
 @Service
 public class MailServiceImpl implements MailService {
 
-    private static final String SUBJECT = " 向您提交了建议";
     @Autowired
-    JavaMailSenderImpl mailSender;
+    private JavaMailSender mailSender;
 
     @Override
-    public boolean sendMail(String mail, String text,String sendTo) {
+    public boolean sendOpinionMail(String sub, Map info) {
         try {
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
+            SimpleMailMessage message = MailMessageUtil.getOpinion(sub, info);
 
-            mailMessage.setSubject(mail + SUBJECT);
-            mailMessage.setText(text);
-
-            mailMessage.setFrom("Yun_mic@126.com");
-            mailMessage.setTo(sendTo);
-
-            mailSender.send(mailMessage);
-
+            mailSender.send(message);
             return true;
-
         } catch (Exception e) {
             return false;
         }
     }
+
+
 }

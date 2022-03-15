@@ -46,6 +46,8 @@ public class User implements Serializable {
 
     private Integer feedbackNum;
 
+    private Integer expectId;
+
     private LocalDateTime addDate;
 
     private LocalDateTime updateDate;
@@ -148,6 +150,14 @@ public class User implements Serializable {
         this.feedbackNum = feedbackNum;
     }
 
+    public Integer getExpectId() {
+        return expectId;
+    }
+
+    public void setExpectId(Integer expectId) {
+        this.expectId = expectId;
+    }
+
     public LocalDateTime getAddDate() {
         return addDate;
     }
@@ -168,18 +178,20 @@ public class User implements Serializable {
     public String toString() {
         return "User{" +
                 "userId=" + userId +
-                ", userNumber=" + userNumber +
-                ", userPass=" + userPass +
-                ", userName=" + userName +
+                ", userNumber='" + userNumber + '\'' +
+                ", userPass='" + userPass + '\'' +
+                ", userName='" + userName + '\'' +
                 ", userSex=" + userSex +
-                ", userPhone=" + userPhone +
-                ", userTrip=" + userTrip +
+                ", userPhone='" + userPhone + '\'' +
+                ", userTrip='" + userTrip + '\'' +
+                ", userTripTime=" + userTripTime +
                 ", userRole=" + userRole +
                 ", version=" + version +
                 ", logicDelete=" + logicDelete +
+                ", feedbackNum=" + feedbackNum +
+                ", expectId=" + expectId +
                 ", addDate=" + addDate +
                 ", updateDate=" + updateDate +
-                "}";
+                '}';
     }
-
 }
