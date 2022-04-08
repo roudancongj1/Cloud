@@ -39,6 +39,8 @@ public class Place implements Serializable {
 
     private String placeInfo;
 
+    private String chargePhone;
+
     private LocalDate addDate;
 
     private LocalDate updateDate;
@@ -124,6 +126,14 @@ public class Place implements Serializable {
         this.placeInfo = placeInfo;
     }
 
+    public String getChargePhone() {
+        return chargePhone;
+    }
+
+    public void setChargePhone(String chargePhone) {
+        this.chargePhone = chargePhone;
+    }
+
     public LocalDate getAddDate() {
         return addDate;
     }
@@ -143,18 +153,19 @@ public class Place implements Serializable {
     @Override
     public String toString() {
         return "Place{" +
-        "placeId=" + placeId +
-        ", parentId=" + parentId +
-        ", placeName=" + placeName +
-        ", palceMark=" + placeMark +
-        ", placeAddress=" + placeAddress +
-        ", placeEat=" + placeEat +
-        ", placeWifi=" + placeWifi +
-        ", placeMoney=" + placeMoney +
-        ", placeImg=" + placeImg +
-        ", placeInfo=" + placeInfo +
-        ", addDate=" + addDate +
-        ", updateDate=" + updateDate +
-        "}";
+                "placeId=" + placeId +
+                ", parentId=" + parentId +
+                ", placeName='" + placeName + '\'' +
+                ", placeMark=" + placeMark +
+                ", placeAddress='" + placeAddress + '\'' +
+                ", placeEat='" + placeEat + '\'' +
+                ", placeWifi=" + placeWifi +
+                ", placeMoney=" + placeMoney +
+                ", placeImg='" + placeImg + '\'' +
+                ", placeInfo='" + placeInfo + '\'' +
+                ", chargePhone='" + chargePhone + '\'' +
+                ", addDate=" + addDate +
+                ", updateDate=" + updateDate +
+                '}';
     }
 }

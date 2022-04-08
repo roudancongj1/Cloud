@@ -10,6 +10,8 @@
     <script src="js/element-plus.js"></script>
     <script src="js/axios.min.js"></script>
     <script src="js/vue-router.global.js"></script>
+    <script src="js/jquery-3.6.0.min.js"></script>
+
     <style>
         #app{
             width: 100%;
@@ -59,8 +61,8 @@
                 <el-link class="herderLink" @click="index">首页</el-link>
                 <el-link class="herderLink" @click="services">服务</el-link>
                 <el-link class="herderLink" @click="city">城市</el-link>
+                <el-link class="herderLink" @click="support">信息</el-link>
                 <el-link class="herderLink" @click="about">关于</el-link>
-                <el-link class="herderLink" @click="support">支持我们</el-link>
                 <el-link class="herderLink" @click="feedback">反馈</el-link>
                 <el-button class="herderLink" @click="toLogin" v-if="visitor" round>登录</el-button>
                 <el-dropdown trigger="click" v-else>
@@ -72,8 +74,10 @@
                     <template #dropdown>
                         <el-dropdown-menu>
                             <el-dropdown-item @click="toUser">个人资料</el-dropdown-item>
-                            <el-dropdown-item @click="toAccount">我的账户</el-dropdown-item>
                             <el-dropdown-item v-if="userRole != '0'" @click="toManage">后台管理</el-dropdown-item>
+                            <el-dropdown-item v-else @click="toAccount">
+                                <span>&nbsp;&nbsp;购物车</span>
+                            </el-dropdown-item>
                             <el-dropdown-item @click="logout" divided>退出登录</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
@@ -193,7 +197,8 @@
         }
     }
 
-    const index = { template:
+    const index = {
+        template:
             '<el-container class="cont">\n' +
             '    <div>\n' +
             '        <h1 style="font-size: 30px">出差/旅游到疫情地区?</h1>\n' +
@@ -201,8 +206,12 @@
             '        <p>隔离期间的日日夜夜少不了对亲人的思念，舒适的隔离环境对您显得尤为重要，一起来挑选一个满意的隔离地点吧!</p>\n' +
             '        <router-link to="city"><el-button type="info" round>点击挑选</el-button></router-link>\n' +
             '    </div>\n' +
-            '    <img src="img/index1.png">\n' +
-            '</el-container>\n' +''
+            '    <img  src="img/index1.png">\n' +
+            '</el-container>\n' +'',
+        methods:{
+        },
+        created(){
+        }
     }
 
     const services = { template: '<el-container>\n' +
@@ -285,7 +294,6 @@
             '          </el-carousel-item>\n' +
             '      </el-carousel><br>\n'+
             '      <div style="text-align: right">\n'+
-            '      <el-button @click="downloadForm" type="success">下载今日疫情表格</el-button>\n' +
             '      <el-input style="width: 200px;margin: 0 20px"' +
             '                placeholder="城市名称"></el-input>\n' +
             '      <el-button type="primary">查询</el-button>\n' +
@@ -297,15 +305,21 @@
             '                 v-for="cval in cityList"' +
             '                 >\n' +
             '          <el-sub-menu index="[cval.cityId]">\n' +
-            '              <template #title>--&nbsp;{{cval.cityName}}&nbsp;--' +
-            '              <span style="color: #ff4d51">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;隔离天数:{{cval.cityDays}}</span>\n' +
-            '              <span style="color: #ff4d51">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;风险等级:{{cval.cityLv}}</span>' +            '              <div style="width: 100%;text-align: right">\n' +
-            '              <span style="text-align: right">&nbsp;&nbsp;{{cval.cityInfo}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>' +
-            '              </div>' +
+            '              <template #title>' +
+            '                  <span>————{{cval.cityName}}————</span>' +
+            '                  <div style="width: 100%;text-align: right">\n' +
+            '                  <span style="text-align: right">&nbsp;&nbsp;{{cval.cityInfo}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>' +
+            '                  </div>' +
             '              </template>\n' +
-            '              <el-menu-item v-for="(num,index) in 5" index="[cval.cityId]-[num]" >\n' +
-            '              <div style="width: 100%">地方酒店{{num}}<el-button @click="expectTo(num)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
-
+            '                  <el-menu-item v-for="(num,index) in 0" index="[cval.cityId]-[num]" ></el-menu-item>\n' +
+            '                  <el-menu-item><div style="width: 100%">余杭区<el-button @click="expectTo(1)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
+            '                  <el-menu-item><div style="width: 100%">滨江区<el-button @click="expectTo(num)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
+            '                  <el-menu-item><div style="width: 100%">萧山区<el-button @click="expectTo(num)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
+            '                  <el-menu-item><div style="width: 100%">临平区<el-button @click="expectTo(num)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
+            '                  <el-menu-item><div style="width: 100%">拱墅区<el-button @click="expectTo(num)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
+            '                  <el-menu-item><div style="width: 100%">富阳区<el-button @click="expectTo(num)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
+            '                  <el-menu-item><div style="width: 100%">河桥区<el-button @click="expectTo(num)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
+            '                  <el-menu-item><div style="width: 100%">钱塘区<el-button @click="expectTo(num)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
             '          </el-sub-menu>\n' +
             '      </component>' + '',
         data(){
@@ -315,9 +329,6 @@
             }
         },
         methods:{
-            downloadForm(){
-                window.location.href = window.location.protocol+'//'+window.location.host+'/data/exportToday'
-            },
             queryCityList() {
                 axios({
                     method: 'get',
@@ -390,6 +401,119 @@
         }
     }
 
+
+    const support = {
+        template:
+            '<el-row gutter="20" >' +
+            '<el-col :span="8">' +
+            '<h3>境外输入:</h3>' +
+            '<h3 style="color: #ebb563">121321</h3>' +
+            '</el-col>\n'+
+            '<el-col :span="8">' +
+            '<h3>无症状感染者:</h3>' +
+            '<h3 style="color: #f3d19e">546321</h3>' +
+            '</el-col>\n'+
+            '<el-col :span="8">' +
+            '<h3>现有确诊:</h3>' +
+            '<h3 style="color: red">123871</h3>' +
+            '</el-col>\n'+
+            '</el-row>\n'+
+            '<el-row gutter="20" >' +
+            '<el-col :span="8">' +
+            '<h3>累计确诊:</h3>' +
+            '<h3 style="color: brown">456321</h3>' +
+            '</el-col>\n'+
+            '<el-col :span="8">' +
+            '<h3>累计死亡:</h3>' +
+            '<h3 >816321321</h3>' +
+            '</el-col>\n'+
+            '<el-col :span="8">' +
+            '<h3>累计治愈:</h3>' +
+            '<h3 style="color: green">568321321</h3>' +
+            '</el-col>\n'+
+            '</el-row>\n'+
+            '<div style="text-align: right">\n'+
+            '<el-button @click="downloadForm" type="success">下载今日疫情表格</el-button>\n'+
+            '</div>\n'+
+            '<el-table :data="apiInfo" style="width: 100%">\n' +
+            '    <el-table-column prop="name" label="name" width="180" />\n' +
+            '    <el-table-column prop="children.name" label="children.name" width="180" />\n' +
+            '    <el-table-column prop="today.confirm" label="today.confirm"  />\n' +
+            '    <el-table-column prop="today.confirmCuts" label="today.confirmCuts" />\n' +
+            '    <el-table-column prop="today.isUpdated" label="oday.isUpdated"/>\n' +
+            '    <el-table-column prop="total.nowConfirm" label="total.nowConfirm" />\n' +
+            '    <el-table-column prop="total.confirm" label="today.confirm"  />\n' +
+            '    <el-table-column prop="total.dead" label="total.dead" />\n' +
+            '    <el-table-column prop="total.showRate" label="total.howRatem" />\n' +
+            '    <el-table-column prop="total.heal" label="total.heal" />\n' +
+            '    <el-table-column prop="total.showHeal" label="total.showHeal" />\n' +
+            '    <el-table-column prop="total.grade" label="total.grade" />\n' +
+            '</el-table>\n' +
+            '</div>\n',
+        data() {
+            return {
+                apiInfo: [],
+            };
+        },
+        methods: {
+            downloadForm(){
+                window.location.href = window.location.protocol+'//'+window.location.host+'/data/exportToday'
+            },
+            toApiInfo() {
+                //  axios.get("https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5").then(res => {
+                //      res.data.data.forEach( name => {
+                //          this.apiInfo.push(name)
+                //      })
+                //  })
+                $.ajax({
+                    url: 'https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5',
+                    method: 'get',
+                    dataType: 'jsonp'
+                }).then(res => {
+                    const val =[JSON.parse(res.data)]
+                    for(let i=0,l=val.length;i<l;i++){
+                        for(let key in val[i]){
+                            if(key ==='areaTree'){
+                                const tree=val[i][key]
+                                //alert(tree)
+                                for (let j = 0; j <tree.length; j++) {
+                                    for (let treeKey in tree[j]) {
+                                        if(treeKey ==='children'){
+                                            const city=tree[j][treeKey]
+                                            for (let k = 0; k < city.length; k++) {
+                                                for (let cityKey in city[k]) {
+                                                    if(cityKey ==='children'){
+                                                        let dd=city[k][cityKey]
+
+                                                        this.apiInfo.push(...dd)
+                                                        //alert(JSON.stringify(this.apiInfo))
+                                                        //alert(JSON.stringify(city[k][cityKey]))
+                                                    }
+                                                }
+                                            }
+                                           // this.apiInfo=city
+                                           // alert(JSON.stringify(this.apiInfo))
+                                        }
+                                    }
+                                }
+                                //alert(key+':'+JSON.stringify(val[i][key]));
+
+                            }
+
+                        }
+
+                    }
+                })
+            }
+        },
+        created(){
+            this.toApiInfo()
+        }
+    }
+
+
+
+
     const about = {
         template: '<el-container>\n' +
             '          <el-header style="text-align: center">\n' +
@@ -436,17 +560,7 @@
     }
 
 
-    const support = {
-        template: '<el-empty description="暂时为空" :image-size="300"></el-empty>',
-        data() {
-            return {
-                aa: 'aaaaaa',
-            };
-        },
-        methods: {
 
-        }
-    }
 
 
     const feedback = {

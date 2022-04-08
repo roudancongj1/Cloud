@@ -107,4 +107,20 @@ public class authController {
             return ResultUtil.error("更新购物车失败");
         }
     }
+
+    @PostMapping("payTrip")
+    public ResultUtil payTrip(String info,boolean imgVx){
+
+
+        /*调用支付接口*/
+        if(imgVx){
+
+        }else {
+
+        }
+
+        /*判断支付成功*/
+        /*发送短信导区域负责人*/
+        return null;
+    }
 }

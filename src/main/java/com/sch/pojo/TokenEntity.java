@@ -42,6 +42,8 @@ public class TokenEntity implements Serializable {
 
     private Integer userRole;
 
+    private Integer expectId;
+
     private Map<String,Object> data =new HashMap();
 
     public TokenEntity set(String key,Object value){

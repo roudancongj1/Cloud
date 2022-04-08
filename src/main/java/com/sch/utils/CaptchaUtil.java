@@ -102,5 +102,4 @@ public class CaptchaUtil {
         return new Color(r,g,b);
     }
 
-
 }

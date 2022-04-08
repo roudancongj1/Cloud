@@ -50,14 +50,14 @@
         </div>
         <el-container>
         <el-header class="title">
-            <el-button>上传头像</el-button>
+            <el-button @click="headDialog=true">上传头像</el-button>
             <el-button>修改信息</el-button>
             <el-button @click="passdialog=true">修改密码</el-button>
-            <el-button @click="toaccount">我的账户</el-button>
+            <el-button @click="toaccount">购物车</el-button>
         </el-header>
         <el-main class="info">
             <div class="div">
-                <img src="img/str.png" alt="头像">
+                <img src="img/str.png" style="width: 20%" alt="头像">
                 <el-row class="row">
                     <el-col :span="8">昵称:</el-col>
                     <el-col :span="14">{{user.userName}}</el-col>
@@ -112,6 +112,16 @@
       </span>
         </template>
     </el-dialog>
+
+    <el-dialog v-model="headDialog">
+        <el-input type="file"></el-input>
+        <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="headDialog = false">取消</el-button>
+        <el-button type="primary">提交</el-button>
+      </span>
+        </template>
+    </el-dialog>
 </div>
 <script>
     const App ={
@@ -136,6 +146,7 @@
                 },
                 visitor: true,
                 passdialog: false,
+                headDialog: false,
                 pass: {
                     oldUserPass:'',
                     userPass: '',

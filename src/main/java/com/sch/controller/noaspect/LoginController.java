@@ -69,6 +69,7 @@ public class LoginController {
         entity.setUserSex(u.getUserSex());
         entity.setUserTrip(u.getUserTrip());
         entity.setFeedbackNum(u.getFeedbackNum());
+        entity.setExpectId(u.getExpectId());
 
         if(null != u.getUserTripTime()){
             entity.setUserTripTime(new SimpleDateFormat("yyyy-MM-dd").format(u.getUserTripTime()));

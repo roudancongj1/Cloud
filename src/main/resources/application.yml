@@ -22,7 +22,7 @@ spring:
     host: smtp.126.com
     username: Yun_mic@126.com
     #屏蔽
-    password:
+    password: NJVTIGQOXIPVNWRX
     port: 465
     properties:
       mail:

@@ -5,13 +5,16 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.sch.dao.CityMapper;
+import com.sch.dao.PlaceMapper;
 import com.sch.dao.UserMapper;
 import com.sch.pojo.City;
+import com.sch.pojo.Place;
 import com.sch.pojo.User;
 import com.sch.service.ExcelService;
 import com.sch.serviceimpl.ExcelServiceImpl;
 import com.sch.utils.RedisUtil;
 import com.sch.utils.ResultUtil;
+import com.sch.utils.ThreadLocalUtil;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -38,6 +41,8 @@ public class ProtectedDataController {
     private RedisUtil redisUtil;
     @Autowired
     private CityMapper cityMapper;
+    @Autowired
+    private PlaceMapper placeMapper;
 
 
 
@@ -67,6 +72,17 @@ public class ProtectedDataController {
         }
     }
 
+    @GetMapping("queryExpect")
+    public ResultUtil queryExpect(){
+        try {
+            JSONObject user = ThreadLocalUtil.getThreadLocalUser();
+            int expectId =(int) user.get("expectId");
+            Place place = placeMapper.selectOne(new QueryWrapper<Place>().eq("place_id", expectId));
+            return ResultUtil.ok().put(place);
+        } catch (Exception e) {
+            return ResultUtil.error("查询地方城市信息失败");
+        }
+    }
 
 
 
