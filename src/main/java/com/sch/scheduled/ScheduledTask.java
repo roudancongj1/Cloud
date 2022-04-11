@@ -1,6 +1,9 @@
 package com.sch.scheduled;
 
 import com.sch.dao.UserMapper;
+import com.sch.pojo.HtmlInfo;
+import com.sch.utils.AddRandomHtmlUtil;
+import com.sch.utils.RedisUtil;
 import com.sch.utils.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -10,6 +13,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.HtmlUtils;
+
+import java.util.Random;
 
 
 /**
@@ -32,6 +38,10 @@ public class ScheduledTask {
     private final static Logger log = LoggerFactory.getLogger(ScheduledTask.class);
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private RedisUtil redisUtil;
+    @Autowired
+    private AddRandomHtmlUtil randomHtmlUtil;
 
     @PostMapping("resetFdNum")
     @Scheduled(cron = "0 0 0 * * ?")
@@ -46,4 +56,13 @@ public class ScheduledTask {
         return ResultUtil.ok("重置成功");
     }
 
+    @PostMapping("addRandom")
+    @Scheduled(cron = "0 0 0 * * ?")
+    public ResultUtil addRandom(){
+        try {
+            return randomHtmlUtil.getInfo();
+        } catch (Exception e) {
+            return ResultUtil.error("更新疫情信息失败");
+        }
+    }
 }

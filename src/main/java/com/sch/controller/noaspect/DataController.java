@@ -1,13 +1,17 @@
 package com.sch.controller.noaspect;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sch.dao.CityMapper;
 import com.sch.dao.PlaceMapper;
 import com.sch.dao.StaticMapper;
 import com.sch.pojo.City;
+import com.sch.pojo.HtmlInfo;
 import com.sch.pojo.Place;
 import com.sch.pojo.Static;
+import com.sch.service.MailService;
 import com.sch.serviceimpl.ExcelServiceImpl;
+import com.sch.utils.RedisUtil;
 import com.sch.utils.ResultUtil;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -39,6 +43,10 @@ public class DataController {
     private CityMapper cityMapper;
     @Autowired
     private PlaceMapper placeMapper;
+    @Autowired
+    private RedisUtil redisUtil;
+    @Autowired
+    private MailService mailService;
 
 
 
@@ -101,6 +109,29 @@ public class DataController {
         }
     }
 
+    @GetMapping("queryHtmlInfo")
+    public ResultUtil queryHtmlInfo(){
+        try {
+            HtmlInfo info = JSON.parseObject(redisUtil.get("htmlInfo").toString(), HtmlInfo.class);
 
+            return ResultUtil.ok().put(info);
+        } catch (Exception e) {
+            return ResultUtil.error("查询失败");
+        }
+    }
+
+    @GetMapping("sendMailCode")
+    public ResultUtil sendMailCode(@RequestParam String mail){
+        try {
+            boolean state = mailService.sendMailCode(mail);
+            if (state)
+                return ResultUtil.ok("验证码发送成功");
+            else
+                return ResultUtil.error("验证码发送失败");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultUtil.error("验证码发送异常");
+        }
+    }
 }
 

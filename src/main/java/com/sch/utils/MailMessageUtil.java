@@ -4,6 +4,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @Auth: Gao
@@ -40,4 +41,16 @@ public class MailMessageUtil {
         return mailMessage;
     }
 
+    public static SimpleMailMessage getMailCode(String mail){
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+
+        mailMessage.setFrom("Yun_mic@126.com");
+        mailMessage.setTo(mail);
+
+        mailMessage.setSubject("[光晕科技]请查收您的验证码,有效时间三分钟,若非本人操作请忽略");
+        String s = UUID.randomUUID().toString().replaceAll("-", "").substring(0,4);
+        mailMessage.setText(s);
+
+        return mailMessage;
+    }
 }

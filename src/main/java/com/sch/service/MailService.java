@@ -11,4 +11,6 @@ import java.util.Map;
 
 public interface MailService {
     boolean sendOpinionMail(String sub, Map info);
+
+    boolean sendMailCode(String mail);
 }

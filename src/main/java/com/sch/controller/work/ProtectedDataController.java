@@ -8,6 +8,7 @@ import com.sch.dao.CityMapper;
 import com.sch.dao.PlaceMapper;
 import com.sch.dao.UserMapper;
 import com.sch.pojo.City;
+import com.sch.pojo.HtmlInfo;
 import com.sch.pojo.Place;
 import com.sch.pojo.User;
 import com.sch.service.ExcelService;
@@ -83,9 +84,6 @@ public class ProtectedDataController {
             return ResultUtil.error("查询地方城市信息失败");
         }
     }
-
-
-
 
 
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sch.dao.UserMapper;
+import com.sch.pojo.RegFrom;
 import com.sch.pojo.TokenEntity;
 import com.sch.pojo.User;
 import com.sch.pojo.UserForm;
@@ -20,6 +21,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -116,9 +119,30 @@ public class LoginController {
         }
     }
 
+    @PostMapping("reg")
+    public ResultUtil register(@RequestBody RegFrom regFrom){
+        try {
+            User user = new User();
+            user.setUserNumber(regFrom.getUserNumber());
+            user.setUserPass(regFrom.getUserPass());
+            user.setUserName(regFrom.getUserName());
+            user.setUserSex("男".equals(regFrom.getSex())? 1:0);
+            user.setUserPhone(regFrom.getUserPhone());
+            user.setFeedbackNum(3);
+            user.setAddDate(LocalDateTime.now());
 
+            if(redisUtil.hasKey(regFrom.getUserPhone())&&redisUtil.get(regFrom.getUserPhone()).equals(regFrom.getCaptcha())){
+                userMapper.insert(user);
+                log.info("注册成功 用户名:"+user.getUserName());
+                return ResultUtil.ok();
+            }else {
+                return ResultUtil.error("验证码错误或已过期");
+            }
 
-
-
+        } catch (Exception e) {
+            log.error("注册失败");
+            return ResultUtil.error("注册失败");
+        }
+    }
 
 }
