@@ -89,6 +89,16 @@ public class DataController {
 
     }
 
+    @GetMapping("searchCity")
+    public ResultUtil searchCity(@RequestParam String wrapper){
+        try {
+            List<City> cities = cityMapper.searchCityLike(wrapper);
+            return ResultUtil.ok().put(cities);
+        } catch (Exception e) {
+            return ResultUtil.error("模糊查询失败");
+        }
+    }
+
     @GetMapping("simpleCityInfo")
     public ResultUtil simpleCityInfo(){
         try {
@@ -100,7 +110,7 @@ public class DataController {
     }
 
     @GetMapping("simplePlaceInfo")
-    public ResultUtil simplePlaceInfo(Integer pId){
+    public ResultUtil simplePlaceInfo(@RequestParam Integer pId){
         try {
             List<Place> cities = placeMapper.selectList(new QueryWrapper<Place>().eq("parent_id",pId));
             return ResultUtil.ok().put(cities);
@@ -109,6 +119,7 @@ public class DataController {
         }
     }
 
+
     @GetMapping("queryHtmlInfo")
     public ResultUtil queryHtmlInfo(){
         try {
@@ -116,6 +127,7 @@ public class DataController {
 
             return ResultUtil.ok().put(info);
         } catch (Exception e) {
+            e.printStackTrace();
             return ResultUtil.error("查询失败");
         }
     }

@@ -295,37 +295,33 @@
             '      </el-carousel><br>\n'+
             '      <div style="text-align: right">\n'+
             '      <el-input style="width: 200px;margin: 0 20px"' +
-            '                placeholder="城市名称"></el-input>\n' +
-            '      <el-button type="primary">查询</el-button>\n' +
+            '                placeholder="城市名称" v-model="wrapper"></el-input>\n' +
+            '      <el-button type="primary" @click="queryCityListLike">查询</el-button>\n' +
             '      </div><br>\n' +
             '      <component is="el-menu"' +
             '                 background-color="#606266"' +
             '                 text-color="#ffffff"' +
             '                 active-text-color="#ffd04b"' +
-            '                 v-for="cval in cityList"' +
+            '                 unique-opened' +
             '                 >\n' +
-            '          <el-sub-menu index="[cval.cityId]">\n' +
+            '          <el-sub-menu v-for="cval in cityList" @click="queryPlaceList(cval.cityId)" :index="[cval.cityId]">\n' +
             '              <template #title>' +
             '                  <span>————{{cval.cityName}}————</span>' +
             '                  <div style="width: 100%;text-align: right">\n' +
-            '                  <span style="text-align: right">&nbsp;&nbsp;{{cval.cityInfo}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>' +
+            '                  <span style="text-align: right">&nbsp;&nbsp;{{cval.cityInfo}}&nbsp;&nbsp;&nbsp;&nbsp;</span>' +
             '                  </div>' +
             '              </template>\n' +
-            '                  <el-menu-item v-for="(num,index) in 0" index="[cval.cityId]-[num]" ></el-menu-item>\n' +
-            '                  <el-menu-item><div style="width: 100%">余杭区<el-button @click="expectTo(1)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
-            '                  <el-menu-item><div style="width: 100%">滨江区<el-button @click="expectTo(num)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
-            '                  <el-menu-item><div style="width: 100%">萧山区<el-button @click="expectTo(num)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
-            '                  <el-menu-item><div style="width: 100%">临平区<el-button @click="expectTo(num)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
-            '                  <el-menu-item><div style="width: 100%">拱墅区<el-button @click="expectTo(num)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
-            '                  <el-menu-item><div style="width: 100%">富阳区<el-button @click="expectTo(num)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
-            '                  <el-menu-item><div style="width: 100%">河桥区<el-button @click="expectTo(num)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
-            '                  <el-menu-item><div style="width: 100%">钱塘区<el-button @click="expectTo(num)" style="float: right">点击选择</el-button><div></el-menu-item>\n' +
+            '                  <el-menu-item v-for="(place,num) in placeList" index="[cval.cityId]-[num]" >' +
+            '                  <div style="width: 100%">{{place.placeAddress}}&nbsp;&nbsp;{{place.placeName}}<el-button @click="expectTo(place.placeMark)" style="float: right">点击选择</el-button><div>' +
+            '                  </el-menu-item>\n' +
             '          </el-sub-menu>\n' +
-            '      </component>' + '',
+            '      </component>' +''
+        ,
         data(){
             return{
                 cityList: [],
-                placeList: []
+                placeList: [],
+                wrapper: '',
             }
         },
         methods:{
@@ -333,10 +329,24 @@
                 axios({
                     method: 'get',
                     url: 'data/simpleCityInfo',
-                    headers: {'token': localStorage.getItem('token') }
                 }).then(res => {
                     if(res.data.code){
                         this.cityList=res.data.data
+                    }else {
+                        this.$message.error(res.data.msg)
+                    }
+                })
+            },
+            queryPlaceList(pId) {
+                axios({
+                    method: 'get',
+                    url: 'data/simplePlaceInfo',
+                    params:{
+                        pId: pId
+                    }
+                }).then(res => {
+                    if(res.data.code=== '0'){
+                        this.placeList=res.data.data
                     }else {
                         this.$message.error(res.data.msg)
                     }
@@ -357,7 +367,23 @@
                         this.$message.error(res.data.msg)
                     }
                 })
-            }
+            },
+            queryCityListLike() {
+                axios({
+                    method: 'get',
+                    url: 'data/searchCity',
+                    params: {
+                        wrapper: this.wrapper
+                    }
+                }).then(res => {
+                    if(res.data.code === '0'){
+                        this.cityList=res.data.data
+                    }else {
+                        this.$message.error(res.data.msg)
+                    }
+                })
+            },
+
         },
         created(){
             this.queryCityList()

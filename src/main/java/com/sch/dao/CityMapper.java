@@ -20,4 +20,6 @@ import java.util.List;
 public interface CityMapper extends BaseMapper<City> {
     @Select("select * from city")
     List<City> queryCount();
+
+    List<City> searchCityLike(String wrapper);
 }

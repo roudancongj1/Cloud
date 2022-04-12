@@ -78,7 +78,7 @@ public class ProtectedDataController {
         try {
             JSONObject user = ThreadLocalUtil.getThreadLocalUser();
             int expectId =(int) user.get("expectId");
-            Place place = placeMapper.selectOne(new QueryWrapper<Place>().eq("place_id", expectId));
+            Place place = placeMapper.selectOne(new QueryWrapper<Place>().eq("place_mark", expectId));
             return ResultUtil.ok().put(place);
         } catch (Exception e) {
             return ResultUtil.error("查询地方城市信息失败");

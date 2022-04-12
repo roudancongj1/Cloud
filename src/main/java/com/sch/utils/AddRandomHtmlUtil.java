@@ -21,7 +21,7 @@ public class AddRandomHtmlUtil {
         try {
             HtmlInfo info = new HtmlInfo();
             info.setAsymptomatic(getRandom()+12312);
-            info.setCumulativeCure(getRandom()+21412);
+            info.setCumulativeCure(getRandom()+314122422);
             info.setOverseasInput(getRandom());
             info.setExistingDiagnosis(getRandom());
             info.setCumulativeDeath(getRandom()+1231244);

@@ -84,7 +84,8 @@
                     <span class="label">wifi</span>
                 </el-col>
                 <el-col :span="18">
-                    <span class="label">{{place.placeWifi}}</span>
+                    <span class="label" v-if="place.placeWifi === 1">有</span>
+                    <span class="label" v-else>无</span>
                 </el-col>
             </el-row>
             <el-row class="row" gutter="20" justify="left">
@@ -153,7 +154,7 @@
                 imgMes: '支付宝支付',
                 place: {},
                 day: 1,
-                money: 140,
+                money: '',
             }
         },
         methods: {
@@ -178,6 +179,7 @@
                 }).then(res => {
                     if(res.data.code === '0'){
                         this.place= res.data.data
+                        this.money= res.data.data.placeMoney
                     }else {
                         this.$message.error(res.data.msg)
                     }
