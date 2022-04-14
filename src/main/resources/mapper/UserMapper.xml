@@ -7,4 +7,11 @@
     <update id="resetFdNum" parameterType="int">
         update user set feedback_num = #{num}
     </update>
+    <update id="updateForId" parameterType="User" >
+        update user set user_number = #{user.userNumber},
+                        user_phone = #{user.userPhone},
+                        user_sex = #{user.userSex},
+                        user_name = #{user.userName}
+        where user_id = #{Id}
+    </update>
 </mapper>

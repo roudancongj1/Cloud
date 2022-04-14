@@ -1,5 +1,6 @@
 package com.sch.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.sch.pojo.Static;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface StaticMapper {
+public interface StaticMapper extends BaseMapper<Static> {
     @Select("select * from static")
     List<Static> queryAll();
 

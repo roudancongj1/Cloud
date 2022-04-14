@@ -110,9 +110,9 @@ public class DataController {
     }
 
     @GetMapping("simplePlaceInfo")
-    public ResultUtil simplePlaceInfo(@RequestParam Integer pId){
+    public ResultUtil simplePlaceInfo(@RequestParam Integer mark){
         try {
-            List<Place> cities = placeMapper.selectList(new QueryWrapper<Place>().eq("parent_id",pId));
+            List<Place> cities = placeMapper.selectList(new QueryWrapper<Place>().eq("parent_mark",mark));
             return ResultUtil.ok().put(cities);
         } catch (Exception e) {
             return ResultUtil.error("查询子城市信息失败");

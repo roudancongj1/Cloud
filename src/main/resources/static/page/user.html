@@ -51,7 +51,7 @@
         <el-container>
         <el-header class="title">
             <el-button @click="headDialog=true">上传头像</el-button>
-            <el-button>修改信息</el-button>
+            <el-button @click="updateInfoDialog=true">修改信息</el-button>
             <el-button @click="passdialog=true">修改密码</el-button>
             <el-button @click="toaccount">购物车</el-button>
         </el-header>
@@ -64,7 +64,8 @@
                 </el-row>
                 <el-row class="row">
                     <el-col :span="8">性别:</el-col>
-                    <el-col :span="14">{{user.userSex}}</el-col>
+                    <el-col :span="14" v-if="user.userSex === 1">男</el-col>
+                    <el-col :span="14" v-else>女</el-col>
                 </el-row>
                 <el-row class="row">
                     <el-col :span="8">账号:</el-col>
@@ -116,10 +117,43 @@
     <el-dialog v-model="headDialog">
         <el-input type="file"></el-input>
         <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="headDialog = false">取消</el-button>
-        <el-button type="primary">提交</el-button>
-      </span>
+            <span class="dialog-footer">
+              <el-button @click="headDialog = false">取消</el-button>
+              <el-button type="primary">提交</el-button>
+            </span>
+        </template>
+    </el-dialog>
+
+    <el-dialog v-model="updateInfoDialog">
+        <el-container>
+            <el-form label-position="right"
+                     label-width="100px"
+                     :model="user"
+                     :rules="userInfoRule"
+                     ref="user"
+                     status-icon>
+                <el-form-item label="用户名:" prop="userName">
+                    <el-input class="input" v-model="user.userName"></el-input>
+                </el-form-item>
+                <el-form-item label="性别:"  prop="userSex">
+                    <el-radio-group v-model="user.userSex">
+                        <el-radio :label="1">男</el-radio>
+                        <el-radio :label="0">女</el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="账号:" prop="userNumber">
+                    <el-input class="input" v-model="user.userNumber"></el-input>
+                </el-form-item>
+                <el-form-item label="手机号码:" prop="userPhone">
+                    <el-input class="input" v-model="user.userPhone"></el-input>
+                </el-form-item>
+            </el-form>
+        </el-container>
+        <template #footer>
+            <span class="dialog-footer">
+              <el-button @click="updateInfoDialog = false">取消</el-button>
+              <el-button @click="updateUserInfo('user')" type="primary">提交</el-button>
+            </span>
         </template>
     </el-dialog>
 </div>
@@ -163,8 +197,22 @@
                         { required: true, message: '请再次输入新密码', trigger: 'blur' },
                         { validator: repasswordValidator,trigger: 'blur' },
                     ],
-                }
-
+                },
+                updateInfoDialog: false,
+                userInfoRule: {
+                    userName: [
+                        { required: true, message: '请输入昵称', trigger: 'blur' },
+                    ],
+                    userSex: [
+                        { required: true, message: '请输入性别', trigger: 'blur' },
+                    ],
+                    userNumber: [
+                        { required: true, message: '请输入账号', trigger: 'blur' },
+                    ],
+                    userPhone: [
+                        { required: true, message: '请输入手机号码', trigger: 'blur' },
+                    ],
+                },
             }
         },
         methods: {
@@ -173,7 +221,7 @@
                     res => {
                         if(res.data.code == 0){
                             this.user.userName = res.data.userName
-                            this.user.userSex = res.data.userSex === 1?'男':'女'
+                            this.user.userSex = res.data.userSex
                             this.user.userNumber = res.data.userNumber
                             this.user.userPhone = res.data.userPhone
                             this.user.userRole = res.data.userRole ==='1'?'管理员':'游客'
@@ -219,6 +267,28 @@
                         this.$message.error("登陆状态已过期或未登录")
                     window.setTimeout(function () {
                         window.location.href = window.location.protocol + '//' + window.location.host + "/"}, 2 * 1000)
+                    }
+                })
+            },
+            updateUserInfo(user) {
+                this.$refs[user].validate(valid => {
+                    if (valid) {
+                        axios({
+                            url: 'updateSimpleUserInfo',
+                            method: 'post',
+                            data: this.user,
+                            headers: {'token': localStorage.getItem('token') }
+                        }).then(
+                            res => {
+                                if (res.data.code === '0') {
+                                    this.$message.success(res.data.msg)
+                                    window.setTimeout(function () {
+                                        window.location.href = window.location.protocol + '//' + window.location.host + "/"}, 2 * 1000)
+                                } else {
+                                    this.$message.error(res.data.msg)
+                                }
+                            })
+                        this.passdialog = false
                     }
                 })
             },

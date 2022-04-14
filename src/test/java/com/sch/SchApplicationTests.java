@@ -1,4 +1,3 @@
-/*
 
 package com.sch;
 
@@ -23,7 +22,7 @@ class SchApplicationTests {
                     builder.parent("sacn"); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("place") // 设置需要生成的表名
+                    builder.addInclude("orders") // 设置需要生成的表名
                             .addTablePrefix("t_", "c_"); // 设置过滤表前缀
                 })
                 .execute();
@@ -31,4 +30,4 @@ class SchApplicationTests {
 
 }
 
-*/
+

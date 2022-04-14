@@ -21,7 +21,7 @@ public class Place implements Serializable {
     @TableId(value = "place_id", type = IdType.AUTO)
     private Integer placeId;
 
-    private Integer parentId;
+    private Integer parentMark;
 
     private String placeName;
 
@@ -54,12 +54,12 @@ public class Place implements Serializable {
         this.placeId = placeId;
     }
 
-    public Integer getParentId() {
-        return parentId;
+    public Integer getParentMark() {
+        return parentMark;
     }
 
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
+    public void setParentMark(Integer parentMark) {
+        this.parentMark = parentMark;
     }
 
     public String getPlaceName() {
@@ -154,7 +154,7 @@ public class Place implements Serializable {
     public String toString() {
         return "Place{" +
                 "placeId=" + placeId +
-                ", parentId=" + parentId +
+                ", parentId=" + parentMark +
                 ", placeName='" + placeName + '\'' +
                 ", placeMark=" + placeMark +
                 ", placeAddress='" + placeAddress + '\'' +

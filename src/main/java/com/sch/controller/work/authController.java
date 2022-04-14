@@ -3,20 +3,20 @@ package com.sch.controller.work;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.sch.dao.CityMapper;
-import com.sch.dao.UserMapper;
-import com.sch.pojo.City;
-import com.sch.pojo.User;
+import com.sch.dao.*;
+import com.sch.pojo.*;
 import com.sch.service.MailService;
+import com.sch.utils.RedisUtil;
 import com.sch.utils.ResultUtil;
 import com.sch.utils.ThreadLocalUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Auth: Gao
@@ -25,7 +25,10 @@ import java.util.Map;
 
 @RestController
 public class authController {
+
     private static final Logger log = LoggerFactory.getLogger(authController.class);
+
+
 
     @Autowired
     private UserMapper userMapper;
@@ -33,6 +36,18 @@ public class authController {
     private MailService mailService;
     @Autowired
     private CityMapper cityMapper;
+    @Autowired
+    private RedisUtil redisUtil;
+    @Autowired
+    private FeedbackMapper feedbackMapper;
+    @Autowired
+    private PlaceMapper placeMapper;
+    @Autowired
+    private StaticMapper staticMapper;
+    @Autowired
+    private FlowMapper flowMapper;
+    @Autowired
+    private OrdersMapper ordersMapper;
 
     @RequestMapping("pass")
     public ResultUtil updatepass(@RequestBody Map<String,Object> map){
@@ -48,6 +63,27 @@ public class authController {
             }
         } catch (Exception e) {
             return ResultUtil.error("修改异常");
+        }
+    }
+
+    @RequestMapping("updateSimpleUserInfo")
+    public ResultUtil updateSimpleUserInfo(@RequestBody Map map){
+        try {
+            JSONObject localUser = ThreadLocalUtil.getThreadLocalUser();
+            User user = userMapper.selectOne(new QueryWrapper<User>().eq("user_number", localUser.get("userNumber")));
+            user.setUserName(map.get("userName").toString());
+            user.setUserSex((int)map.get("userSex"));
+            user.setUserPhone(map.get("userPhone").toString());
+            user.setUserNumber(map.get("userNumber").toString());
+
+            userMapper.updateForId((int)localUser.get("userId"),user);
+
+            ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            String token = requestAttributes.getRequest().getHeader("token");
+            redisUtil.delete(token);
+            return ResultUtil.ok("更新用户信息成功请重新登录");
+        } catch (Exception e) {
+            return ResultUtil.error("更新用户信息失败");
         }
     }
 
@@ -79,22 +115,6 @@ public class authController {
         }
     }
 
-    @PostMapping("addCity")
-    public ResultUtil addCity(){
-        try {
-            City city = new City();
-            city.setCityDays(22);
-            city.setCityLv(2);
-            city.setCityInfo("是一个好地方");
-            city.setCityName("大连");
-            city.setCityRisk(1);
-            city.setChildMark(100);
-            cityMapper.insert(city);
-            return ResultUtil.ok("添加成功");
-        } catch (Exception e) {
-            return ResultUtil.error("添加失败");
-        }
-    }
 
     @PostMapping ("updateExpect")
     public ResultUtil updateExpect(@RequestParam Integer expectId){
@@ -123,4 +143,23 @@ public class authController {
         /*发送短信导区域负责人*/
         return null;
     }
+
+    @PostMapping("addCity")
+    public ResultUtil addCity(){
+        try {
+            City city = new City();
+            city.setCityDays(22);
+            city.setCityLv(2);
+            city.setCityInfo("是一个好地方");
+            city.setCityName("大连");
+            city.setCityRisk(1);
+            city.setChildMark(100);
+            cityMapper.insert(city);
+            return ResultUtil.ok("添加成功");
+        } catch (Exception e) {
+            return ResultUtil.error("添加失败");
+        }
+    }
+
+
 }
