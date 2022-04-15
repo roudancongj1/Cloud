@@ -144,22 +144,4 @@ public class authController {
         return null;
     }
 
-    @PostMapping("addCity")
-    public ResultUtil addCity(){
-        try {
-            City city = new City();
-            city.setCityDays(22);
-            city.setCityLv(2);
-            city.setCityInfo("是一个好地方");
-            city.setCityName("大连");
-            city.setCityRisk(1);
-            city.setChildMark(100);
-            cityMapper.insert(city);
-            return ResultUtil.ok("添加成功");
-        } catch (Exception e) {
-            return ResultUtil.error("添加失败");
-        }
-    }
-
-
 }

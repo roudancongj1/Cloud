@@ -1,6 +1,7 @@
 package com.sch.controller.work;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -113,6 +114,9 @@ public class ProtectedDataController {
                     //带有[]
                     //list = Collections.singletonList(users);
                     //list = Arrays.asList(users);
+                    //直接显示
+                    //Object o ;
+                    //o = map.get("entity");
                     list.addAll(users);
                     break;
                 case PLACE:
@@ -136,7 +140,7 @@ public class ProtectedDataController {
                     list.addAll(orders);
                     break;
                 default:
-                    return ResultUtil.error("表名称错误");
+                    return ResultUtil.error("查询表名称错误");
             }
 
             return ResultUtil.ok().put(list);
@@ -179,7 +183,7 @@ public class ProtectedDataController {
                     list.addAll(orders);
                     break;
                 default:
-                    return ResultUtil.error("查询条件错误");
+                    return ResultUtil.error("查询表格名称错误");
 
             }
 
@@ -189,4 +193,151 @@ public class ProtectedDataController {
             return ResultUtil.error("模糊查询失败");
         }
     }
+
+    @PostMapping("addOneEntity")
+    public ResultUtil addCity(@RequestBody Map<String,Object> map){
+        try {
+
+            switch (map.get("from").toString()){
+                case CITY:
+                    City city = JSON.parseObject(JSON.toJSONString(map.get("entity")),City.class);
+                    cityMapper.insert(city);
+                    break;
+                case FEEDBACK:
+                    Feedback feedback = JSON.parseObject(JSON.toJSONString(map.get("entity")),Feedback.class);
+                    feedbackMapper.insert(feedback);
+                    break;
+                case PLACE:
+                    Place place = JSON.parseObject(JSON.toJSONString(map.get("entity")),Place.class);
+                    placeMapper.insert(place);
+                    break;
+                case USER:
+                    User user = JSON.parseObject(JSON.toJSONString(map.get("entity")),User.class);
+                    userMapper.insert(user);
+                    break;
+                case STATIC:
+                    Static staticEntity = JSON.parseObject(JSON.toJSONString(map.get("entity")),Static.class);
+                    staticMapper.insert(staticEntity);
+                    break;
+                case FLOW:
+                    Flow flow = JSON.parseObject(JSON.toJSONString(map.get("entity")),Flow.class);
+                    flowMapper.insert(flow);
+                    break;
+                case ORDERS:
+                    Orders orders = JSON.parseObject(JSON.toJSONString(map.get("entity")),Orders.class);
+                    ordersMapper.insert(orders);
+                    break;
+                default:
+                    return ResultUtil.error("添加失败表格名称错误");
+            }
+
+            return ResultUtil.ok();
+        } catch (Exception e) {
+            return ResultUtil.error("添加失败");
+        }
+    }
+
+    @PostMapping("updateOneEntity")
+    public ResultUtil updateOneEntity(@RequestBody Map<String,Object> map){
+        try {
+
+            switch (map.get("from").toString()){
+                case CITY:
+                    City city = JSON.parseObject(JSON.toJSONString(map.get("entity")),City.class);
+                    cityMapper.updateById(city);
+                    break;
+                case FEEDBACK:
+                    Feedback feedback = JSON.parseObject(JSON.toJSONString(map.get("entity")),Feedback.class);
+                    feedbackMapper.updateById(feedback);
+                    break;
+                case PLACE:
+                    Place place = JSON.parseObject(JSON.toJSONString(map.get("entity")),Place.class);
+                    placeMapper.updateById(place);
+                    break;
+                case USER:
+                    User user = JSON.parseObject(JSON.toJSONString(map.get("entity")),User.class);
+                    userMapper.updateById(user);
+                    break;
+                case STATIC:
+                    Static staticEntity = JSON.parseObject(JSON.toJSONString(map.get("entity")),Static.class);
+                    staticMapper.updateById(staticEntity);
+                    break;
+                case FLOW:
+                    Flow flow = JSON.parseObject(JSON.toJSONString(map.get("entity")),Flow.class);
+                    flowMapper.updateById(flow);
+                    break;
+                case ORDERS:
+                    Orders orders = JSON.parseObject(JSON.toJSONString(map.get("entity")),Orders.class);
+                    ordersMapper.updateById(orders);
+                    break;
+                default:
+                    return ResultUtil.error("更新失败表格名称错误");
+            }
+
+            return ResultUtil.ok();
+        } catch (Exception e) {
+            return ResultUtil.error("更新失败");
+        }
+    }
+
+    @PostMapping("deleteOneEntity")
+    public ResultUtil deleteOneEntity(@RequestBody Map<String,Object> map){
+        try {
+
+            switch (map.get("from").toString()){
+                case CITY:
+                    List<City> cities = JSONArray.parseArray(JSON.toJSONString(map.get("entity")), City.class);
+                    cities.forEach(city -> {
+                        System.out.println(city);
+                        int i = cityMapper.deleteById(city);
+                        System.out.println("您删除了"+i+"条数据");
+                    });
+                    break;
+                case FEEDBACK:
+                    List<Feedback> feedbacks = JSON.parseArray(JSON.toJSONString(map.get("entity")), Feedback.class);
+                    feedbacks.forEach(feedback -> {
+                        feedbackMapper.deleteById(feedback);
+                    });
+                    break;
+                case PLACE:
+                    List<Place> places= JSON.parseArray(JSON.toJSONString(map.get("entity")), Place.class);
+                    places.forEach(place -> {
+                        placeMapper.deleteById(place);
+                    });
+                    break;
+                case USER:
+                    List<User> users = JSON.parseArray(JSON.toJSONString(map.get("entity")), User.class);
+                    users.forEach(user -> {
+                        userMapper.deleteById(user);
+                    });
+                    break;
+                case STATIC:
+                    List<Static> statics = JSON.parseArray(JSON.toJSONString(map.get("entity")), Static.class);
+                    statics.forEach(staticEntity -> {
+                        staticMapper.deleteById(staticEntity);
+                    });
+                    break;
+                case FLOW:
+                    List<Flow> flows = JSON.parseArray(JSON.toJSONString(map.get("entity")), Flow.class);
+                    for (Flow flow: flows) {
+                        flowMapper.deleteById(flow);
+                    }
+                    break;
+                case ORDERS:
+                    List<Orders> ordersList = JSON.parseArray(JSON.toJSONString(map.get("entity")), Orders.class);
+                    for (int i = 0; i < ordersList.size(); i++) {
+                        ordersMapper.deleteById(ordersList.get(i));
+                    }
+                    break;
+                default:
+                    return ResultUtil.error("删除失败表格名称错误");
+            }
+
+            return ResultUtil.ok();
+        } catch (Exception e) {
+            return ResultUtil.error("删除失败");
+        }
+    }
+
+
 }

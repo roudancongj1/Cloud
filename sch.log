@@ -1,178 +1,123 @@
-2022-04-14 00:14:24.658  INFO 4188 --- [http-nio-8888-exec-1] c.s.controller.noaspect.LoginController  : 用户:admin已登录
-2022-04-14 00:16:55.807  WARN 4188 --- [http-nio-8888-exec-3] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 135615
-2022-04-14 00:19:10.660  WARN 4188 --- [http-nio-8888-exec-6] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 60338
-2022-04-14 00:23:56.492  WARN 4188 --- [http-nio-8888-exec-8] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 91329
-2022-04-14 00:25:32.975  WARN 4188 --- [http-nio-8888-exec-2] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 96449
-2022-04-14 00:25:33.007  INFO 4188 --- [http-nio-8888-exec-2] c.s.controller.noaspect.LoginController  : 用户:admin已登录
-2022-04-14 00:27:16.096  WARN 4188 --- [http-nio-8888-exec-2] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 65106
-2022-04-14 00:30:54.496  INFO 4188 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
-2022-04-14 00:30:54.506  INFO 4188 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
-2022-04-14 00:30:58.746  INFO 11740 --- [main] com.sch.SchApplication                   : Starting SchApplication using Java 11.0.13 on ntbook with PID 11740 (D:\_____idea\_____project\_____git\target\classes started by Gao in D:\_____idea\_____project\_____git)
-2022-04-14 00:30:58.746  INFO 11740 --- [main] com.sch.SchApplication                   : No active profile set, falling back to default profiles: default
-2022-04-14 00:30:59.237  INFO 11740 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2022-04-14 00:30:59.237  INFO 11740 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2022-04-14 00:30:59.258  INFO 11740 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 0 Redis repository interfaces.
-2022-04-14 00:30:59.716  INFO 11740 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2022-04-14 00:30:59.727  INFO 11740 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-04-14 00:30:59.727  INFO 11740 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
-2022-04-14 00:30:59.817  INFO 11740 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-04-14 00:30:59.817  INFO 11740 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1041 ms
-2022-04-14 00:31:00.156  INFO 11740 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
-2022-04-14 00:31:00.226  INFO 11740 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
-2022-04-14 00:31:02.147  INFO 11740 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2022-04-14 00:31:02.179  INFO 11740 --- [main] com.sch.SchApplication                   : Started SchApplication in 3.742 seconds (JVM running for 4.569)
-2022-04-14 00:31:06.769  INFO 11740 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-04-14 00:31:06.770  INFO 11740 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-04-14 00:31:06.771  INFO 11740 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2022-04-14 00:38:06.515  WARN 11740 --- [http-nio-8888-exec-5] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 417596
-2022-04-14 00:38:06.572  INFO 11740 --- [http-nio-8888-exec-5] c.s.controller.noaspect.LoginController  : 用户:admin已登录
-2022-04-14 00:39:48.196  WARN 11740 --- [http-nio-8888-exec-10] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 65686
-2022-04-14 00:44:22.211  WARN 11740 --- [http-nio-8888-exec-8] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 273981
-2022-04-14 00:46:38.638  WARN 11740 --- [http-nio-8888-exec-7] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 67127
-2022-04-14 00:49:05.797  WARN 11740 --- [http-nio-8888-exec-5] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 147131
-2022-04-14 00:49:05.830  INFO 11740 --- [http-nio-8888-exec-5] c.s.controller.noaspect.LoginController  : 用户:admin已登录
-2022-04-14 00:51:07.236  WARN 11740 --- [http-nio-8888-exec-3] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 76972
-2022-04-14 00:53:07.270  WARN 11740 --- [http-nio-8888-exec-7] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 120003
-2022-04-14 00:54:50.603  WARN 11740 --- [http-nio-8888-exec-7] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 63730
-2022-04-14 00:56:28.789  WARN 11740 --- [http-nio-8888-exec-6] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 98150
-2022-04-14 01:07:21.097  INFO 11740 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
-2022-04-14 01:07:21.107  INFO 11740 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
-2022-04-14 09:56:59.193  INFO 8420 --- [main] com.sch.SchApplication                   : Starting SchApplication using Java 11.0.13 on ntbook with PID 8420 (D:\_____idea\_____project\_____git\target\classes started by Gao in D:\_____idea\_____project\_____git)
-2022-04-14 09:56:59.193  INFO 8420 --- [main] com.sch.SchApplication                   : No active profile set, falling back to default profiles: default
-2022-04-14 09:56:59.820  INFO 8420 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2022-04-14 09:56:59.820  INFO 8420 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2022-04-14 09:56:59.851  INFO 8420 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
-2022-04-14 09:57:00.463  INFO 8420 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2022-04-14 09:57:00.463  INFO 8420 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-04-14 09:57:00.463  INFO 8420 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
-2022-04-14 09:57:00.589  INFO 8420 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-04-14 09:57:00.589  INFO 8420 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1365 ms
-2022-04-14 09:57:01.002  INFO 8420 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
-2022-04-14 09:57:01.127  INFO 8420 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
-2022-04-14 09:57:03.424  INFO 8420 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2022-04-14 09:57:03.439  INFO 8420 --- [main] com.sch.SchApplication                   : Started SchApplication in 4.613 seconds (JVM running for 6.626)
-2022-04-14 09:57:12.074  INFO 8420 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-04-14 09:57:12.075  INFO 8420 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-04-14 09:57:12.076  INFO 8420 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2022-04-14 09:58:02.710  INFO 8420 --- [http-nio-8888-exec-8] c.s.controller.noaspect.LoginController  : 用户:admin已登录
-2022-04-14 10:14:35.691  WARN 8420 --- [http-nio-8888-exec-10] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 917934
-2022-04-14 10:14:35.722  INFO 8420 --- [http-nio-8888-exec-10] c.s.controller.noaspect.LoginController  : 用户:admin已登录
-2022-04-14 10:29:00.866  WARN 8420 --- [http-nio-8888-exec-7] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 861378
-2022-04-14 10:29:00.901  INFO 8420 --- [http-nio-8888-exec-7] c.s.controller.noaspect.LoginController  : 用户:admin已登录
-2022-04-14 10:30:50.100  WARN 8420 --- [http-nio-8888-exec-2] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 103947
-2022-04-14 10:34:52.126  WARN 8420 --- [http-nio-8888-exec-4] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 234195
-2022-04-14 10:38:40.947  WARN 8420 --- [http-nio-8888-exec-9] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 178842
-2022-04-14 12:46:21.309  INFO 8420 --- [http-nio-8888-exec-8] c.s.controller.noaspect.LoginController  : 用户:admin已登录
-2022-04-14 12:49:59.509  WARN 8420 --- [http-nio-8888-exec-1] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 207986
-2022-04-14 12:51:41.221  WARN 8420 --- [http-nio-8888-exec-2] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 101672
-2022-04-14 12:53:47.418  WARN 8420 --- [http-nio-8888-exec-1] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 76537
-2022-04-14 12:58:30.261  WARN 8420 --- [http-nio-8888-exec-6] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 225026
-2022-04-14 12:58:32.359  INFO 8420 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
-2022-04-14 12:58:32.369  INFO 8420 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
-2022-04-14 12:58:36.277  INFO 8168 --- [main] com.sch.SchApplication                   : Starting SchApplication using Java 11.0.13 on ntbook with PID 8168 (D:\_____idea\_____project\_____git\target\classes started by Gao in D:\_____idea\_____project\_____git)
-2022-04-14 12:58:36.279  INFO 8168 --- [main] com.sch.SchApplication                   : No active profile set, falling back to default profiles: default
-2022-04-14 12:58:36.892  INFO 8168 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2022-04-14 12:58:36.892  INFO 8168 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2022-04-14 12:58:36.919  INFO 8168 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
-2022-04-14 12:58:37.509  INFO 8168 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2022-04-14 12:58:37.518  INFO 8168 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-04-14 12:58:37.518  INFO 8168 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
-2022-04-14 12:58:37.608  INFO 8168 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-04-14 12:58:37.608  INFO 8168 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1290 ms
-2022-04-14 12:58:37.918  INFO 8168 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
-2022-04-14 12:58:38.019  INFO 8168 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
-2022-04-14 12:58:40.017  INFO 8168 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2022-04-14 12:58:40.039  INFO 8168 --- [main] com.sch.SchApplication                   : Started SchApplication in 4.227 seconds (JVM running for 5.624)
-2022-04-14 12:58:40.148  INFO 8168 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-04-14 12:58:40.148  INFO 8168 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-04-14 12:58:40.148  INFO 8168 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2022-04-14 13:02:14.683  INFO 8168 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
-2022-04-14 13:02:14.683  INFO 8168 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
-2022-04-14 13:02:19.839  INFO 9864 --- [main] com.sch.SchApplication                   : Starting SchApplication using Java 11.0.13 on ntbook with PID 9864 (D:\_____idea\_____project\_____git\target\classes started by Gao in D:\_____idea\_____project\_____git)
-2022-04-14 13:02:19.841  INFO 9864 --- [main] com.sch.SchApplication                   : No active profile set, falling back to default profiles: default
-2022-04-14 13:02:20.400  INFO 9864 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2022-04-14 13:02:20.401  INFO 9864 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2022-04-14 13:02:20.424  INFO 9864 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
-2022-04-14 13:02:20.979  INFO 9864 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2022-04-14 13:02:20.990  INFO 9864 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-04-14 13:02:20.990  INFO 9864 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
-2022-04-14 13:02:21.101  INFO 9864 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-04-14 13:02:21.102  INFO 9864 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1216 ms
-2022-04-14 13:02:21.436  INFO 9864 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
-2022-04-14 13:02:21.538  INFO 9864 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
-2022-04-14 13:02:23.613  INFO 9864 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2022-04-14 13:02:23.633  INFO 9864 --- [main] com.sch.SchApplication                   : Started SchApplication in 4.156 seconds (JVM running for 5.172)
-2022-04-14 13:02:27.001  INFO 9864 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-04-14 13:02:27.001  INFO 9864 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-04-14 13:02:27.002  INFO 9864 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2022-04-14 13:05:09.014  INFO 9864 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
-2022-04-14 13:05:09.014  INFO 9864 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
-2022-04-14 13:05:13.762  INFO 2372 --- [main] com.sch.SchApplication                   : Starting SchApplication using Java 11.0.13 on ntbook with PID 2372 (D:\_____idea\_____project\_____git\target\classes started by Gao in D:\_____idea\_____project\_____git)
-2022-04-14 13:05:13.764  INFO 2372 --- [main] com.sch.SchApplication                   : No active profile set, falling back to default profiles: default
-2022-04-14 13:05:14.357  INFO 2372 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2022-04-14 13:05:14.359  INFO 2372 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2022-04-14 13:05:14.383  INFO 2372 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
-2022-04-14 13:05:14.977  INFO 2372 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2022-04-14 13:05:14.988  INFO 2372 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-04-14 13:05:14.989  INFO 2372 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
-2022-04-14 13:05:15.095  INFO 2372 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-04-14 13:05:15.096  INFO 2372 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1291 ms
-2022-04-14 13:05:15.432  INFO 2372 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
-2022-04-14 13:05:15.520  INFO 2372 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
-2022-04-14 13:05:17.774  INFO 2372 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2022-04-14 13:05:17.794  INFO 2372 --- [main] com.sch.SchApplication                   : Started SchApplication in 4.412 seconds (JVM running for 5.275)
-2022-04-14 13:05:18.705  INFO 2372 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-04-14 13:05:18.706  INFO 2372 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-04-14 13:05:18.707  INFO 2372 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2022-04-14 13:05:56.253  INFO 2372 --- [http-nio-8888-exec-3] c.s.controller.noaspect.LoginController  : 用户:admin已登录
-2022-04-14 13:11:00.902  WARN 2372 --- [http-nio-8888-exec-7] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 244131
-2022-04-14 15:14:58.388  INFO 2372 --- [http-nio-8888-exec-9] c.s.controller.noaspect.LoginController  : 用户:admin已登录
-2022-04-14 16:50:28.963  INFO 2372 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
-2022-04-14 16:50:28.963  INFO 2372 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
-2022-04-14 16:50:35.175  INFO 9528 --- [main] com.sch.SchApplication                   : Starting SchApplication using Java 11.0.13 on ntbook with PID 9528 (D:\_____idea\_____project\_____git\target\classes started by Gao in D:\_____idea\_____project\_____git)
-2022-04-14 16:50:35.175  INFO 9528 --- [main] com.sch.SchApplication                   : No active profile set, falling back to default profiles: default
-2022-04-14 16:50:35.708  INFO 9528 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2022-04-14 16:50:35.724  INFO 9528 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2022-04-14 16:50:35.755  INFO 9528 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
-2022-04-14 16:50:36.398  INFO 9528 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2022-04-14 16:50:36.398  INFO 9528 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-04-14 16:50:36.398  INFO 9528 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
-2022-04-14 16:50:36.665  INFO 9528 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-04-14 16:50:36.665  INFO 9528 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1459 ms
-2022-04-14 16:50:37.107  INFO 9528 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
-2022-04-14 16:50:37.252  INFO 9528 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
-2022-04-14 16:50:40.071  INFO 9528 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2022-04-14 16:50:40.103  INFO 9528 --- [main] com.sch.SchApplication                   : Started SchApplication in 5.423 seconds (JVM running for 6.624)
-2022-04-14 16:50:51.379  INFO 9528 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-04-14 16:50:51.380  INFO 9528 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-04-14 16:50:51.383  INFO 9528 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2022-04-14 16:51:02.817  INFO 9528 --- [http-nio-8888-exec-10] c.s.controller.noaspect.LoginController  : 用户:admin已登录
-2022-04-14 16:52:28.679  WARN 9528 --- [http-nio-8888-exec-10] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 85901
-2022-04-14 18:38:57.587  INFO 9528 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
-2022-04-14 18:38:57.587  INFO 9528 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
-2022-04-14 18:39:02.483  INFO 12316 --- [main] com.sch.SchApplication                   : Starting SchApplication using Java 11.0.13 on ntbook with PID 12316 (D:\_____idea\_____project\_____git\target\classes started by Gao in D:\_____idea\_____project\_____git)
-2022-04-14 18:39:02.491  INFO 12316 --- [main] com.sch.SchApplication                   : No active profile set, falling back to default profiles: default
-2022-04-14 18:39:03.048  INFO 12316 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2022-04-14 18:39:03.048  INFO 12316 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2022-04-14 18:39:03.079  INFO 12316 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
-2022-04-14 18:39:03.660  INFO 12316 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2022-04-14 18:39:03.675  INFO 12316 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-04-14 18:39:03.675  INFO 12316 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
-2022-04-14 18:39:03.769  INFO 12316 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-04-14 18:39:03.769  INFO 12316 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1238 ms
-2022-04-14 18:39:04.055  INFO 12316 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
-2022-04-14 18:39:04.107  INFO 12316 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
-2022-04-14 18:39:06.416  INFO 12316 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2022-04-14 18:39:06.458  INFO 12316 --- [main] com.sch.SchApplication                   : Started SchApplication in 4.45 seconds (JVM running for 5.438)
-2022-04-14 18:39:07.745  INFO 12316 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-04-14 18:39:07.745  INFO 12316 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-04-14 18:39:07.745  INFO 12316 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2022-04-14 18:39:41.466  INFO 12316 --- [http-nio-8888-exec-7] c.s.controller.noaspect.LoginController  : 用户:admin已登录
-2022-04-14 18:50:36.334  WARN 12316 --- [http-nio-8888-exec-1] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 460762
-2022-04-14 18:50:36.367  INFO 12316 --- [http-nio-8888-exec-1] c.s.controller.noaspect.LoginController  : 用户:admin已登录
-2022-04-14 18:55:12.419  WARN 12316 --- [http-nio-8888-exec-5] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 263219
-2022-04-14 18:58:55.823  WARN 12316 --- [http-nio-8888-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'wrapper' for method parameter type String is not present]
-2022-04-14 19:00:06.225  WARN 12316 --- [http-nio-8888-exec-9] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 76001
-2022-04-14 19:04:06.579  WARN 12316 --- [http-nio-8888-exec-3] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 227235
-2022-04-14 19:04:06.611  INFO 12316 --- [http-nio-8888-exec-3] c.s.controller.noaspect.LoginController  : 用户:admin已登录
-2022-04-14 19:08:16.710  WARN 12316 --- [http-nio-8888-exec-4] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 232825
+2022-04-16 00:00:00.037  WARN 1496 --- [scheduling-1] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 174467
+2022-04-16 00:00:00.068  INFO 1496 --- [scheduling-1] com.sch.scheduled.ScheduledTask          : 重置条数5
+2022-04-16 00:00:11.331  INFO 1496 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2022-04-16 00:00:11.347  INFO 1496 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2022-04-16 00:00:16.039  INFO 13044 --- [main] com.sch.SchApplication                   : Starting SchApplication using Java 11.0.13 on ntbook with PID 13044 (D:\_____idea\_____project\_____git\target\classes started by Gao in D:\_____idea\_____project\_____git)
+2022-04-16 00:00:16.039  INFO 13044 --- [main] com.sch.SchApplication                   : No active profile set, falling back to default profiles: default
+2022-04-16 00:00:16.525  INFO 13044 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-04-16 00:00:16.525  INFO 13044 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-04-16 00:00:16.541  INFO 13044 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2022-04-16 00:00:17.074  INFO 13044 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2022-04-16 00:00:17.090  INFO 13044 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-04-16 00:00:17.090  INFO 13044 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-04-16 00:00:17.231  INFO 13044 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-04-16 00:00:17.231  INFO 13044 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1145 ms
+2022-04-16 00:00:17.562  INFO 13044 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2022-04-16 00:00:17.640  INFO 13044 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2022-04-16 00:00:19.603  INFO 13044 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2022-04-16 00:00:19.619  INFO 13044 --- [main] com.sch.SchApplication                   : Started SchApplication in 3.909 seconds (JVM running for 4.814)
+2022-04-16 00:00:22.376  INFO 13044 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-04-16 00:00:22.377  INFO 13044 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-04-16 00:00:22.378  INFO 13044 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-04-16 00:07:40.618  WARN 13044 --- [http-nio-8888-exec-3] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 119291
+2022-04-16 00:07:59.361  INFO 13044 --- [http-nio-8888-exec-7] c.s.controller.noaspect.LoginController  : 用户:admin已登录
+2022-04-16 00:11:47.242  WARN 13044 --- [http-nio-8888-exec-7] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 136784
+2022-04-16 00:12:55.444  INFO 13044 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2022-04-16 00:12:55.444  INFO 13044 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2022-04-16 00:12:58.491  INFO 7176 --- [main] com.sch.SchApplication                   : Starting SchApplication using Java 11.0.13 on ntbook with PID 7176 (D:\_____idea\_____project\_____git\target\classes started by Gao in D:\_____idea\_____project\_____git)
+2022-04-16 00:12:58.491  INFO 7176 --- [main] com.sch.SchApplication                   : No active profile set, falling back to default profiles: default
+2022-04-16 00:12:58.945  INFO 7176 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-04-16 00:12:58.945  INFO 7176 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-04-16 00:12:58.961  INFO 7176 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2022-04-16 00:12:59.432  INFO 7176 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2022-04-16 00:12:59.432  INFO 7176 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-04-16 00:12:59.432  INFO 7176 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-04-16 00:12:59.510  INFO 7176 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-04-16 00:12:59.510  INFO 7176 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 988 ms
+2022-04-16 00:12:59.786  INFO 7176 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2022-04-16 00:12:59.852  INFO 7176 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2022-04-16 00:13:01.993  INFO 7176 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2022-04-16 00:13:02.009  INFO 7176 --- [main] com.sch.SchApplication                   : Started SchApplication in 3.846 seconds (JVM running for 5.096)
+2022-04-16 00:13:58.372  INFO 7176 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-04-16 00:13:58.372  INFO 7176 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-04-16 00:13:58.372  INFO 7176 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2022-04-16 00:15:51.121  INFO 7176 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2022-04-16 00:15:51.136  INFO 7176 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2022-04-16 00:15:56.188  INFO 6248 --- [main] com.sch.SchApplication                   : Starting SchApplication using Java 11.0.13 on ntbook with PID 6248 (D:\_____idea\_____project\_____git\target\classes started by Gao in D:\_____idea\_____project\_____git)
+2022-04-16 00:15:56.188  INFO 6248 --- [main] com.sch.SchApplication                   : No active profile set, falling back to default profiles: default
+2022-04-16 00:15:56.690  INFO 6248 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-04-16 00:15:56.690  INFO 6248 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-04-16 00:15:56.705  INFO 6248 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
+2022-04-16 00:15:57.176  INFO 6248 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2022-04-16 00:15:57.176  INFO 6248 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-04-16 00:15:57.176  INFO 6248 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-04-16 00:15:57.255  INFO 6248 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-04-16 00:15:57.255  INFO 6248 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1036 ms
+2022-04-16 00:15:57.537  INFO 6248 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2022-04-16 00:15:57.600  INFO 6248 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2022-04-16 00:15:59.759  INFO 6248 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2022-04-16 00:15:59.775  INFO 6248 --- [main] com.sch.SchApplication                   : Started SchApplication in 3.903 seconds (JVM running for 4.751)
+2022-04-16 00:16:01.246  INFO 6248 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-04-16 00:16:01.247  INFO 6248 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-04-16 00:16:01.248  INFO 6248 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-04-16 00:16:31.113  INFO 6248 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2022-04-16 00:16:31.128  INFO 6248 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2022-04-16 00:16:36.275  INFO 4464 --- [main] com.sch.SchApplication                   : Starting SchApplication using Java 11.0.13 on ntbook with PID 4464 (D:\_____idea\_____project\_____git\target\classes started by Gao in D:\_____idea\_____project\_____git)
+2022-04-16 00:16:36.275  INFO 4464 --- [main] com.sch.SchApplication                   : No active profile set, falling back to default profiles: default
+2022-04-16 00:16:36.824  INFO 4464 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-04-16 00:16:36.824  INFO 4464 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-04-16 00:16:36.840  INFO 4464 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2022-04-16 00:16:37.358  INFO 4464 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2022-04-16 00:16:37.358  INFO 4464 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-04-16 00:16:37.358  INFO 4464 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-04-16 00:16:37.451  INFO 4464 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-04-16 00:16:37.451  INFO 4464 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1144 ms
+2022-04-16 00:16:37.738  INFO 4464 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2022-04-16 00:16:37.806  INFO 4464 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2022-04-16 00:16:39.789  INFO 4464 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2022-04-16 00:16:39.812  INFO 4464 --- [main] com.sch.SchApplication                   : Started SchApplication in 3.838 seconds (JVM running for 4.724)
+2022-04-16 00:16:41.123  INFO 4464 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-04-16 00:16:41.124  INFO 4464 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-04-16 00:16:41.125  INFO 4464 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-04-16 00:19:18.380  INFO 4464 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2022-04-16 00:19:18.380  INFO 4464 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2022-04-16 00:19:23.242  INFO 7760 --- [main] com.sch.SchApplication                   : Starting SchApplication using Java 11.0.13 on ntbook with PID 7760 (D:\_____idea\_____project\_____git\target\classes started by Gao in D:\_____idea\_____project\_____git)
+2022-04-16 00:19:23.242  INFO 7760 --- [main] com.sch.SchApplication                   : No active profile set, falling back to default profiles: default
+2022-04-16 00:19:23.744  INFO 7760 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-04-16 00:19:23.744  INFO 7760 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-04-16 00:19:23.760  INFO 7760 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
+2022-04-16 00:19:24.261  INFO 7760 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2022-04-16 00:19:24.277  INFO 7760 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-04-16 00:19:24.277  INFO 7760 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-04-16 00:19:24.387  INFO 7760 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-04-16 00:19:24.387  INFO 7760 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1098 ms
+2022-04-16 00:19:24.748  INFO 7760 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2022-04-16 00:19:24.842  INFO 7760 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2022-04-16 00:19:27.636  INFO 7760 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2022-04-16 00:19:27.655  INFO 7760 --- [main] com.sch.SchApplication                   : Started SchApplication in 4.763 seconds (JVM running for 5.607)
+2022-04-16 00:19:27.908  INFO 7760 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-04-16 00:19:27.909  INFO 7760 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-04-16 00:19:27.910  INFO 7760 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-04-16 00:19:37.202  INFO 7760 --- [http-nio-8888-exec-9] c.s.controller.noaspect.LoginController  : 用户:admin已登录
+2022-04-16 00:24:06.206  WARN 7760 --- [http-nio-8888-exec-6] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC, version : 1.2.5, lastPacketReceivedIdleMillis : 264485
+2022-04-16 00:24:38.832  INFO 7760 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2022-04-16 00:24:38.847  INFO 7760 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2022-04-16 00:24:43.429  INFO 3644 --- [main] com.sch.SchApplication                   : Starting SchApplication using Java 11.0.13 on ntbook with PID 3644 (D:\_____idea\_____project\_____git\target\classes started by Gao in D:\_____idea\_____project\_____git)
+2022-04-16 00:24:43.429  INFO 3644 --- [main] com.sch.SchApplication                   : No active profile set, falling back to default profiles: default
+2022-04-16 00:24:43.916  INFO 3644 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-04-16 00:24:43.916  INFO 3644 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-04-16 00:24:43.931  INFO 3644 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
+2022-04-16 00:24:44.402  INFO 3644 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2022-04-16 00:24:44.417  INFO 3644 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-04-16 00:24:44.417  INFO 3644 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-04-16 00:24:44.496  INFO 3644 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-04-16 00:24:44.496  INFO 3644 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1036 ms
+2022-04-16 00:24:44.780  INFO 3644 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2022-04-16 00:24:44.833  INFO 3644 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2022-04-16 00:24:46.673  INFO 3644 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2022-04-16 00:24:46.692  INFO 3644 --- [main] com.sch.SchApplication                   : Started SchApplication in 3.572 seconds (JVM running for 4.353)
+2022-04-16 00:24:51.438  INFO 3644 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-04-16 00:24:51.454  INFO 3644 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-04-16 00:24:51.455  INFO 3644 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-04-16 00:27:46.658  INFO 3644 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2022-04-16 00:27:46.665  INFO 3644 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
