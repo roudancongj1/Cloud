@@ -1,7 +1,9 @@
 package com.sch.service;
 
+
+
 import javax.servlet.http.HttpServletResponse;
-import java.net.http.HttpResponse;
+
 import java.util.List;
 
 /**
@@ -14,6 +16,8 @@ public interface ExcelService {
 
     boolean uploadExcel();
 
-    boolean exportExcel(String exportName, String sheetName, List<String> cellHeader, HttpServletResponse response);
+    boolean exportExcelTemp(String exportName, String sheetName, List<String> cellHeader, HttpServletResponse response);
+
+    boolean exportFormExcel(String form,List<Object> objectList,HttpServletResponse response);
 
 }

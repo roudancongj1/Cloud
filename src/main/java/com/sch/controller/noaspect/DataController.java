@@ -1,6 +1,7 @@
 package com.sch.controller.noaspect;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sch.dao.CityMapper;
 import com.sch.dao.PlaceMapper;
@@ -13,17 +14,16 @@ import com.sch.service.MailService;
 import com.sch.serviceimpl.ExcelServiceImpl;
 import com.sch.utils.RedisUtil;
 import com.sch.utils.ResultUtil;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auth: Gao
@@ -34,6 +34,7 @@ import java.util.List;
 @RequestMapping("/data")
 public class DataController {
 
+    private static final Logger log = LoggerFactory.getLogger(DataController.class);
 
     @Autowired
     private StaticMapper staticMapper;
@@ -68,24 +69,7 @@ public class DataController {
         String cellsArr[]={"省份","地区","地址","风险等级"};
         List<String> cellsList = List.of(cellsArr);
 
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet(sheetName);
-        sheet.setDefaultColumnWidth(20);
-        XSSFRow row = sheet.createRow(0);
-        for (int i = 0; i < cellsList.size(); i++) {
-            row.createCell(i).setCellValue(cellsList.get(i));
-        }
-
-        response.setContentType("application/ms-excel");
-        response.addHeader("Content-Disposition", "attachment;filename=" + exportName + ".xlsx");
-        try {
-            workbook.write(response.getOutputStream());
-//
-        } catch (Exception e) {
-            e.printStackTrace();
-            //log.error("导出文件流异常");
-        }
-
+        excelService.exportExcelTemp(exportName,sheetName,cellsList,response);
 
     }
 
@@ -143,6 +127,85 @@ public class DataController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResultUtil.error("验证码发送异常");
+        }
+    }
+
+    @GetMapping("exportTemplate")
+    public void exportTemplate(@RequestParam String form,HttpServletResponse response){
+        try {
+            String exportName;
+            String sheetName;
+            List<String> cellHeader;
+            boolean state = false;
+
+            switch (form){
+                case "city":
+                    exportName = new String("城市模板".getBytes(),"ISO8859-1");
+                    sheetName = "第一页";
+                    cellHeader = List.of(new String[]{"城市名称", "风险等级","城市编号","简介","是否存在中高风险地","隔离天数"});
+                    state = excelService.exportExcelTemp(exportName, sheetName, cellHeader, response);
+                    break;
+                case "feedback":
+                    exportName = new String("反馈信息模板".getBytes(),"ISO8859-1");
+                    sheetName = "第一页";
+                    cellHeader = List.of(new String[]{"反馈用户", "反馈信息"});
+                    state = excelService.exportExcelTemp(exportName, sheetName, cellHeader, response);
+                    break;
+                case "place":
+                    exportName = new String("酒店模板".getBytes(),"ISO8859-1");
+                    sheetName = "第一页";
+                    cellHeader = List.of(new String[]{"城市标记", "酒店名称","酒店标记","酒店地址","酒店食物","酒店wifi","单日金额","酒店信息","区域负责人"});
+                    state = excelService.exportExcelTemp(exportName, sheetName, cellHeader, response);
+                    break;
+                case "user":
+                    exportName = new String("用户模板".getBytes(),"ISO8859-1");
+                    sheetName = "第一页";
+                    cellHeader = List.of(new String[]{"账号", "密码","用户名","性别","手机号码","行程地区","行程日期","用户角色"});
+                    state = excelService.exportExcelTemp(exportName, sheetName, cellHeader, response);
+                    break;
+                case "static":
+                    exportName = new String("静态数据模板".getBytes(),"ISO8859-1");
+                    sheetName = "第一页";
+                    cellHeader = List.of(new String[]{"静态数据识别码", "标签","值"});
+                    state = excelService.exportExcelTemp(exportName, sheetName, cellHeader, response);
+                    break;
+                case "flow":
+                    exportName = new String("订单流水模板".getBytes(),"ISO8859-1");
+                    sheetName = "第一页";
+                    cellHeader = List.of(new String[]{"流水号", "订单号","产品标记","支付金额","支付方式","购买数量"});
+                    state = excelService.exportExcelTemp(exportName, sheetName, cellHeader, response);
+                    break;
+                case "orders":
+                    exportName = new String("订单模板".getBytes(),"ISO8859-1");
+                    sheetName = "第一页";
+                    cellHeader = List.of(new String[]{"订单号","订单状态","订单金额","实际支付金额","产品标记","购买数量","支付时间"});
+                    state = excelService.exportExcelTemp(exportName, sheetName, cellHeader, response);
+                    break;
+                default:
+                    break;
+            }
+            if (state)
+                log.info("下载了"+form+"模板");
+            else
+                log.error("下载"+form+"模板错误");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PostMapping("exportFormInfo")
+    public void exportFromInfo(@RequestBody Map<String,Object> map, HttpServletResponse response){
+        try {
+            List<Object> objectList = (List<Object>) map.get("Info");
+
+            boolean state = excelService.exportFormExcel(map.get("form").toString(),objectList,response);
+
+            if (state)
+                log.info("导出"+map.get("form").toString()+"表格成功");
+            else
+                log.error("导出"+map.get("form").toString()+"表格错误");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

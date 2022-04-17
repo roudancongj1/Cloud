@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.sch.dao.*;
 import com.sch.pojo.*;
+import com.sch.service.ExcelService;
 import com.sch.service.MailService;
 import com.sch.utils.RedisUtil;
 import com.sch.utils.ResultUtil;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -48,6 +51,8 @@ public class authController {
     private FlowMapper flowMapper;
     @Autowired
     private OrdersMapper ordersMapper;
+    @Autowired
+    private ExcelService excelService;
 
     @RequestMapping("pass")
     public ResultUtil updatepass(@RequestBody Map<String,Object> map){
@@ -143,5 +148,6 @@ public class authController {
         /*发送短信导区域负责人*/
         return null;
     }
+
 
 }

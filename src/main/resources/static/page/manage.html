@@ -8,6 +8,7 @@
     <script src="js/element-plus.js"></script>
     <script src="js/axios.min.js"></script>
     <script src="js/vue-router.global.js"></script>
+    <script src="js/jquery-3.6.0.min.js"></script>
     <style>
         #app{
             width: 100%;
@@ -129,9 +130,9 @@
                 <el-button @click="queryLikeInfo">查询</el-button>
                 <el-button @click="addOneCity" type="success">添加</el-button>
                 <el-button type="danger" :disabled="dataListSelections.length <= 0" @click="deleteRowList">批量删除</el-button>
-                <el-button >导出</el-button>
+                <el-button @click="downloadExcelInfo" >导出</el-button>
                 <el-button >导入</el-button>
-                <el-button >模板下载</el-button>
+                <el-button @click="downloadExcelTemp">模板下载</el-button>
                 <el-table :data="CityInfo"
                           style="width: 100%"
                           height="550"
@@ -460,6 +461,28 @@
                         }
                     })
                 }).catch(()=>{})
+            },
+            downloadExcelTemp(){
+                window.location.href = window.location.protocol+'//'+window.location.host+'/data/exportTemplate?form=city'
+            },
+            downloadExcelInfo(){
+                axios({
+                    method: 'post',
+                    url: 'data/exportFormInfo',
+                    data: {
+                        form: 'city',
+                        Info: this.dataListSelections
+                    },
+                    responseType: 'blob'
+                }).then(res => {
+                    const blob = new Blob([res.data]);
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.style.display = 'none'
+                    a.download = '城市信息表.xlsx'
+                    a.href = url
+                    a.click()
+                })
             }
         },
         created() {
