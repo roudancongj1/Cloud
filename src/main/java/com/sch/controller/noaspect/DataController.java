@@ -25,6 +25,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @Auth: Gao
@@ -218,5 +219,39 @@ public class DataController {
         else
             return ResultUtil.error("添加失败");
     }
+
+    @GetMapping("redis")
+    public ResultUtil getRedis(@RequestParam String param){
+        String value;
+        try {
+            if (redisUtil.hasKey(param)){
+                value = redisUtil.get(param).toString();
+            }else {
+                return ResultUtil.error("查询参数为空");
+            }
+            return ResultUtil.ok().put(value);
+        } catch (Exception e) {
+            return ResultUtil.error("获取redis数据失败");
+        }
+    }
+
+    @PostMapping("redis")
+    public ResultUtil postRedis(@RequestBody Map<String,Object> map){
+        try {
+            Set<String> strings = map.keySet();
+            boolean state ;
+            for (String key:
+                 strings) {
+                state = redisUtil.set(key, map.get(key));
+                if (!state){
+                    return ResultUtil.error("添加失败");
+                }
+            }
+            return ResultUtil.ok("添加成功");
+        } catch (Exception e) {
+            return ResultUtil.error("存储数据失败");
+        }
+    }
+
 }
 
