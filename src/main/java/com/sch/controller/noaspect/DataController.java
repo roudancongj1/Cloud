@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
@@ -207,6 +208,15 @@ public class DataController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @RequestMapping("uploadExcel")
+    public ResultUtil uploadExcel(@RequestParam(value = "uploadFile", required = false) MultipartFile file){
+        boolean state = excelService.uploadExcel(file);
+        if (state)
+            return ResultUtil.ok("添加成功");
+        else
+            return ResultUtil.error("添加失败");
     }
 }
 

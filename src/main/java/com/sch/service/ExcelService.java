@@ -2,9 +2,13 @@ package com.sch.service;
 
 
 
+import com.sch.utils.ResultUtil;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletResponse;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auth: Gao
@@ -14,7 +18,7 @@ import java.util.List;
 
 public interface ExcelService {
 
-    boolean uploadExcel();
+    boolean uploadExcel(MultipartFile file);
 
     boolean exportExcelTemp(String exportName, String sheetName, List<String> cellHeader, HttpServletResponse response);
 

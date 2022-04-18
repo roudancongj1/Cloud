@@ -131,7 +131,17 @@
                 <el-button @click="addOneCity" type="success">添加</el-button>
                 <el-button type="danger" :disabled="dataListSelections.length <= 0" @click="deleteRowList">批量删除</el-button>
                 <el-button @click="downloadExcelInfo" >导出</el-button>
-                <el-button >导入</el-button>
+                <el-upload class="upload-demo"
+                           accept=".xls,.xlsx"
+                           ref="upload"
+                           :action="uploadUrl"
+                           :on-success="handleUploadSuccess"
+                           :show-file-list="false"
+                           style="display: inline-block;"
+                           name="uploadFile"
+                           :on-error="handleUploadError">
+                    <el-button style="margin: 0 10px" type="primary">导入</el-button>
+                </el-upload>
                 <el-button @click="downloadExcelTemp">模板下载</el-button>
                 <el-table :data="CityInfo"
                           style="width: 100%"
@@ -285,9 +295,7 @@
                     ],
                 },
                 dataListSelections:[],
-
-
-
+                uploadUrl: window.location.protocol + '//' + window.location.host + "/data/uploadExcel"
             }
         },
         methods: {
@@ -483,7 +491,26 @@
                     a.href = url
                     a.click()
                 })
-            }
+            },
+            handleUploadSuccess(response, file, fileList) {
+                if (response.code === '0') {
+                    this.$notify.success({
+                        title: '上传成功',
+                        message: response.data
+                    })
+                } else {
+                    this.$notify.error({
+                        title: '上传失败',
+                        message: response.data
+                    })
+                }
+            },
+            handleUploadError(err, file, fileList) {
+                this.$notify.error({
+                    title: '上传失败',
+                    message: err.data
+                })
+            },
         },
         created() {
             this.toVisitor()
