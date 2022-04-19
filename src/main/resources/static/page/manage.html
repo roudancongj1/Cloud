@@ -207,7 +207,17 @@
                     </el-table-column>
 
                 </el-table>
-                <el-pagination background layout="prev, pager, next" :total="50"></el-pagination>
+                <el-pagination
+                        @size-change="sizeChangeHandle"
+                        @current-change="currentChangeHandle"
+                        :current-page="pageIndex"
+                        :page-sizes="[2, 5, 10, 50]"
+                        :page-size="pageSize"
+                        :total="totalPage"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        background
+                        style="float: right">
+                </el-pagination>
             </el-main>
         </el-container>
     </el-container>
@@ -295,7 +305,11 @@
                     ],
                 },
                 dataListSelections:[],
-                uploadUrl: window.location.protocol + '//' + window.location.host + "/data/uploadExcel"
+                uploadUrl: window.location.protocol + '//' + window.location.host + "/data/uploadExcel",
+                pageSize: 10,
+                totalPage: 0,
+                pageIndex: 1,
+
             }
         },
         methods: {
@@ -510,6 +524,15 @@
                     title: '上传失败',
                     message: err.data
                 })
+            },
+            sizeChangeHandle (val) {
+                this.pageSize = val
+                this.pageIndex = 1
+                this.queryCityList()
+            },
+            currentChangeHandle (val) {
+                this.pageIndex = val
+                this.queryCityList()
             },
         },
         created() {
