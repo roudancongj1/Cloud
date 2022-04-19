@@ -143,3 +143,42 @@
 2022-04-18 18:25:14.473  INFO 5384 --- [http-nio-8888-exec-6] c.s.controller.noaspect.LoginController  : 用户:admin已登录
 2022-04-18 18:55:42.283  INFO 5384 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
 2022-04-18 18:55:42.283  INFO 5384 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2022-04-18 18:55:47.695  INFO 11272 --- [main] com.sch.SchApplication                   : Starting SchApplication using Java 11.0.13 on ntbook with PID 11272 (D:\_____idea\_____project\_____git\target\classes started by Gao in D:\_____idea\_____project\_____git)
+2022-04-18 18:55:47.695  INFO 11272 --- [main] com.sch.SchApplication                   : No active profile set, falling back to default profiles: default
+2022-04-18 18:55:48.535  INFO 11272 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-04-18 18:55:48.535  INFO 11272 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-04-18 18:55:48.598  INFO 11272 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 29 ms. Found 0 Redis repository interfaces.
+2022-04-18 18:55:49.523  INFO 11272 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2022-04-18 18:55:49.523  INFO 11272 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-04-18 18:55:49.523  INFO 11272 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-04-18 18:55:49.632  INFO 11272 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-04-18 18:55:49.632  INFO 11272 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1906 ms
+2022-04-18 18:55:49.981  INFO 11272 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2022-04-18 18:55:50.059  INFO 11272 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2022-04-18 18:55:52.205  INFO 11272 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2022-04-18 18:55:52.226  INFO 11272 --- [main] com.sch.SchApplication                   : Started SchApplication in 4.873 seconds (JVM running for 5.814)
+2022-04-18 18:57:23.715  INFO 11272 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-04-18 18:57:23.715  INFO 11272 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-04-18 18:57:23.715  INFO 11272 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2022-04-18 19:02:55.213  INFO 11272 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2022-04-18 19:02:55.217  INFO 11272 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2022-04-18 19:02:57.568  INFO 11072 --- [main] com.sch.SchApplication                   : Starting SchApplication using Java 11.0.13 on ntbook with PID 11072 (D:\_____idea\_____project\_____git\target\classes started by Gao in D:\_____idea\_____project\_____git)
+2022-04-18 19:02:57.568  INFO 11072 --- [main] com.sch.SchApplication                   : No active profile set, falling back to default profiles: default
+2022-04-18 19:02:58.055  INFO 11072 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-04-18 19:02:58.055  INFO 11072 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-04-18 19:02:58.070  INFO 11072 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+2022-04-18 19:02:58.557  INFO 11072 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2022-04-18 19:02:58.572  INFO 11072 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-04-18 19:02:58.572  INFO 11072 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-04-18 19:02:58.651  INFO 11072 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-04-18 19:02:58.651  INFO 11072 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1051 ms
+2022-04-18 19:02:58.949  INFO 11072 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2022-04-18 19:02:59.011  INFO 11072 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2022-04-18 19:03:01.186  INFO 11072 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2022-04-18 19:03:01.202  INFO 11072 --- [main] com.sch.SchApplication                   : Started SchApplication in 3.985 seconds (JVM running for 4.907)
+2022-04-18 19:03:11.840  INFO 11072 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-04-18 19:03:11.841  INFO 11072 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-04-18 19:03:11.842  INFO 11072 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-04-18 20:34:10.484  INFO 11072 --- [http-nio-8888-exec-9] c.s.controller.noaspect.LoginController  : 用户:admin已登录
+2022-04-18 20:56:42.174  INFO 11072 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2022-04-18 20:56:42.180  INFO 11072 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed

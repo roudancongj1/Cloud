@@ -28,7 +28,7 @@ public class AddRandomHtmlUtil {
             info.setCumulativeDiagnosis(getRandom()+23214515);
 
             redisUtil.set("htmlInfo",info,60*24);
-            return ResultUtil.ok("获取信息成功");
+            return ResultUtil.ok().put(info);
         } catch (Exception e) {
             e.printStackTrace();
             return ResultUtil.error("获取信息失败");
